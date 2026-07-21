@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 
 export function SmoothScroll() {
+  const pathname = usePathname();
+
   useEffect(() => {
     const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
     if (isMobile) return;
@@ -21,19 +24,16 @@ export function SmoothScroll() {
 
     requestAnimationFrame(raf);
 
-    // Refresh multipli per sicurezza
     const refresh = () => lenis.resize();
     setTimeout(refresh, 100);
     setTimeout(refresh, 500);
-    setTimeout(refresh, 1000);
-
     window.addEventListener("resize", refresh);
 
     return () => {
       lenis.destroy();
       window.removeEventListener("resize", refresh);
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }
