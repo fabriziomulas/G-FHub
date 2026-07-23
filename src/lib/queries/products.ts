@@ -1,13 +1,22 @@
 import { prisma } from "@/lib/prisma";
 
-export async function getFeaturedProducts() {
+interface ProductBase {
+  id: string;
+  title: string;
+  handle: string;
+  image: string;
+  price: string;
+  compareAtPrice: string | undefined;
+}
+
+export async function getFeaturedProducts(): Promise<ProductBase[]> {
   const products = await prisma.product.findMany({
     where: { featured: true, inStock: true },
     take: 4,
     orderBy: { createdAt: "desc" },
   });
 
-  return products.map((p) => ({
+  return products.map((p: { id: string; title: string; handle: string; images: string[]; price: number; compareAtPrice: number | null }) => ({
     id: p.id,
     title: p.title,
     handle: p.handle,
@@ -17,13 +26,13 @@ export async function getFeaturedProducts() {
   }));
 }
 
-export async function getAllProducts() {
+export async function getAllProducts(): Promise<ProductBase[]> {
   const products = await prisma.product.findMany({
     where: { inStock: true },
     orderBy: { createdAt: "desc" },
   });
 
-  return products.map((p) => ({
+  return products.map((p: { id: string; title: string; handle: string; images: string[]; price: number; compareAtPrice: number | null }) => ({
     id: p.id,
     title: p.title,
     handle: p.handle,
