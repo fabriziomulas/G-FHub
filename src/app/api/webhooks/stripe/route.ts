@@ -30,21 +30,30 @@ export async function POST(request: Request) {
     const total = (session.amount_total || 0) / 100;
     const userEmail = session.customer_details?.email;
 
+    console.log("=== NUOVO ORDINE ===");
+    console.log("Email Stripe:", userEmail);
+    console.log("Totale:", total);
+
     // Salva ordine
     await prisma.$executeRaw`
       INSERT INTO "Order" (id, status, total, "createdAt", "updatedAt")
       VALUES (gen_random_uuid(), 'PAID', ${total}, NOW(), NOW())
     `;
 
-    // Se abbiamo l'email, aggiorna XP e livello
     if (userEmail) {
       const user = await prisma.user.findUnique({ where: { email: userEmail } });
+      
       if (user) {
+        console.log("Utente trovato:", user.email, "XP attuali:", user.xp, "Livello:", user.level);
+
         const xpGained = calculateXp(total);
         const newXp = user.xp + xpGained;
         const oldLevel = getLevel(user.xp);
         const newLevel = getLevel(newXp);
         const pointsGained = Math.round(total * newLevel.pointsMultiplier);
+
+        console.log("XP guadagnati:", xpGained, "Nuovo XP:", newXp);
+        console.log("Vecchio livello:", oldLevel.name, "Nuovo livello:", newLevel.name);
 
         await prisma.user.update({
           where: { id: user.id },
@@ -55,12 +64,13 @@ export async function POST(request: Request) {
           },
         });
 
-        // Se sale di livello, crea coupon
         if (oldLevel.name !== newLevel.name && LEVEL_COUPONS[newLevel.name]) {
           const couponConfig = LEVEL_COUPONS[newLevel.name];
           const code = generateCode();
           const expiresAt = new Date();
           expiresAt.setDate(expiresAt.getDate() + 30);
+
+          console.log("CREAZIONE COUPON:", code, "Sconto:", couponConfig.discount, "€");
 
           await prisma.coupon.create({
             data: {
@@ -71,8 +81,14 @@ export async function POST(request: Request) {
               expiresAt,
             },
           });
+        } else if (oldLevel.name === newLevel.name) {
+          console.log("Nessun cambio livello, no coupon");
         }
+      } else {
+        console.log("UTENTE NON TROVATO per email:", userEmail);
       }
+    } else {
+      console.log("Nessuna email nel pagamento Stripe");
     }
   }
 
