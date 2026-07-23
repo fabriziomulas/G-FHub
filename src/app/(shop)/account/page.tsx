@@ -53,7 +53,14 @@ export default function AccountPage() {
   const nextLevel = LEVELS.find((l) => l.minXp > user.xp) || currentLevel;
   const progress = nextLevel.minXp === 0 ? 100 : ((user.xp - currentLevel.minXp) / (nextLevel.minXp - currentLevel.minXp)) * 100;
 
+  // Coupon attivi (non usati e non scaduti)
   const activeCoupons = coupons.filter((c) => !c.used && new Date(c.expiresAt) > new Date());
+  
+  // Coupon scaduti (non usati ma scaduti)
+  const expiredCoupons = coupons.filter((c) => !c.used && new Date(c.expiresAt) <= new Date());
+  
+  // Coupon usati
+  const usedCoupons = coupons.filter((c) => c.used);
 
   return (
     <>
@@ -87,7 +94,9 @@ export default function AccountPage() {
           {/* Coupon attivi */}
           {activeCoupons.length > 0 && (
             <div className="glass p-6 rounded-2xl mb-6">
-              <h2 className="text-lg font-semibold text-text-primary mb-4">Coupon attivi</h2>
+              <h2 className="text-lg font-semibold text-text-primary mb-4">
+                Coupon attivi ({activeCoupons.length})
+              </h2>
               <div className="space-y-3">
                 {activeCoupons.map((c) => (
                   <div key={c.id} className="flex justify-between items-center border border-border-default rounded-lg p-3">
@@ -95,12 +104,68 @@ export default function AccountPage() {
                       <p className="text-text-primary font-bold">{c.code}</p>
                       <p className="text-xs text-text-muted">
                         Scade {new Date(c.expiresAt).toLocaleDateString("it-IT")}
+                        {c.minSpent && ` • Minimo €${c.minSpent}`}
                       </p>
                     </div>
-                    <Badge color="success">-€{c.discount}</Badge>
+                    <Badge color="success">{c.discount}% sconto</Badge>
                   </div>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* Coupon scaduti */}
+          {expiredCoupons.length > 0 && (
+            <div className="glass p-6 rounded-2xl mb-6">
+              <h2 className="text-lg font-semibold text-text-primary mb-4">
+                Coupon scaduti ({expiredCoupons.length})
+              </h2>
+              <div className="space-y-3">
+                {expiredCoupons.map((c) => (
+                  <div key={c.id} className="flex justify-between items-center border border-border-default rounded-lg p-3 opacity-60">
+                    <div>
+                      <p className="text-text-primary font-bold">{c.code}</p>
+                      <p className="text-xs text-text-muted">
+                        Scaduto il {new Date(c.expiresAt).toLocaleDateString("it-IT")}
+                        {c.minSpent && ` • Minimo €${c.minSpent}`}
+                      </p>
+                    </div>
+                    <Badge color="secondary">{c.discount}% sconto</Badge>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Coupon usati */}
+          {usedCoupons.length > 0 && (
+            <div className="glass p-6 rounded-2xl mb-6">
+              <h2 className="text-lg font-semibold text-text-primary mb-4">
+                Coupon usati ({usedCoupons.length})
+              </h2>
+              <div className="space-y-3">
+                {usedCoupons.map((c) => (
+                  <div key={c.id} className="flex justify-between items-center border border-border-default rounded-lg p-3 opacity-60">
+                    <div>
+                      <p className="text-text-primary font-bold">{c.code}</p>
+                      <p className="text-xs text-text-muted">
+                        Usato • Scadeva il {new Date(c.expiresAt).toLocaleDateString("it-IT")}
+                        {c.minSpent && ` • Minimo €${c.minSpent}`}
+                      </p>
+                    </div>
+                    <Badge color="secondary">{c.discount}% sconto</Badge>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Messaggio quando non ci sono coupon */}
+          {activeCoupons.length === 0 && expiredCoupons.length === 0 && usedCoupons.length === 0 && (
+            <div className="glass p-6 rounded-2xl mb-6">
+              <h2 className="text-lg font-semibold text-text-primary mb-4">Coupon</h2>
+              <p className="text-text-muted text-sm">Non hai ancora coupon disponibili.</p>
+              <p className="text-text-muted text-sm mt-1">Continua a fare acquisti per guadagnare coupon esclusivi!</p>
             </div>
           )}
 
