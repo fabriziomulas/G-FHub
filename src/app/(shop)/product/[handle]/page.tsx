@@ -51,13 +51,13 @@ async function ProductContent({ handle }: { handle: string }) {
     );
   }
 
-  const variants = product.variants.map((v) => ({
-    id: v.id,
-    title: v.name,
-    availableForSale: v.inStock,
-    price: { amount: (v.price ?? product.price).toString() },
-    selectedOptions: [{ name: v.name, value: v.value }],
-  }));
+const variants = product.variants.map((v: { id: string; name: string; inStock: boolean; price: number | null; value: string }) => ({
+  id: v.id,
+  title: v.name,
+  availableForSale: v.inStock,
+  price: { amount: (v.price ?? product.price).toString() },
+  selectedOptions: [{ name: v.name, value: v.value }],
+}));
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12">

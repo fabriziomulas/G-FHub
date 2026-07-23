@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import Image from "next/image";
@@ -13,13 +14,32 @@ interface CartDrawerProps {
 
 export function CartDrawer({ open, onClose }: CartDrawerProps) {
   const { items, removeItem, updateQuantity, totalPrice } = useCart();
+  const [loading, setLoading] = useState(false);
 
-  const handleCheckout = () => {
-    const domain = "jwbixz-kc.myshopify.com";
-    const cartUrl = `https://${domain}/cart/${items
-      .map((item) => `${item.variantId}:${item.quantity}`)
-      .join(",")}`;
-    window.location.href = cartUrl;
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: items.map((item) => ({
+            title: item.title,
+            price: item.price,
+            quantity: item.quantity,
+            image: item.image,
+          })),
+        }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -64,10 +84,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
                 </div>
               ) : (
                 items.map((item) => (
-                  <div
-                    key={item.variantId}
-                    className="flex gap-3 glass p-3 rounded-xl"
-                  >
+                  <div key={item.variantId} className="flex gap-3 glass p-3 rounded-xl">
                     <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-background-secondary">
                       {item.image && (
                         <Image
@@ -84,9 +101,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
                         {item.title}
                       </h4>
                       {item.options && (
-                        <p className="text-xs text-text-muted mt-0.5">
-                          {item.options}
-                        </p>
+                        <p className="text-xs text-text-muted mt-0.5">{item.options}</p>
                       )}
                       <p className="text-sm font-semibold text-text-primary mt-1">
                         €{(item.price * item.quantity).toFixed(2)}
@@ -126,12 +141,8 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
                   <span className="font-medium">Totale</span>
                   <span className="font-bold">€{totalPrice().toFixed(2)}</span>
                 </div>
-                <Button
-                  size="lg"
-                  className="w-full"
-                  onClick={handleCheckout}
-                >
-                  Vai al Checkout
+                <Button size="lg" className="w-full" loading={loading} onClick={handleCheckout}>
+                  Pagamento Sicuro
                 </Button>
               </div>
             )}

@@ -7,6 +7,8 @@ import { Heart, ShoppingBag } from "lucide-react";
 import { Card } from "@/components/ui/composites/Card";
 import { Badge } from "@/components/ui/primitives/Badge";
 import { Button } from "@/components/ui/primitives/Button";
+import { useCart } from "@/stores/cart";
+import { toast } from "sonner";
 
 interface ProductCardProps {
   product: {
@@ -36,6 +38,21 @@ const PLACEHOLDER = "/placeholder.png";
 export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const hasDiscount = product.compareAtPrice && product.compareAtPrice !== product.price;
   const imageSrc = isValidImageUrl(product.image) ? product.image : PLACEHOLDER;
+  const { addItem } = useCart();
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addItem({
+      id: product.id,
+      variantId: product.id,
+      title: product.title,
+      image: imageSrc,
+      price: parseFloat(product.price),
+      quantity: 1,
+    });
+    toast.success(`${product.title} aggiunto al carrello!`);
+  };
 
   return (
     <motion.div
@@ -67,7 +84,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             <Heart size={16} className="text-white" />
           </button>
           <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
-            <Button size="sm" className="w-full" leftIcon={<ShoppingBag size={14} />}>
+            <Button size="sm" className="w-full" leftIcon={<ShoppingBag size={14} />} onClick={handleAddToCart}>
               Aggiungi
             </Button>
           </div>
