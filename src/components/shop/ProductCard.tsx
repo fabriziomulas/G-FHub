@@ -22,8 +22,20 @@ interface ProductCardProps {
   index?: number;
 }
 
+function isValidImageUrl(url: string): boolean {
+  try {
+    const u = new URL(url);
+    return u.protocol === "http:" || u.protocol === "https:";
+  } catch {
+    return url.startsWith("/");
+  }
+}
+
+const PLACEHOLDER = "/placeholder.png";
+
 export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const hasDiscount = product.compareAtPrice && product.compareAtPrice !== product.price;
+  const imageSrc = isValidImageUrl(product.image) ? product.image : PLACEHOLDER;
 
   return (
     <motion.div
@@ -33,16 +45,14 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       transition={{ delay: index * 0.1, duration: 0.5 }}
     >
       <Card variant="interactive" padding="none" className="group overflow-hidden">
-        {/* Image */}
         <div className="relative aspect-square overflow-hidden bg-background-secondary">
           <Image
-            src={product.image}
+            src={imageSrc}
             alt={product.title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 25vw"
           />
-          {/* Badge */}
           {product.badge && (
             <div className="absolute top-3 left-3">
               <Badge color={product.badgeColor || "electric"} size="sm">
@@ -50,14 +60,12 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
               </Badge>
             </div>
           )}
-          {/* Wishlist */}
           <button
             className="absolute top-3 right-3 p-2 rounded-full bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity"
             aria-label="Aggiungi ai preferiti"
           >
             <Heart size={16} className="text-white" />
           </button>
-          {/* Quick add */}
           <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
             <Button size="sm" className="w-full" leftIcon={<ShoppingBag size={14} />}>
               Aggiungi
@@ -65,7 +73,6 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           </div>
         </div>
 
-        {/* Info */}
         <div className="p-4">
           <Link href={`/product/${product.handle}`}>
             <h3 className="text-sm font-medium text-text-primary hover:text-accent-electric transition-colors line-clamp-1">

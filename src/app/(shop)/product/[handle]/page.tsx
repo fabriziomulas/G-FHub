@@ -4,7 +4,7 @@ import { Footer } from "@/components/ui/layout/Footer";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductInfo } from "@/components/product/ProductInfo";
 import { Skeleton } from "@/components/ui/primitives/Skeleton";
-import { shopifyFetch } from "@/lib/shopify";
+import { getProductByHandle } from "@/lib/queries/products";
 
 interface PageProps {
   params: Promise<{ handle: string }>;
@@ -41,75 +41,7 @@ function ProductSkeleton() {
 }
 
 async function ProductContent({ handle }: { handle: string }) {
-  const data = await shopifyFetch<{
-    productByHandle: {
-      id: string;
-      title: string;
-      handle: string;
-      description: string;
-      images: { edges: Array<{ node: { url: string; altText: string | null } }> };
-      priceRange: { minVariantPrice: { amount: string; currencyCode: string } };
-      compareAtPriceRange: { minVariantPrice: { amount: string; currencyCode: string } };
-      variants: {
-        edges: Array<{
-          node: {
-            id: string;
-            title: string;
-            availableForSale: boolean;
-            price: { amount: string };
-            selectedOptions: Array<{ name: string; value: string }>;
-          };
-        }>;
-      };
-    };
-  }>(`
-    query Product($handle: String!) {
-      productByHandle(handle: $handle) {
-        id
-        title
-        handle
-        description
-        images(first: 10) {
-          edges {
-            node {
-              url
-              altText
-            }
-          }
-        }
-        priceRange {
-          minVariantPrice {
-            amount
-            currencyCode
-          }
-        }
-        compareAtPriceRange {
-          minVariantPrice {
-            amount
-            currencyCode
-          }
-        }
-        variants(first: 10) {
-          edges {
-            node {
-              id
-              title
-              availableForSale
-              price {
-                amount
-              }
-              selectedOptions {
-                name
-                value
-              }
-            }
-          }
-        }
-      }
-    }
-  `, { handle });
-
-  const product = data.productByHandle;
+  const product = await getProductByHandle(handle);
 
   if (!product) {
     return (
@@ -119,17 +51,22 @@ async function ProductContent({ handle }: { handle: string }) {
     );
   }
 
-  const images = product.images.edges.map(({ node }) => node.url);
-  const variants = product.variants.edges.map(({ node }) => node);
+  const variants = product.variants.map((v) => ({
+    id: v.id,
+    title: v.name,
+    availableForSale: v.inStock,
+    price: { amount: (v.price ?? product.price).toString() },
+    selectedOptions: [{ name: v.name, value: v.value }],
+  }));
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12">
-      <ProductGallery images={images} title={product.title} />
+      <ProductGallery images={product.images} title={product.title} />
       <ProductInfo
         title={product.title}
         description={product.description}
-        price={product.priceRange.minVariantPrice.amount}
-        compareAtPrice={product.compareAtPriceRange.minVariantPrice.amount}
+        price={product.price}
+        compareAtPrice={product.compareAtPrice}
         variants={variants}
       />
     </div>

@@ -22,23 +22,69 @@ model User {
   orders        Order[]
 }
 
+model Product {
+  id             String        @id @default(cuid())
+  title          String
+  handle         String        @unique
+  description    String        @default("")
+  price          Float
+  compareAtPrice Float?
+  images         String[]      @default([])
+  category       String        @default("")
+  tags           String[]      @default([])
+  inStock        Boolean       @default(true)
+  featured       Boolean       @default(false)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  variants       Variant[]
+  orderItems     OrderItem[]
+  wishlistItems  WishlistItem[]
+}
+
+model Variant {
+  id        String  @id @default(cuid())
+  productId String
+  name      String
+  value     String
+  price     Float?
+  inStock   Boolean @default(true)
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
 model WishlistItem {
   id        String   @id @default(cuid())
   userId    String
   productId String
   createdAt DateTime @default(now())
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@unique([userId, productId])
 }
 
 model Order {
-  id             String   @id @default(cuid())
-  userId         String
-  shopifyOrderId String   @unique
-  total          Float
-  createdAt      DateTime @default(now())
+  id        String   @id @default(cuid())
+  userId    String
+  status    String   @default("PENDING")
+  total     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user  User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items OrderItem[]
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  productId String
+  variantId String?
+  quantity  Int
+  price     Float
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
