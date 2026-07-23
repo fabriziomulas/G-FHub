@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { useCart } from "@/stores/cart";
+import { useUser } from "@/hooks/useUser";
 import { CartDrawer } from "@/components/cart/CartDrawer";
+import { Dropdown } from "@/components/ui/composites/Dropdown";
 
 const links = [
   { label: "Shop", href: "/shop" },
@@ -21,6 +23,7 @@ export function Navbar() {
   const [cartOpen, setCartOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { totalItems } = useCart();
+  const { user, logout } = useUser();
 
   useEffect(() => {
     setMounted(true);
@@ -46,47 +49,59 @@ export function Navbar() {
         )}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          {/* Logo */}
           <Link href="/" className="text-xl font-bold text-text-primary tracking-tight">
             STORELUXE
           </Link>
 
-          {/* Desktop Links */}
           <nav className="hidden md:flex items-center gap-8">
             {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm text-text-secondary hover:text-text-primary transition-colors"
-              >
+              <Link key={link.href} href={link.href} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-3">
-            <Link href="/account" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
-              Account
-            </Link>
-            <button
-              onClick={() => setCartOpen(true)}
-              className="text-sm text-text-secondary hover:text-text-primary transition-colors"
-            >
-              Carrello ({itemCount})
-            </button>
+            {user ? (
+              <>
+                {user.role === "ADMIN" && (
+                  <Link href="/admin" className="text-sm text-accent-electric hover:text-accent-purple transition-colors font-medium">
+                    Admin
+                  </Link>
+                )}
+                <Dropdown
+                  trigger={
+                    <button className="flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary transition-colors">
+                      <User size={16} />
+                      {user.name || user.email}
+                    </button>
+                  }
+                  items={[
+                    { label: "I miei ordini", onClick: () => window.location.href = "/account" },
+                    { label: "Esci", danger: true, onClick: logout, icon: <LogOut size={14} /> },
+                  ]}
+                />
+                <button onClick={() => setCartOpen(true)} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                  Carrello ({itemCount})
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href="/account/login" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                  Accedi
+                </Link>
+                <button onClick={() => setCartOpen(true)} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                  Carrello ({itemCount})
+                </button>
+              </>
+            )}
           </div>
 
-          {/* Mobile Toggle */}
-          <button
-            className="md:hidden text-text-primary p-1"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
+          <button className="md:hidden text-text-primary p-1" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
@@ -97,27 +112,31 @@ export function Navbar() {
             >
               <div className="px-6 py-4 flex flex-col gap-3">
                 {links.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="text-text-secondary hover:text-text-primary transition-colors py-1"
-                  >
+                  <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="text-text-secondary hover:text-text-primary transition-colors py-1">
                     {link.label}
                   </Link>
                 ))}
                 <hr className="border-border-default" />
-                <Link
-                  href="/account"
-                  onClick={() => setMobileOpen(false)}
-                  className="text-text-secondary hover:text-text-primary transition-colors py-1"
-                >
-                  Account
-                </Link>
-                <button
-                  onClick={() => { setMobileOpen(false); setCartOpen(true); }}
-                  className="text-text-secondary hover:text-text-primary transition-colors py-1 text-left"
-                >
+                {user ? (
+                  <>
+                    {user.role === "ADMIN" && (
+                      <Link href="/admin" onClick={() => setMobileOpen(false)} className="text-accent-electric font-medium py-1">
+                        Admin
+                      </Link>
+                    )}
+                    <Link href="/account" onClick={() => setMobileOpen(false)} className="text-text-secondary hover:text-text-primary transition-colors py-1">
+                      Account
+                    </Link>
+                    <button onClick={() => { setMobileOpen(false); logout(); }} className="text-red-400 text-left py-1">
+                      Esci
+                    </button>
+                  </>
+                ) : (
+                  <Link href="/account/login" onClick={() => setMobileOpen(false)} className="text-text-secondary hover:text-text-primary transition-colors py-1">
+                    Accedi
+                  </Link>
+                )}
+                <button onClick={() => { setMobileOpen(false); setCartOpen(true); }} className="text-text-secondary hover:text-text-primary transition-colors py-1 text-left">
                   Carrello ({itemCount})
                 </button>
               </div>

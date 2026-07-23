@@ -9,9 +9,11 @@ datasource db {
 model User {
   id                String        @id @default(cuid())
   email             String        @unique
+  emailVerified     Boolean       @default(false)
   name              String?
   image             String?
-  shopifyCustomerId String?       @unique
+  password          String?
+  role              String        @default("USER")
   xp                Int           @default(0)
   level             String        @default("BRONZE")
   points            Int           @default(0)
@@ -34,6 +36,9 @@ model Product {
   tags           String[]      @default([])
   inStock        Boolean       @default(true)
   featured       Boolean       @default(false)
+  isNew          Boolean       @default(false)
+  isBestSeller   Boolean       @default(false)
+  isOnSale       Boolean       @default(false)
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
 

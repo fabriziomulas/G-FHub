@@ -16,6 +16,9 @@ export async function POST(request: Request) {
         category: body.category || "",
         featured: true,
         inStock: true,
+        isNew: body.isNew || false,
+        isBestSeller: body.isBestSeller || false,
+        isOnSale: body.isOnSale || false,
       },
     });
 
