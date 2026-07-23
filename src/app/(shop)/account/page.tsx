@@ -91,7 +91,7 @@ export default function AccountPage() {
             </div>
           </div>
 
-          {/* Coupon attivi */}
+          {/* Coupon attivi - VERDI */}
           {activeCoupons.length > 0 && (
             <div className="glass p-6 rounded-2xl mb-6">
               <h2 className="text-lg font-semibold text-text-primary mb-4">
@@ -99,7 +99,7 @@ export default function AccountPage() {
               </h2>
               <div className="space-y-3">
                 {activeCoupons.map((c) => (
-                  <div key={c.id} className="flex justify-between items-center border border-border-default rounded-lg p-3">
+                  <div key={c.id} className="flex justify-between items-center border border-green-500/30 bg-green-500/5 rounded-lg p-3">
                     <div>
                       <p className="text-text-primary font-bold">{c.code}</p>
                       <p className="text-xs text-text-muted">
@@ -114,7 +114,7 @@ export default function AccountPage() {
             </div>
           )}
 
-          {/* Coupon scaduti */}
+          {/* Coupon scaduti - ROSSI */}
           {expiredCoupons.length > 0 && (
             <div className="glass p-6 rounded-2xl mb-6">
               <h2 className="text-lg font-semibold text-text-primary mb-4">
@@ -122,7 +122,7 @@ export default function AccountPage() {
               </h2>
               <div className="space-y-3">
                 {expiredCoupons.map((c) => (
-                  <div key={c.id} className="flex justify-between items-center border border-border-default rounded-lg p-3 opacity-60">
+                  <div key={c.id} className="flex justify-between items-center border border-red-500/30 bg-red-500/5 rounded-lg p-3">
                     <div>
                       <p className="text-text-primary font-bold">{c.code}</p>
                       <p className="text-xs text-text-muted">
@@ -130,14 +130,14 @@ export default function AccountPage() {
                         {c.minSpent && ` • Minimo €${c.minSpent}`}
                       </p>
                     </div>
-                    <Badge color="secondary">{c.discount}% sconto</Badge>
+                    <Badge color="danger">{c.discount}% sconto</Badge>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Coupon usati */}
+          {/* Coupon usati - ROSSI */}
           {usedCoupons.length > 0 && (
             <div className="glass p-6 rounded-2xl mb-6">
               <h2 className="text-lg font-semibold text-text-primary mb-4">
@@ -145,7 +145,7 @@ export default function AccountPage() {
               </h2>
               <div className="space-y-3">
                 {usedCoupons.map((c) => (
-                  <div key={c.id} className="flex justify-between items-center border border-border-default rounded-lg p-3 opacity-60">
+                  <div key={c.id} className="flex justify-between items-center border border-red-500/30 bg-red-500/5 rounded-lg p-3">
                     <div>
                       <p className="text-text-primary font-bold">{c.code}</p>
                       <p className="text-xs text-text-muted">
@@ -153,7 +153,7 @@ export default function AccountPage() {
                         {c.minSpent && ` • Minimo €${c.minSpent}`}
                       </p>
                     </div>
-                    <Badge color="secondary">{c.discount}% sconto</Badge>
+                    <Badge color="danger">{c.discount}% sconto</Badge>
                   </div>
                 ))}
               </div>
