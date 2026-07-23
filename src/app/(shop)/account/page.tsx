@@ -130,7 +130,7 @@ export default function AccountPage() {
                         {c.minSpent && ` • Minimo €${c.minSpent}`}
                       </p>
                     </div>
-                    <Badge color="red">{c.discount}% sconto</Badge>
+                    <Badge color="error">{c.discount}% sconto</Badge>
                   </div>
                 ))}
               </div>
@@ -153,7 +153,7 @@ export default function AccountPage() {
                         {c.minSpent && ` • Minimo €${c.minSpent}`}
                       </p>
                     </div>
-                    <Badge color="red">{c.discount}% sconto</Badge>
+                    <Badge color="error">{c.discount}% sconto</Badge>
                   </div>
                 ))}
               </div>
