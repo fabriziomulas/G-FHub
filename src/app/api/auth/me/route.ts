@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { jwtVerify } from "jose";
 
 const JWT_SECRET = new TextEncoder().encode(process.env.NEXTAUTH_SECRET!);
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
 
   if (!token) {
