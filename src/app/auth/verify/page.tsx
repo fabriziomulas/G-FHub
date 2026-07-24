@@ -1,27 +1,19 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-
 import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function VerifyPage() {
-  const searchParams = useSearchParams();
   const router = useRouter();
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
   const [message, setMessage] = useState("");
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-    
-    const statusParam = searchParams.get("status");
-    const messageParam = searchParams.get("message");
+    // Leggi i parametri dall'URL usando window.location (lato client)
+    const params = new URLSearchParams(window.location.search);
+    const statusParam = params.get("status");
+    const messageParam = params.get("message");
 
     if (statusParam === "success") {
       setStatus("success");
@@ -36,19 +28,7 @@ export default function VerifyPage() {
       setStatus("error");
       setMessage("Parametri mancanti per la verifica.");
     }
-  }, [searchParams, router, mounted]);
-
-  // Durante SSR mostra un placeholder
-  if (!mounted) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0C0A09] px-4">
-        <div className="max-w-md w-full bg-[#1A1A1A] rounded-2xl p-8 text-center border border-[#333]">
-          <div className="w-16 h-16 border-4 border-[#B2B395] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <h2 className="text-xl font-semibold text-[#F4F5F6]">Verifica in corso...</h2>
-        </div>
-      </div>
-    );
-  }
+  }, [router]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0C0A09] px-4">
