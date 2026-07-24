@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
@@ -18,7 +20,7 @@ export default function VerifyPage() {
       setStatus("success");
       setMessage("Email verificata con successo! Ora puoi accedere.");
       setTimeout(() => {
-        router.push("/account/login");  // ← MODIFICATO
+        router.push("/account/login");
       }, 3000);
     } else if (statusParam === "error") {
       setStatus("error");
