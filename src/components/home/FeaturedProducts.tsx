@@ -29,10 +29,10 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
           className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4"
         >
           <div>
-            <p className="text-text-muted text-sm tracking-widest uppercase mb-3">
+            <p className="text-accent-electric text-sm tracking-widest uppercase mb-3">
               Novità
             </p>
-            <h2 className="text-4xl md:text-5xl font-bold text-text-primary">
+            <h2 className="text-4xl md:text-5xl font-bold text-white">
               Prodotti in evidenza
             </h2>
           </div>

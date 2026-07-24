@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { Navbar } from "@/components/ui/layout/Navbar";
 import { Footer } from "@/components/ui/layout/Footer";
 import { Badge } from "@/components/ui/primitives/Badge";
-import { Button } from "@/components/ui/primitives/Button";
 
 interface Coupon {
   id: string;
@@ -34,7 +33,7 @@ export default function AccountPage() {
     fetch("/api/user/coupons")
       .then((r) => r.json())
       .then(setCoupons);
-  }, []);
+  }, [router]);
 
   if (!user) return null;
 
@@ -53,13 +52,8 @@ export default function AccountPage() {
   const nextLevel = LEVELS.find((l) => l.minXp > user.xp) || currentLevel;
   const progress = nextLevel.minXp === 0 ? 100 : ((user.xp - currentLevel.minXp) / (nextLevel.minXp - currentLevel.minXp)) * 100;
 
-  // Coupon attivi (non usati e non scaduti)
   const activeCoupons = coupons.filter((c) => !c.used && new Date(c.expiresAt) > new Date());
-  
-  // Coupon scaduti (non usati ma scaduti)
   const expiredCoupons = coupons.filter((c) => !c.used && new Date(c.expiresAt) <= new Date());
-  
-  // Coupon usati
   const usedCoupons = coupons.filter((c) => c.used);
 
   return (
@@ -70,7 +64,6 @@ export default function AccountPage() {
           <h1 className="text-3xl font-bold text-text-primary mb-2">Il mio account</h1>
           <p className="text-text-secondary mb-8">{user.email}</p>
 
-          {/* Livello + XP Bar */}
           <div className="glass p-6 rounded-2xl mb-6">
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-lg font-semibold text-text-primary">Livello</h2>
@@ -78,7 +71,7 @@ export default function AccountPage() {
             </div>
             <div className="w-full h-3 bg-background-secondary rounded-full overflow-hidden mb-2">
               <div
-                className="h-full bg-gradient-to-r from-accent-electric to-accent-purple rounded-full transition-all duration-500"
+                className="h-full bg-linear-to-r from-accent-electric to-accent-purple rounded-full transition-all duration-500"
                 style={{ width: `${Math.min(progress, 100)}%` }}
               />
             </div>
@@ -91,12 +84,9 @@ export default function AccountPage() {
             </div>
           </div>
 
-          {/* Coupon attivi - VERDI */}
           {activeCoupons.length > 0 && (
             <div className="glass p-6 rounded-2xl mb-6">
-              <h2 className="text-lg font-semibold text-text-primary mb-4">
-                Coupon attivi ({activeCoupons.length})
-              </h2>
+              <h2 className="text-lg font-semibold text-text-primary mb-4">Coupon attivi ({activeCoupons.length})</h2>
               <div className="space-y-3">
                 {activeCoupons.map((c) => (
                   <div key={c.id} className="flex justify-between items-center border border-green-500/30 bg-green-500/5 rounded-lg p-3">
@@ -114,12 +104,9 @@ export default function AccountPage() {
             </div>
           )}
 
-          {/* Coupon scaduti - ROSSI */}
           {expiredCoupons.length > 0 && (
             <div className="glass p-6 rounded-2xl mb-6">
-              <h2 className="text-lg font-semibold text-text-primary mb-4">
-                Coupon scaduti ({expiredCoupons.length})
-              </h2>
+              <h2 className="text-lg font-semibold text-text-primary mb-4">Coupon scaduti ({expiredCoupons.length})</h2>
               <div className="space-y-3">
                 {expiredCoupons.map((c) => (
                   <div key={c.id} className="flex justify-between items-center border border-red-500/30 bg-red-500/5 rounded-lg p-3">
@@ -137,12 +124,9 @@ export default function AccountPage() {
             </div>
           )}
 
-          {/* Coupon usati - ROSSI */}
           {usedCoupons.length > 0 && (
             <div className="glass p-6 rounded-2xl mb-6">
-              <h2 className="text-lg font-semibold text-text-primary mb-4">
-                Coupon usati ({usedCoupons.length})
-              </h2>
+              <h2 className="text-lg font-semibold text-text-primary mb-4">Coupon usati ({usedCoupons.length})</h2>
               <div className="space-y-3">
                 {usedCoupons.map((c) => (
                   <div key={c.id} className="flex justify-between items-center border border-red-500/30 bg-red-500/5 rounded-lg p-3">
@@ -160,7 +144,6 @@ export default function AccountPage() {
             </div>
           )}
 
-          {/* Messaggio quando non ci sono coupon */}
           {activeCoupons.length === 0 && expiredCoupons.length === 0 && usedCoupons.length === 0 && (
             <div className="glass p-6 rounded-2xl mb-6">
               <h2 className="text-lg font-semibold text-text-primary mb-4">Coupon</h2>
@@ -169,7 +152,6 @@ export default function AccountPage() {
             </div>
           )}
 
-          {/* I miei ordini */}
           <div className="glass p-6 rounded-2xl">
             <h2 className="text-lg font-semibold text-text-primary mb-4">I miei ordini</h2>
             <p className="text-text-muted text-sm">Storico ordini in arrivo...</p>

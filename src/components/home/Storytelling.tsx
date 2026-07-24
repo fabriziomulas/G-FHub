@@ -19,7 +19,6 @@ export function Storytelling() {
     <section ref={ref} className="relative py-32 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Testo */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -58,8 +57,7 @@ export function Storytelling() {
             </Button>
           </motion.div>
 
-          {/* Immagini con parallax */}
-          <div className="relative h-[500px]">
+          <div className="relative h-125">
             <motion.div
               style={{ y: y1 }}
               className="absolute top-0 right-0 w-72 h-96 rounded-2xl overflow-hidden shadow-glow-blue"
