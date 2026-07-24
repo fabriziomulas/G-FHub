@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Button } from "@/components/ui/primitives/Button";
 import { ArrowRight } from "lucide-react";
 
@@ -54,9 +55,11 @@ export function Hero() {
           transition={{ delay: 0.9, duration: 0.8 }}
           className="flex gap-4 justify-center"
         >
-          <Button size="xl" rightIcon={<ArrowRight size={20} />}>
-            Esplora la collezione
-          </Button>
+          <Link href="/shop">
+            <Button size="xl" rightIcon={<ArrowRight size={20} />}>
+              Esplora la collezione
+            </Button>
+          </Link>
         </motion.div>
       </motion.div>
     </section>

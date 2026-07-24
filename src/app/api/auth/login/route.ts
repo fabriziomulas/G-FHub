@@ -13,6 +13,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Credenziali non valide" }, { status: 401 });
   }
 
+  // 🔒 NUOVO CONTROLLO: verifica che l'email sia stata confermata
+  if (!user.emailVerified) {
+    return NextResponse.json(
+      { error: "Verifica la tua email prima di accedere. Controlla anche la cartella spam." },
+      { status: 403 }
+    );
+  }
+
   const valid = await bcrypt.compare(password, user.password);
   if (!valid) {
     return NextResponse.json({ error: "Credenziali non valide" }, { status: 401 });

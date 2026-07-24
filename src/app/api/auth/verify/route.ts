@@ -40,7 +40,9 @@ export async function GET(request: Request) {
   const token = searchParams.get("token");
 
   if (!token) {
-    return NextResponse.json({ error: "Token mancante" }, { status: 400 });
+    return NextResponse.redirect(
+      new URL("/auth/verify?status=error&message=Token mancante", process.env.NEXTAUTH_URL)
+    );
   }
 
   try {
@@ -50,10 +52,12 @@ export async function GET(request: Request) {
       data: { emailVerified: true },
     });
 
-    return new Response("Email verificata! Torna al sito e fai login.", {
-      headers: { "Content-Type": "text/html" },
-    });
+    return NextResponse.redirect(
+      new URL("/auth/verify?status=success", process.env.NEXTAUTH_URL)
+    );
   } catch {
-    return new Response("Token scaduto o non valido.", { status: 400 });
+    return NextResponse.redirect(
+      new URL("/auth/verify?status=error&message=Token scaduto o non valido", process.env.NEXTAUTH_URL)
+    );
   }
 }

@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     const { payload } = await jwtVerify(token, JWT_SECRET);
     const user = await prisma.user.findUnique({
       where: { id: payload.id as string },
-      select: { id: true, email: true, name: true, role: true, level: true, xp: true, points: true },
+      select: { id: true, email: true, name: true, role: true, level: true, xp: true, points: true, emailVerified: true },
     });
 
     return NextResponse.json({ user });

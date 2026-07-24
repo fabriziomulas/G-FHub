@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { Navbar } from "@/components/ui/layout/Navbar";
 import { Footer } from "@/components/ui/layout/Footer";
 import { Badge } from "@/components/ui/primitives/Badge";
+import { LevelBadge } from "@/components/ui/LevelBadge";
+import { toast } from "sonner";
 
 interface Coupon {
   id: string;
@@ -16,7 +18,7 @@ interface Coupon {
 }
 
 export default function AccountPage() {
-  const [user, setUser] = useState<{ email: string; name: string; level: string; xp: number; points: number } | null>(null);
+  const [user, setUser] = useState<{ email: string; name: string; level: string; xp: number; points: number; emailVerified: boolean } | null>(null);
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const router = useRouter();
 
@@ -59,40 +61,62 @@ export default function AccountPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-24 min-h-screen px-6">
+      <main className="pt-24 min-h-screen px-6 bg-[#0C0A09]">
         <div className="max-w-2xl mx-auto py-12">
-          <h1 className="text-3xl font-bold text-text-primary mb-2">Il mio account</h1>
-          <p className="text-text-secondary mb-8">{user.email}</p>
+          <h1 className="text-3xl font-bold text-white mb-2">Il mio account</h1>
+          <p className="text-gray-400 mb-4">{user.email}</p>
 
-          <div className="glass p-6 rounded-2xl mb-6">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-lg font-semibold text-text-primary">Livello</h2>
-              <Badge color="electric">{user.level}</Badge>
+          {!user.emailVerified && (
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 mb-6">
+              <p className="text-amber-400 text-sm font-medium">⚠️ Email non verificata</p>
+              <p className="text-amber-400/70 text-xs mt-1">
+                Controlla la tua casella di posta e clicca sul link di verifica.
+              </p>
+              <button
+                onClick={async () => {
+                  await fetch("/api/auth/verify", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email: user.email }),
+                  });
+                  toast.success("Email di verifica inviata!");
+                }}
+                className="text-amber-400 text-xs underline mt-2 hover:text-amber-300"
+              >
+                Reinvia email di verifica
+              </button>
             </div>
-            <div className="w-full h-3 bg-background-secondary rounded-full overflow-hidden mb-2">
+          )}
+
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl mb-6">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-lg font-semibold text-white">Livello</h2>
+              <LevelBadge level={user.level} size="md" />
+            </div>
+            <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden mb-2">
               <div
                 className="h-full bg-linear-to-r from-accent-electric to-accent-purple rounded-full transition-all duration-500"
                 style={{ width: `${Math.min(progress, 100)}%` }}
               />
             </div>
-            <div className="flex justify-between text-xs text-text-muted">
+            <div className="flex justify-between text-xs text-gray-500">
               <span>{user.xp} XP</span>
               <span>{nextLevel.name} - {nextLevel.minXp} XP</span>
             </div>
-            <div className="mt-3 flex items-center gap-2 text-sm text-text-secondary">
-              <span>Punti fedeltà: <strong className="text-text-primary">{user.points}</strong></span>
+            <div className="mt-3 flex items-center gap-2 text-sm text-gray-300">
+              <span>Punti fedeltà: <strong className="text-white">{user.points}</strong></span>
             </div>
           </div>
 
           {activeCoupons.length > 0 && (
-            <div className="glass p-6 rounded-2xl mb-6">
-              <h2 className="text-lg font-semibold text-text-primary mb-4">Coupon attivi ({activeCoupons.length})</h2>
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl mb-6">
+              <h2 className="text-lg font-semibold text-white mb-4">Coupon attivi ({activeCoupons.length})</h2>
               <div className="space-y-3">
                 {activeCoupons.map((c) => (
                   <div key={c.id} className="flex justify-between items-center border border-green-500/30 bg-green-500/5 rounded-lg p-3">
                     <div>
-                      <p className="text-text-primary font-bold">{c.code}</p>
-                      <p className="text-xs text-text-muted">
+                      <p className="text-white font-bold">{c.code}</p>
+                      <p className="text-xs text-gray-400">
                         Scade {new Date(c.expiresAt).toLocaleDateString("it-IT")}
                         {c.minSpent && ` • Minimo €${c.minSpent}`}
                       </p>
@@ -105,14 +129,14 @@ export default function AccountPage() {
           )}
 
           {expiredCoupons.length > 0 && (
-            <div className="glass p-6 rounded-2xl mb-6">
-              <h2 className="text-lg font-semibold text-text-primary mb-4">Coupon scaduti ({expiredCoupons.length})</h2>
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl mb-6">
+              <h2 className="text-lg font-semibold text-white mb-4">Coupon scaduti ({expiredCoupons.length})</h2>
               <div className="space-y-3">
                 {expiredCoupons.map((c) => (
                   <div key={c.id} className="flex justify-between items-center border border-red-500/30 bg-red-500/5 rounded-lg p-3">
                     <div>
-                      <p className="text-text-primary font-bold">{c.code}</p>
-                      <p className="text-xs text-text-muted">
+                      <p className="text-white font-bold">{c.code}</p>
+                      <p className="text-xs text-gray-400">
                         Scaduto il {new Date(c.expiresAt).toLocaleDateString("it-IT")}
                         {c.minSpent && ` • Minimo €${c.minSpent}`}
                       </p>
@@ -125,14 +149,14 @@ export default function AccountPage() {
           )}
 
           {usedCoupons.length > 0 && (
-            <div className="glass p-6 rounded-2xl mb-6">
-              <h2 className="text-lg font-semibold text-text-primary mb-4">Coupon usati ({usedCoupons.length})</h2>
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl mb-6">
+              <h2 className="text-lg font-semibold text-white mb-4">Coupon usati ({usedCoupons.length})</h2>
               <div className="space-y-3">
                 {usedCoupons.map((c) => (
                   <div key={c.id} className="flex justify-between items-center border border-red-500/30 bg-red-500/5 rounded-lg p-3">
                     <div>
-                      <p className="text-text-primary font-bold">{c.code}</p>
-                      <p className="text-xs text-text-muted">
+                      <p className="text-white font-bold">{c.code}</p>
+                      <p className="text-xs text-gray-400">
                         Usato • Scadeva il {new Date(c.expiresAt).toLocaleDateString("it-IT")}
                         {c.minSpent && ` • Minimo €${c.minSpent}`}
                       </p>
@@ -145,16 +169,16 @@ export default function AccountPage() {
           )}
 
           {activeCoupons.length === 0 && expiredCoupons.length === 0 && usedCoupons.length === 0 && (
-            <div className="glass p-6 rounded-2xl mb-6">
-              <h2 className="text-lg font-semibold text-text-primary mb-4">Coupon</h2>
-              <p className="text-text-muted text-sm">Non hai ancora coupon disponibili.</p>
-              <p className="text-text-muted text-sm mt-1">Continua a fare acquisti per guadagnare coupon esclusivi!</p>
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl mb-6">
+              <h2 className="text-lg font-semibold text-white mb-4">Coupon</h2>
+              <p className="text-gray-400 text-sm">Non hai ancora coupon disponibili.</p>
+              <p className="text-gray-400 text-sm mt-1">Continua a fare acquisti per guadagnare coupon esclusivi!</p>
             </div>
           )}
 
-          <div className="glass p-6 rounded-2xl">
-            <h2 className="text-lg font-semibold text-text-primary mb-4">I miei ordini</h2>
-            <p className="text-text-muted text-sm">Storico ordini in arrivo...</p>
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl">
+            <h2 className="text-lg font-semibold text-white mb-4">I miei ordini</h2>
+            <p className="text-gray-400 text-sm">Storico ordini in arrivo...</p>
           </div>
         </div>
       </main>

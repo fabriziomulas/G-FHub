@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/primitives/Button";
 import { Badge } from "@/components/ui/primitives/Badge";
-import { ShoppingBag, Heart } from "lucide-react";
+import { ShoppingBag, Heart, PenLine } from "lucide-react";
 import { toast } from "sonner";
 import { useCart } from "@/stores/cart";
 
@@ -54,6 +54,10 @@ export function ProductInfo({
       options: selectedVariant.selectedOptions.map((o) => o.value).join(" / "),
     });
     toast.success(`${title} aggiunto al carrello!`);
+  };
+
+  const handleOpenReview = () => {
+    window.dispatchEvent(new CustomEvent("open-review-modal"));
   };
 
   return (
@@ -135,6 +139,16 @@ export function ProductInfo({
           <Heart size={20} />
         </Button>
       </div>
+
+      <Button
+        size="xl"
+        className="w-full"
+        variant="primary"
+        leftIcon={<PenLine size={20} />}
+        onClick={handleOpenReview}
+      >
+        Scrivi una recensione
+      </Button>
 
       {selectedVariant && (
         <p className="text-xs text-gray-500">

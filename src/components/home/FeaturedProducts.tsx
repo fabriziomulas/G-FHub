@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import Link from "next/link";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { Button } from "@/components/ui/primitives/Button";
 import { ArrowRight } from "lucide-react";
@@ -36,9 +37,11 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
               Prodotti in evidenza
             </h2>
           </div>
-          <Button variant="link" rightIcon={<ArrowRight size={16} />}>
-            Vedi tutti
-          </Button>
+          <Link href="/shop">
+            <Button variant="link" rightIcon={<ArrowRight size={16} />}>
+              Vedi tutti
+            </Button>
+          </Link>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
