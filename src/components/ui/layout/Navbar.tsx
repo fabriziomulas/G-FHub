@@ -68,17 +68,20 @@ export function Navbar() {
           </nav>
 
           <div className="hidden md:flex items-center gap-2">
-            <button
-              onClick={() => setCartOpen(true)}
-              className="relative p-2 text-text-secondary hover:text-text-primary hover:bg-text-primary/5 rounded-lg transition-all"
-            >
-              <ShoppingBag size={18} />
-              {itemCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-accent-electric text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                  {itemCount}
-                </span>
-              )}
-            </button>
+            {/* 🔹 Icona carrello VISIBILE SOLO SE UTENTE LOGGATO */}
+            {user && (
+              <button
+                onClick={() => setCartOpen(true)}
+                className="relative p-2 text-text-secondary hover:text-text-primary hover:bg-text-primary/5 rounded-lg transition-all"
+              >
+                <ShoppingBag size={18} />
+                {itemCount > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-accent-electric text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                    {itemCount}
+                  </span>
+                )}
+              </button>
+            )}
 
             {user ? (
               <div className="relative">
@@ -110,6 +113,13 @@ export function Navbar() {
                       >
                         <User size={14} /> Dashboard
                       </Link>
+                      {/* 🔹 CARRELLO DENTRO IL DROPDOWN */}
+                      <button
+                        onClick={() => { setCartOpen(true); setAccountOpen(false); }}
+                        className="flex items-center gap-2 px-3 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-text-primary/5 rounded-lg transition-all w-full"
+                      >
+                        <ShoppingBag size={14} /> Carrello ({itemCount})
+                      </button>
                       {user.role === "ADMIN" && (
                         <Link
                           href="/admin"
@@ -176,6 +186,9 @@ export function Navbar() {
                         Admin
                       </Link>
                     )}
+                    <button onClick={() => { setMobileOpen(false); setCartOpen(true); }} className="text-text-secondary hover:text-text-primary py-2 text-left">
+                      Carrello ({itemCount})
+                    </button>
                     <button onClick={() => { setMobileOpen(false); logout(); }} className="text-red-400 text-left py-2">
                       Esci
                     </button>
@@ -185,9 +198,6 @@ export function Navbar() {
                     Accedi
                   </Link>
                 )}
-                <button onClick={() => { setMobileOpen(false); setCartOpen(true); }} className="text-text-secondary hover:text-text-primary py-2 text-left">
-                  Carrello ({itemCount})
-                </button>
               </div>
             </motion.div>
           )}
