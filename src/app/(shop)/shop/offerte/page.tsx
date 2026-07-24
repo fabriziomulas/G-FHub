@@ -9,10 +9,10 @@ export default function OffertePage() {
   return (
     <>
       <Navbar />
-      <main className="pt-24 min-h-screen">
+      <main className="pt-24 min-h-screen bg-[#0C0A09]">
         <div className="max-w-7xl mx-auto px-6 py-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-2">Offerte</h1>
-          <p className="text-text-secondary mb-8">Prezzi speciali per tempo limitato</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Offerte</h1>
+          <p className="text-gray-400 mb-8">Prezzi speciali per tempo limitato</p>
           <Suspense fallback={<ShopSkeleton />}>
             <ShopContent />
           </Suspense>

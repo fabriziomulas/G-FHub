@@ -34,19 +34,21 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background-primary pt-24">
-      <div className="glass p-8 rounded-2xl w-full max-w-sm space-y-4">
-        <h1 className="text-xl font-bold text-text-primary text-center">Accedi</h1>
-        <form onSubmit={handleLogin} className="space-y-4">
-          <Input label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          <Input label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-          <Button type="submit" loading={loading} className="w-full">Accedi</Button>
-        </form>
-        <p className="text-text-muted text-sm text-center">
-          Non hai un account?{" "}
-          <Link href="/account/register" className="text-accent-electric hover:underline">Registrati</Link>
-        </p>
+    <>
+      <div className="min-h-screen flex items-center justify-center bg-[#0C0A09] pt-24 px-6">
+        <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl w-full max-w-sm space-y-4">
+          <h1 className="text-xl font-bold text-white text-center">Accedi</h1>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <Input label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            <Input label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <Button type="submit" loading={loading} className="w-full">Accedi</Button>
+          </form>
+          <p className="text-gray-400 text-sm text-center">
+            Non hai un account?{" "}
+            <Link href="/account/register" className="text-accent-electric hover:underline">Registrati</Link>
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

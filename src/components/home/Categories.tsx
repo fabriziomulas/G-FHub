@@ -53,7 +53,7 @@ export function Categories() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.5 }}
             >
-              <div className="glass-dark rounded-2xl overflow-hidden">
+              <div className="glass-dark rounded-2xl overflow-hidden border-white/20">
                 <Link
                   href={cat.href}
                   className="group relative block aspect-4/5"

@@ -61,8 +61,8 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
     >
-      <Card variant="interactive" padding="none" className="group overflow-hidden">
-        <div className="relative aspect-square overflow-hidden bg-background-secondary">
+      <Card variant="interactive" padding="none" className="group overflow-hidden border-white/20">
+        <div className="relative aspect-square overflow-hidden bg-white/5">
           <Image
             src={imageSrc}
             alt={product.title}
@@ -92,16 +92,16 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
 
         <div className="p-4">
           <Link href={`/product/${product.handle}`}>
-            <h3 className="text-sm font-medium text-text-primary hover:text-accent-electric transition-colors line-clamp-1">
+            <h3 className="text-sm font-medium text-white hover:text-accent-electric transition-colors line-clamp-1">
               {product.title}
             </h3>
           </Link>
           <div className="flex items-center gap-2 mt-1">
-            <span className="text-sm font-semibold text-text-primary">
+            <span className="text-sm font-semibold text-white">
               €{product.price}
             </span>
             {hasDiscount && (
-              <span className="text-xs text-text-muted line-through">
+              <span className="text-xs text-gray-400 line-through">
                 €{product.compareAtPrice}
               </span>
             )}

@@ -38,16 +38,16 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background-primary pt-24">
-      <div className="glass p-8 rounded-2xl w-full max-w-sm space-y-4">
-        <h1 className="text-xl font-bold text-text-primary text-center">Registrati</h1>
+    <div className="min-h-screen flex items-center justify-center bg-[#0C0A09] pt-24 px-6">
+      <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl w-full max-w-sm space-y-4">
+        <h1 className="text-xl font-bold text-white text-center">Registrati</h1>
         <form onSubmit={handleRegister} className="space-y-4">
           <Input label="Nome" value={name} onChange={(e) => setName(e.target.value)} />
           <Input label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           <Input label="Password (min 6 caratteri)" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           <Button type="submit" loading={loading} className="w-full">Registrati</Button>
         </form>
-        <p className="text-text-muted text-sm text-center">
+        <p className="text-gray-400 text-sm text-center">
           Hai già un account?{" "}
           <Link href="/account/login" className="text-accent-electric hover:underline">Accedi</Link>
         </p>

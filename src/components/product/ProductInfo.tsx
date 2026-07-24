@@ -34,7 +34,6 @@ export function ProductInfo({
   const hasDiscount = compareAtPrice !== "0.00" && compareAtPrice !== price;
   const { addItem } = useCart();
 
-  // Group options by name
   const options = variants.reduce<Record<string, string[]>>((acc, v) => {
     v.selectedOptions.forEach((opt) => {
       if (!acc[opt.name]) acc[opt.name] = [];
@@ -60,15 +59,15 @@ export function ProductInfo({
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl md:text-4xl font-bold text-text-primary">
+        <h1 className="text-3xl md:text-4xl font-bold text-white">
           {title}
         </h1>
         <div className="flex items-center gap-3 mt-3">
-          <span className="text-2xl font-semibold text-text-primary">
+          <span className="text-2xl font-semibold text-white">
             €{parseFloat(price).toFixed(2)}
           </span>
           {hasDiscount && (
-            <span className="text-lg text-text-muted line-through">
+            <span className="text-lg text-gray-400 line-through">
               €{parseFloat(compareAtPrice).toFixed(2)}
             </span>
           )}
@@ -80,10 +79,9 @@ export function ProductInfo({
         </div>
       </div>
 
-      {/* Variants */}
       {Object.entries(options).map(([name, values]) => (
         <div key={name}>
-          <h3 className="text-sm font-medium text-text-secondary mb-2">
+          <h3 className="text-sm font-medium text-gray-300 mb-2">
             {name}
           </h3>
           <div className="flex gap-2 flex-wrap">
@@ -107,8 +105,8 @@ export function ProductInfo({
                     isSelected
                       ? "bg-accent-electric text-white"
                       : isAvailable
-                      ? "glass text-text-primary hover:bg-white/10"
-                      : "glass text-text-muted line-through cursor-not-allowed"
+                      ? "bg-white/10 text-white hover:bg-white/20"
+                      : "bg-white/5 text-gray-500 line-through cursor-not-allowed"
                   }`}
                 >
                   {value}
@@ -119,12 +117,10 @@ export function ProductInfo({
         </div>
       ))}
 
-      {/* Description */}
-      <div className="text-text-secondary leading-relaxed text-sm"
+      <div className="text-gray-300 leading-relaxed text-sm"
         dangerouslySetInnerHTML={{ __html: description }}
       />
 
-      {/* Actions */}
       <div className="flex gap-3 pt-4">
         <Button
           size="xl"
@@ -140,9 +136,8 @@ export function ProductInfo({
         </Button>
       </div>
 
-      {/* Stock info */}
       {selectedVariant && (
-        <p className="text-xs text-text-muted">
+        <p className="text-xs text-gray-500">
           {selectedVariant.availableForSale
             ? "Disponibile"
             : "Non disponibile"}

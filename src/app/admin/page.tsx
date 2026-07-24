@@ -105,7 +105,7 @@ export default function AdminPage() {
   };
 
   if (checking) {
-    return <div className="min-h-screen bg-background-primary flex items-center justify-center"><p className="text-text-muted">Caricamento...</p></div>;
+    return <div className="min-h-screen bg-[#0C0A09] flex items-center justify-center"><p className="text-gray-400">Caricamento...</p></div>;
   }
 
   if (!user || user.role !== "ADMIN") {
@@ -113,42 +113,42 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background-primary p-8 pt-24">
+    <div className="min-h-screen bg-[#0C0A09] p-8 pt-24">
       <div className="max-w-4xl mx-auto">
         <div className="flex gap-4 mb-8">
-          <button onClick={() => setTab("products")} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === "products" ? "bg-accent-electric text-white" : "glass text-text-secondary"}`}>
+          <button onClick={() => setTab("products")} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === "products" ? "bg-accent-electric text-white" : "bg-white/5 text-gray-400 border border-white/10"}`}>
             Prodotti
           </button>
-          <button onClick={() => setTab("orders")} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === "orders" ? "bg-accent-electric text-white" : "glass text-text-secondary"}`}>
+          <button onClick={() => setTab("orders")} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === "orders" ? "bg-accent-electric text-white" : "bg-white/5 text-gray-400 border border-white/10"}`}>
             Ordini ({orders.length})
           </button>
         </div>
 
         {tab === "products" && (
-          <div className="glass p-8 rounded-2xl">
-            <h1 className="text-2xl font-bold text-text-primary mb-6">Aggiungi Prodotto</h1>
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl">
+            <h1 className="text-2xl font-bold text-white mb-6">Aggiungi Prodotto</h1>
             <form onSubmit={handleSubmit} className="space-y-4">
               <Input label="Titolo" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required />
               <Input label="Handle (URL)" value={form.handle} onChange={(e) => setForm({ ...form, handle: e.target.value })} required />
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1.5">Descrizione</label>
-                <textarea className="w-full h-24 px-3 py-2 rounded-lg bg-background-secondary border border-border-default text-text-primary text-sm" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
+                <label className="block text-sm font-medium text-gray-300 mb-1.5">Descrizione</label>
+                <textarea className="w-full h-24 px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <Input label="Prezzo (€)" type="number" step="0.01" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} required />
                 <Input label="Prezzo originale (€)" type="number" step="0.01" value={form.compareAtPrice} onChange={(e) => setForm({ ...form, compareAtPrice: e.target.value })} />
               </div>
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1.5">Immagini</label>
+                <label className="block text-sm font-medium text-gray-300 mb-1.5">Immagini</label>
                 <input
                   type="file"
                   accept="image/*"
                   multiple
                   onChange={handleFileUpload}
                   disabled={uploading}
-                  className="w-full text-sm text-text-secondary file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-accent-electric file:text-white hover:file:bg-accent-purple file:transition-colors file:cursor-pointer"
+                  className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-accent-electric file:text-white hover:file:bg-accent-purple file:transition-colors file:cursor-pointer"
                 />
-                {uploading && <p className="text-xs text-text-muted mt-1">Caricamento in corso...</p>}
+                {uploading && <p className="text-xs text-gray-500 mt-1">Caricamento in corso...</p>}
                 {form.images && (
                   <div className="flex gap-2 mt-2 flex-wrap">
                     {form.images.split(",").filter(Boolean).map((url, i) => (
@@ -159,13 +159,13 @@ export default function AdminPage() {
               </div>
               <Input label="Categoria" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} />
               <div className="flex gap-4">
-                <label className="flex items-center gap-2 text-sm text-text-secondary">
+                <label className="flex items-center gap-2 text-sm text-gray-300">
                   <input type="checkbox" checked={form.isNew} onChange={(e) => setForm({ ...form, isNew: e.target.checked })} /> Nuovi Arrivi
                 </label>
-                <label className="flex items-center gap-2 text-sm text-text-secondary">
+                <label className="flex items-center gap-2 text-sm text-gray-300">
                   <input type="checkbox" checked={form.isBestSeller} onChange={(e) => setForm({ ...form, isBestSeller: e.target.checked })} /> Best Seller
                 </label>
-                <label className="flex items-center gap-2 text-sm text-text-secondary">
+                <label className="flex items-center gap-2 text-sm text-gray-300">
                   <input type="checkbox" checked={form.isOnSale} onChange={(e) => setForm({ ...form, isOnSale: e.target.checked })} /> Offerte
                 </label>
               </div>
@@ -175,27 +175,27 @@ export default function AdminPage() {
         )}
 
         {tab === "orders" && (
-          <div className="glass p-8 rounded-2xl">
-            <h1 className="text-2xl font-bold text-text-primary mb-6">Ordini</h1>
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl">
+            <h1 className="text-2xl font-bold text-white mb-6">Ordini</h1>
             {orders.length === 0 ? (
-              <p className="text-text-muted">Nessun ordine ancora.</p>
+              <p className="text-gray-400">Nessun ordine ancora.</p>
             ) : (
               <div className="space-y-4">
                 {orders.map((order) => (
-                  <div key={order.id} className="glass p-4 rounded-xl">
+                  <div key={order.id} className="bg-white/5 border border-white/10 p-4 rounded-xl">
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <p className="text-sm text-text-primary font-medium">{order.user?.email || "Guest"}</p>
-                        <p className="text-xs text-text-muted">{new Date(order.createdAt).toLocaleDateString("it-IT", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}</p>
+                        <p className="text-sm text-white font-medium">{order.user?.email || "Guest"}</p>
+                        <p className="text-xs text-gray-400">{new Date(order.createdAt).toLocaleDateString("it-IT", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}</p>
                       </div>
                       <div className="text-right">
                         <Badge color={order.status === "PAID" ? "success" : "warning"}>{order.status === "PAID" ? "Pagato" : order.status}</Badge>
-                        <p className="text-lg font-bold text-text-primary mt-1">€{order.total.toFixed(2)}</p>
+                        <p className="text-lg font-bold text-white mt-1">€{order.total.toFixed(2)}</p>
                       </div>
                     </div>
                     <div className="flex gap-2 mt-2">
                       {order.items.map((item, i) => (
-                        <span key={i} className="text-xs text-text-secondary">{item.quantity}x {item.product.title}</span>
+                        <span key={i} className="text-xs text-gray-300">{item.quantity}x {item.product.title}</span>
                       ))}
                     </div>
                   </div>
