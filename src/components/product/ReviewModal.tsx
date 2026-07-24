@@ -15,26 +15,39 @@ export function ReviewModal({ productId }: { productId: string }) {
 
   useEffect(() => {
     const handler = () => setOpen(true);
+
     window.addEventListener("open-review-modal", handler);
-    return () => window.removeEventListener("open-review-modal", handler);
+
+    return () => {
+      window.removeEventListener("open-review-modal", handler);
+    };
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!name || !text) {
       toast.error("Compila tutti i campi");
       return;
     }
+
     setLoading(true);
-    // TODO: salvare nel database
-    setTimeout(() => {
-      setLoading(false);
+
+    try {
+      // TODO: collegare API recensioni
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      toast.success("Recensione inviata! Grazie 🎉");
+
       setOpen(false);
       setName("");
       setText("");
       setStars(5);
-      toast.success("Recensione inviata! Grazie 🎉");
-    }, 500);
+    } catch {
+      toast.error("Errore durante l'invio della recensione");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -52,18 +65,27 @@ export function ReviewModal({ productId }: { productId: string }) {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-[#0C0A09] border border-white/20 rounded-3xl p-8 md:p-10 w-full max-w-lg shadow-2xl"
+            className="bg-text-primary border border-white/20 rounded-3xl p-8 md:p-10 w-full max-w-lg shadow-2xl"
           >
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-white">Lascia una recensione</h2>
-              <button onClick={() => setOpen(false)} className="text-gray-400 hover:text-white">
+              <h2 className="text-xl font-bold text-white">
+                Lascia una recensione
+              </h2>
+
+              <button
+                onClick={() => setOpen(false)}
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <X size={20} />
               </button>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Il tuo nome</label>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Il tuo nome
+                </label>
+
                 <input
                   type="text"
                   value={name}
@@ -75,18 +97,36 @@ export function ReviewModal({ productId }: { productId: string }) {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Valutazione</label>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Valutazione
+                </label>
+
                 <div className="flex gap-2">
                   {[1, 2, 3, 4, 5].map((s) => (
-                    <button key={s} type="button" onClick={() => setStars(s)} className="p-1 hover:scale-110 transition-transform">
-                      <Star size={28} className={s <= stars ? "text-accent-electric fill-accent-electric" : "text-gray-600"} />
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={() => setStars(s)}
+                      className="p-1 hover:scale-110 transition-transform"
+                    >
+                      <Star
+                        size={28}
+                        className={
+                          s <= stars
+                            ? "text-accent-electric fill-accent-electric"
+                            : "text-gray-600"
+                        }
+                      />
                     </button>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">La tua recensione</label>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  La tua recensione
+                </label>
+
                 <textarea
                   value={text}
                   onChange={(e) => setText(e.target.value)}
@@ -96,7 +136,13 @@ export function ReviewModal({ productId }: { productId: string }) {
                 />
               </div>
 
-              <Button type="submit" loading={loading} className="w-full" size="lg" leftIcon={<Send size={16} />}>
+              <Button
+                type="submit"
+                loading={loading}
+                className="w-full"
+                size="lg"
+                leftIcon={<Send size={16} />}
+              >
                 Invia recensione
               </Button>
             </form>

@@ -9,15 +9,23 @@ export default function NewArrivalsPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-24 min-h-screen bg-[#0C0A09]">
+
+      <main className="pt-24 min-h-screen bg-text-primary">
         <div className="max-w-7xl mx-auto px-6 py-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Nuovi Arrivi</h1>
-          <p className="text-gray-400 mb-8">Le ultime novità appena arrivate</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
+            Nuovi Arrivi
+          </h1>
+
+          <p className="text-gray-400 mb-8">
+            Le ultime novità appena arrivate
+          </p>
+
           <Suspense fallback={<ShopSkeleton />}>
             <ShopContent />
           </Suspense>
         </div>
       </main>
+
       <Footer />
     </>
   );
@@ -28,7 +36,12 @@ function ShopSkeleton() {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {Array.from({ length: 6 }).map((_, i) => (
         <div key={i} className="space-y-3">
-          <Skeleton shape="rectangular" height="300px" className="w-full" />
+          <Skeleton
+            shape="rectangular"
+            height="300px"
+            className="w-full"
+          />
+
           <Skeleton shape="text" width="60%" />
           <Skeleton shape="text" width="30%" />
         </div>
@@ -39,8 +52,13 @@ function ShopSkeleton() {
 
 async function ShopContent() {
   const products = await prisma.product.findMany({
-    where: { inStock: true, isNew: true },
-    orderBy: { createdAt: "desc" },
+    where: {
+      inStock: true,
+      isNew: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   const mapped = products.map((p) => ({
@@ -49,7 +67,9 @@ async function ShopContent() {
     handle: p.handle,
     image: p.images[0] || "/placeholder.png",
     price: p.price.toFixed(2),
-    compareAtPrice: p.compareAtPrice ? p.compareAtPrice.toFixed(2) : undefined,
+    compareAtPrice: p.compareAtPrice
+      ? p.compareAtPrice.toFixed(2)
+      : undefined,
   }));
 
   return <ShopGrid products={mapped} />;

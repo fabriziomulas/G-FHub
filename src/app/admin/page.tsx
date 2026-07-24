@@ -37,8 +37,10 @@ export default function AdminPage() {
     isBestSeller: false,
     isOnSale: false,
   });
+
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -47,11 +49,12 @@ export default function AdminPage() {
       .then((data) => {
         setUser(data.user);
         setChecking(false);
+
         if (!data.user || data.user.role !== "ADMIN") {
           router.push("/");
         }
       });
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     if (user?.role === "ADMIN") {
@@ -63,49 +66,100 @@ export default function AdminPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     setLoading(true);
+
     try {
       const res = await fetch("/api/admin/products", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           ...form,
           price: parseFloat(form.price),
-          compareAtPrice: form.compareAtPrice ? parseFloat(form.compareAtPrice) : null,
-          images: form.images.split(",").map((s) => s.trim()).filter(Boolean),
+          compareAtPrice: form.compareAtPrice
+            ? parseFloat(form.compareAtPrice)
+            : null,
+          images: form.images
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean),
         }),
       });
+
       if (res.ok) {
         toast.success("Prodotto creato!");
-        setForm({ title: "", handle: "", description: "", price: "", compareAtPrice: "", images: "", category: "", isNew: false, isBestSeller: false, isOnSale: false });
+
+        setForm({
+          title: "",
+          handle: "",
+          description: "",
+          price: "",
+          compareAtPrice: "",
+          images: "",
+          category: "",
+          isNew: false,
+          isBestSeller: false,
+          isOnSale: false,
+        });
       } else {
         toast.error("Errore creazione prodotto");
       }
     } catch {
       toast.error("Errore");
     }
+
     setLoading(false);
   };
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const files = e.target.files;
+
     if (!files || files.length === 0) return;
+
     setUploading(true);
-    const urls: string[] = form.images ? form.images.split(",").filter(Boolean) : [];
+
+    const urls: string[] = form.images
+      ? form.images.split(",").filter(Boolean)
+      : [];
+
     for (const file of Array.from(files)) {
       const data = new FormData();
       data.append("file", file);
-      const res = await fetch("/api/admin/upload", { method: "POST", body: data });
+
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: data,
+      });
+
       const json = await res.json();
-      if (json.url) urls.push(json.url);
+
+      if (json.url) {
+        urls.push(json.url);
+      }
     }
-    setForm({ ...form, images: urls.join(",") });
+
+    setForm({
+      ...form,
+      images: urls.join(","),
+    });
+
     setUploading(false);
+
     toast.success("Immagini caricate!");
   };
 
   if (checking) {
-    return <div className="min-h-screen bg-[#0C0A09] flex items-center justify-center"><p className="text-gray-400">Caricamento...</p></div>;
+    return (
+      <div className="min-h-screen bg-text-primary flex items-center justify-center">
+        <p className="text-gray-400">
+          Caricamento...
+        </p>
+      </div>
+    );
   }
 
   if (!user || user.role !== "ADMIN") {
@@ -113,97 +167,75 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0C0A09] p-8 pt-24">
+    <div className="min-h-screen bg-text-primary p-8 pt-24">
       <div className="max-w-4xl mx-auto">
+
         <div className="flex gap-4 mb-8">
-          <button onClick={() => setTab("products")} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === "products" ? "bg-accent-electric text-white" : "bg-white/5 text-gray-400 border border-white/10"}`}>
+          <button
+            onClick={() => setTab("products")}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              tab === "products"
+                ? "bg-accent-electric text-white"
+                : "bg-white/5 text-gray-400 border border-white/10"
+            }`}
+          >
             Prodotti
           </button>
-          <button onClick={() => setTab("orders")} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === "orders" ? "bg-accent-electric text-white" : "bg-white/5 text-gray-400 border border-white/10"}`}>
+
+          <button
+            onClick={() => setTab("orders")}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              tab === "orders"
+                ? "bg-accent-electric text-white"
+                : "bg-white/5 text-gray-400 border border-white/10"
+            }`}
+          >
             Ordini ({orders.length})
           </button>
         </div>
 
         {tab === "products" && (
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl">
-            <h1 className="text-2xl font-bold text-white mb-6">Aggiungi Prodotto</h1>
+            <h1 className="text-2xl font-bold text-white mb-6">
+              Aggiungi Prodotto
+            </h1>
+
             <form onSubmit={handleSubmit} className="space-y-4">
-              <Input label="Titolo" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required />
-              <Input label="Handle (URL)" value={form.handle} onChange={(e) => setForm({ ...form, handle: e.target.value })} required />
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1.5">Descrizione</label>
-                <textarea className="w-full h-24 px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <Input label="Prezzo (€)" type="number" step="0.01" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} required />
-                <Input label="Prezzo originale (€)" type="number" step="0.01" value={form.compareAtPrice} onChange={(e) => setForm({ ...form, compareAtPrice: e.target.value })} />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1.5">Immagini</label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={handleFileUpload}
-                  disabled={uploading}
-                  className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-accent-electric file:text-white hover:file:bg-accent-purple file:transition-colors file:cursor-pointer"
-                />
-                {uploading && <p className="text-xs text-gray-500 mt-1">Caricamento in corso...</p>}
-                {form.images && (
-                  <div className="flex gap-2 mt-2 flex-wrap">
-                    {form.images.split(",").filter(Boolean).map((url, i) => (
-                      <img key={i} src={url} alt="" className="w-16 h-16 rounded-lg object-cover" />
-                    ))}
-                  </div>
-                )}
-              </div>
-              <Input label="Categoria" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} />
-              <div className="flex gap-4">
-                <label className="flex items-center gap-2 text-sm text-gray-300">
-                  <input type="checkbox" checked={form.isNew} onChange={(e) => setForm({ ...form, isNew: e.target.checked })} /> Nuovi Arrivi
-                </label>
-                <label className="flex items-center gap-2 text-sm text-gray-300">
-                  <input type="checkbox" checked={form.isBestSeller} onChange={(e) => setForm({ ...form, isBestSeller: e.target.checked })} /> Best Seller
-                </label>
-                <label className="flex items-center gap-2 text-sm text-gray-300">
-                  <input type="checkbox" checked={form.isOnSale} onChange={(e) => setForm({ ...form, isOnSale: e.target.checked })} /> Offerte
-                </label>
-              </div>
-              <Button type="submit" loading={loading} className="w-full">Crea Prodotto</Button>
+              <Input
+                label="Titolo"
+                value={form.title}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    title: e.target.value,
+                  })
+                }
+                required
+              />
+
+              <Input
+                label="Handle (URL)"
+                value={form.handle}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    handle: e.target.value,
+                  })
+                }
+                required
+              />
+
+              <Button
+                type="submit"
+                loading={loading}
+                className="w-full"
+              >
+                Crea Prodotto
+              </Button>
             </form>
           </div>
         )}
 
-        {tab === "orders" && (
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl">
-            <h1 className="text-2xl font-bold text-white mb-6">Ordini</h1>
-            {orders.length === 0 ? (
-              <p className="text-gray-400">Nessun ordine ancora.</p>
-            ) : (
-              <div className="space-y-4">
-                {orders.map((order) => (
-                  <div key={order.id} className="bg-white/5 border border-white/10 p-4 rounded-xl">
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <p className="text-sm text-white font-medium">{order.user?.email || "Guest"}</p>
-                        <p className="text-xs text-gray-400">{new Date(order.createdAt).toLocaleDateString("it-IT", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}</p>
-                      </div>
-                      <div className="text-right">
-                        <Badge color={order.status === "PAID" ? "success" : "warning"}>{order.status === "PAID" ? "Pagato" : order.status}</Badge>
-                        <p className="text-lg font-bold text-white mt-1">€{order.total.toFixed(2)}</p>
-                      </div>
-                    </div>
-                    <div className="flex gap-2 mt-2">
-                      {order.items.map((item, i) => (
-                        <span key={i} className="text-xs text-gray-300">{item.quantity}x {item.product.title}</span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
       </div>
     </div>
   );

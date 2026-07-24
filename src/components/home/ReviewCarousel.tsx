@@ -17,7 +17,7 @@ export function ReviewCarousel() {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Recensioni
           </h2>
-          <div className="bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-3xl p-12 max-w-lg mx-auto">
+          <div className="bg-white/0.03 backdrop-blur-md border border-white/10 rounded-3xl p-12 max-w-lg mx-auto">
             <MessageSquare size={40} className="text-gray-600 mx-auto mb-4" />
             <p className="text-gray-400">Nessuna recensione ancora.</p>
             <p className="text-gray-500 text-sm mt-2">Sii il primo a lasciare una recensione!</p>
@@ -49,7 +49,7 @@ export function ReviewCarousel() {
           {doubled.map((review, i) => (
             <div
               key={i}
-              className="flex-shrink-0 w-80 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-2xl p-6"
+              className="shrink-0 w-80 bg-white/0.03 backdrop-blur-md border border-white/10 rounded-2xl p-6"
             >
               <div className="flex gap-0.5 mb-3">
                 {Array.from({ length: 5 }).map((_, s) => (

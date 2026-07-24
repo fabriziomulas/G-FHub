@@ -9,19 +9,23 @@ export default function ShopPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-24 min-h-screen bg-[#0C0A09]">
+
+      <main className="pt-24 min-h-screen bg-text-primary">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
             Shop
           </h1>
+
           <p className="text-gray-400 mb-8">
             Esplora la nostra collezione
           </p>
+
           <Suspense fallback={<ShopSkeleton />}>
             <ShopContent />
           </Suspense>
         </div>
       </main>
+
       <Footer />
     </>
   );
@@ -32,7 +36,12 @@ function ShopSkeleton() {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {Array.from({ length: 6 }).map((_, i) => (
         <div key={i} className="space-y-3">
-          <Skeleton shape="rectangular" height="300px" className="w-full" />
+          <Skeleton
+            shape="rectangular"
+            height="300px"
+            className="w-full"
+          />
+
           <Skeleton shape="text" width="60%" />
           <Skeleton shape="text" width="30%" />
         </div>
