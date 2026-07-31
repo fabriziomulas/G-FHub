@@ -62,6 +62,8 @@ export default function AdminPage() {
     stock: "",
     images: "",
     badge: "" as "" | "new" | "bestseller" | "sale",
+    category: "" as "" | "anelli" | "collane" | "bracciali",
+    featured: true,
   });
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -148,13 +150,18 @@ export default function AdminPage() {
           isNew: form.badge === "new",
           isBestSeller: form.badge === "bestseller",
           isOnSale: form.badge === "sale",
+          category: form.category,
+          featured: form.featured,
         }),
       });
       if (res.ok) {
         toast.success("Prodotto creato!");
-        setForm({ title: "", description: "", price: "", stock: "", images: "", badge: "" });
+        setForm({ title: "", description: "", price: "", stock: "", images: "", badge: "", category: "", featured: true });
         fetch("/api/admin/products").then(r => r.json()).then(setProducts);
-      } else toast.error("Errore creazione prodotto");
+      } else {
+        const data = await res.json().catch(() => null);
+        toast.error(data?.error || "Errore creazione prodotto");
+      }
     } catch { toast.error("Errore"); }
     setLoading(false);
   };
@@ -216,12 +223,24 @@ export default function AdminPage() {
                   {uploading && <p className="text-xs text-gray-500 mt-1">Caricamento in corso...</p>}
                   {form.images && <div className="flex gap-2 mt-2 flex-wrap">{form.images.split(",").filter(Boolean).map((url,i) => <Image key={i} src={url} alt="" width={64} height={64} className="rounded-lg object-cover" />)}</div>}
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1.5">Categoria</label>
-                  <select value={form.badge} onChange={e => setForm({...form, badge: e.target.value as ""|"new"|"bestseller"|"sale"})} className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm [&>option]:bg-text-primary [&>option]:text-white">
-                    <option value="">Nessuna</option><option value="new">Nuovi Arrivi</option><option value="bestseller">Best Seller</option><option value="sale">Offerte</option>
-                  </select>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-1.5">Categoria</label>
+                    <select value={form.category} onChange={e => setForm({...form, category: e.target.value as ""|"anelli"|"collane"|"bracciali"})} className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm [&>option]:bg-text-primary [&>option]:text-white">
+                      <option value="">Nessuna</option><option value="anelli">Anelli</option><option value="collane">Collane</option><option value="bracciali">Bracciali</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-1.5">Etichetta</label>
+                    <select value={form.badge} onChange={e => setForm({...form, badge: e.target.value as ""|"new"|"bestseller"|"sale"})} className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm [&>option]:bg-text-primary [&>option]:text-white">
+                      <option value="">Nessuna</option><option value="new">Nuovi Arrivi</option><option value="bestseller">Best Seller</option><option value="sale">Offerte</option>
+                    </select>
+                  </div>
                 </div>
+                <label className="flex items-center gap-2 text-sm text-gray-300">
+                  <input type="checkbox" checked={form.featured} onChange={e => setForm({...form, featured: e.target.checked})} className="rounded" />
+                  Mostra nella sezione &quot;In evidenza&quot; della home
+                </label>
                 <Button type="submit" loading={loading} className="w-full">Crea Prodotto</Button>
               </form>
             </div>

@@ -42,6 +42,22 @@ export async function getAllProducts() {
   }));
 }
 
+export async function getProductsByCategory(category: string) {
+  const products = await prisma.product.findMany({
+    where: { category, inStock: true },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return products.map((p) => ({
+    id: p.id,
+    title: p.title,
+    handle: p.handle,
+    image: p.images[0] || "/placeholder.png",
+    price: p.price.toFixed(2),
+    compareAtPrice: p.compareAtPrice ? p.compareAtPrice.toFixed(2) : undefined,
+  }));
+}
+
 export async function getProductByHandle(handle: string) {
   const product = await prisma.product.findUnique({
     where: { handle },

@@ -1,5 +1,6 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
+import { requireAdmin } from "@/lib/auth-guard";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -7,7 +8,10 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+  const { error } = await requireAdmin(request);
+  if (error) return error;
+
   const formData = await request.formData();
   const file = formData.get("file") as File;
 

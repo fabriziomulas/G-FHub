@@ -46,6 +46,8 @@ export function ReviewModal({ productId }: { productId: string }) {
 
       toast.success("Recensione inviata! Grazie 🎉");
 
+      window.dispatchEvent(new CustomEvent("review-added", { detail: productId }));
+
       setOpen(false);
       setName("");
       setText("");

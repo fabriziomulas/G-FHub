@@ -121,7 +121,7 @@ export function ProductInfo({
         );
       })}
 
-      <div className="text-gray-300 leading-relaxed text-sm" dangerouslySetInnerHTML={{ __html: description }} />
+      <div className="text-gray-300 leading-relaxed text-sm whitespace-pre-line">{description}</div>
 
       <div className="flex gap-3 pt-4">
         <Button size="xl" className="flex-1" leftIcon={<ShoppingBag size={20} />} onClick={handleAddToCart} disabled={!isAvailable}>

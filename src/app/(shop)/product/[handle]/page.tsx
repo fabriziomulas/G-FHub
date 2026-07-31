@@ -4,6 +4,7 @@ import { Footer } from "@/components/ui/layout/Footer";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductInfo } from "@/components/product/ProductInfo";
 import { ReviewModal } from "@/components/product/ReviewModal";
+import { ProductReviews } from "@/components/product/ProductReviews";
 import { Skeleton } from "@/components/ui/primitives/Skeleton";
 import { getProductByHandle } from "@/lib/queries/products";
 
@@ -87,6 +88,7 @@ async function ProductContent({ handle }: { handle: string }) {
               inStock={product.inStock}
             />
           </div>
+          <ProductReviews productId={product.id} />
         </div>
         <ReviewModal productId={product.id} />
       </div>
