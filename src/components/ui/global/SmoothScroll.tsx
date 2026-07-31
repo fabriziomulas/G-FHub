@@ -25,13 +25,19 @@ export function SmoothScroll() {
     requestAnimationFrame(raf);
 
     const refresh = () => lenis.resize();
-    setTimeout(refresh, 100);
-    setTimeout(refresh, 500);
     window.addEventListener("resize", refresh);
+
+    // Il contenuto spesso cresce dopo il mount (recensioni, wishlist, coupon
+    // caricati via fetch, immagini che finiscono di caricare): senza questo
+    // osservatore Lenis resta bloccato sull'altezza calcolata al mount e
+    // impedisce di scorrere fino alla fine reale della pagina.
+    const resizeObserver = new ResizeObserver(() => refresh());
+    resizeObserver.observe(document.documentElement);
 
     return () => {
       lenis.destroy();
       window.removeEventListener("resize", refresh);
+      resizeObserver.disconnect();
     };
   }, [pathname]);
 
