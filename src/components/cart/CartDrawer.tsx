@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
+import { X, Minus, Plus, ShoppingBag, Trash2, Truck, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import { useCart } from "@/stores/cart";
 import { Button } from "@/components/ui/primitives/Button";
 import { toast } from "sonner";
+import { trackEvent } from "@/lib/analytics";
 
 interface CartDrawerProps {
   open: boolean;
@@ -20,12 +21,18 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
   const handleCheckout = async () => {
     if (items.length === 0) return;
     setLoading(true);
+    trackEvent("begin_checkout", {
+      value: totalPrice(),
+      currency: "EUR",
+      items: items.map((item) => ({ item_id: item.id, item_name: item.title, quantity: item.quantity })),
+    });
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           items: items.map((item) => ({
+            id: item.id,
             title: item.title,
             price: item.price,
             quantity: item.quantity,
@@ -90,6 +97,10 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
                 <Button size="lg" className="w-full" loading={loading} onClick={handleCheckout}>
                   Pagamento Sicuro
                 </Button>
+                <div className="flex items-center justify-center gap-4 mt-3 text-gray-500 text-[11px]">
+                  <span className="flex items-center gap-1"><Truck size={12} /> Spedizione rapida</span>
+                  <span className="flex items-center gap-1"><ShieldCheck size={12} /> Pagamento sicuro</span>
+                </div>
               </footer>
             )}
           </motion.div>

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { Toaster } from "sonner";
 import { SmoothScroll } from "@/components/ui/global/SmoothScroll";
+import { Analytics } from "@/components/analytics/Analytics";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="it" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-background-primary text-text-primary">
+        <Analytics />
         <Providers>
           <SmoothScroll />
           {children}

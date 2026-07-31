@@ -4,7 +4,6 @@ import { Hero } from "@/components/home/Hero";
 import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 import { Categories } from "@/components/home/Categories";
 import { ReviewCarousel } from "@/components/home/ReviewCarousel";
-import { Newsletter } from "@/components/home/Newsletter";
 import { getFeaturedProducts } from "@/lib/queries/products";
 
 export default async function Home() {
@@ -29,7 +28,6 @@ export default async function Home() {
           <FeaturedProducts products={products} />
           <Categories />
           <ReviewCarousel />
-          <Newsletter />
         </main>
         <Footer />
       </div>

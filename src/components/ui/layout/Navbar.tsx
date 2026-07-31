@@ -74,16 +74,14 @@ export function Navbar() {
               </Link>
             )}
 
-            {user && (
-              <button onClick={() => setCartOpen(true)} className="relative p-2 text-text-secondary hover:text-text-primary hover:bg-text-primary/5 rounded-lg transition-all">
-                <ShoppingBag size={18} />
-                {itemCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-accent-electric text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                    {itemCount}
-                  </span>
-                )}
-              </button>
-            )}
+            <button onClick={() => setCartOpen(true)} className="relative p-2 text-text-secondary hover:text-text-primary hover:bg-text-primary/5 rounded-lg transition-all">
+              <ShoppingBag size={18} />
+              {itemCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-accent-electric text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                  {itemCount}
+                </span>
+              )}
+            </button>
 
             {user ? (
               <div className="relative">
@@ -138,12 +136,12 @@ export function Navbar() {
                   <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="text-text-secondary hover:text-text-primary transition-colors py-2">{link.label}</Link>
                 ))}
                 <hr className="border-text-primary/10 my-2" />
+                <button onClick={() => { setMobileOpen(false); setCartOpen(true); }} className="text-text-secondary hover:text-text-primary py-2 text-left">Carrello ({itemCount})</button>
                 {user ? (
                   <>
                     <div className="py-2 text-sm text-text-muted">{user.email}</div>
                     <Link href="/account" onClick={() => setMobileOpen(false)} className="text-text-secondary hover:text-text-primary py-2">Dashboard</Link>
                     <Link href="/account/wishlist" onClick={() => setMobileOpen(false)} className="text-text-secondary hover:text-text-primary py-2">Preferiti ({wishlistCount})</Link>
-                    <button onClick={() => { setMobileOpen(false); setCartOpen(true); }} className="text-text-secondary hover:text-text-primary py-2 text-left">Carrello ({itemCount})</button>
                     {user.role === "ADMIN" && <Link href="/admin" onClick={() => setMobileOpen(false)} className="text-accent-electric py-2">Admin</Link>}
                     <button onClick={() => { setMobileOpen(false); logout(); }} className="text-red-400 text-left py-2">Esci</button>
                   </>

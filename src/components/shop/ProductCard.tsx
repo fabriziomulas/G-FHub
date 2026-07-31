@@ -11,6 +11,7 @@ import { useCart } from "@/stores/cart";
 import { useWishlist } from "@/hooks/useWishlist";
 import { toast } from "sonner";
 import { cn } from "@/lib/cn";
+import { trackEvent } from "@/lib/analytics";
 
 interface ProductCardProps {
   product: {
@@ -57,6 +58,12 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       image: imageSrc,
       price: parseFloat(product.price),
       quantity: 1,
+    });
+    trackEvent("add_to_cart", {
+      item_id: product.id,
+      item_name: product.title,
+      value: parseFloat(product.price),
+      currency: "EUR",
     });
     toast.success(`${product.title} aggiunto al carrello!`);
   };

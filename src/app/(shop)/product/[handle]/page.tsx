@@ -86,6 +86,7 @@ async function ProductContent({ handle }: { handle: string }) {
               variants={variants}
               productId={product.id}
               inStock={product.inStock}
+              stock={product.stock}
             />
           </div>
           <ProductReviews productId={product.id} />

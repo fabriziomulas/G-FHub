@@ -11,9 +11,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Carrello vuoto" }, { status: 400 });
     }
 
-    const lineItems = items.map((item: { title: string; price: number; quantity: number; image?: string }) => {
-      const productData: { name: string; images?: string[] } = { name: item.title };
+    const lineItems = items.map((item: { id: string; title: string; price: number; quantity: number; image?: string }) => {
+      const productData: { name: string; images?: string[]; metadata?: Record<string, string> } = { name: item.title };
       if (item.image) productData.images = [item.image];
+      if (item.id) productData.metadata = { productId: item.id };
       return {
         price_data: {
           currency: "eur",

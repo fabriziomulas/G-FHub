@@ -75,6 +75,7 @@ export async function getProductByHandle(handle: string) {
     price: product.price.toFixed(2),
     compareAtPrice: product.compareAtPrice ? product.compareAtPrice.toFixed(2) : "0.00",
     inStock: product.inStock,
+    stock: product.stock,
     variants: product.variants,
   };
 }

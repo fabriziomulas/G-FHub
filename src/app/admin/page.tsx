@@ -282,8 +282,8 @@ export default function AdminPage() {
                       <div>
                         <div className="flex items-center gap-2 mb-1">
                           <span className="text-xs text-gray-500">#{order.id.slice(0,8)}</span>
-                          <Badge color={order.status==="PAID"?"success":order.status==="SHIPPED"?"success":"warning"}>
-                            {order.status==="PAID"?"Pagato":order.status==="SHIPPED"?"Spedito":order.status}
+                          <Badge color={order.status==="REFUNDED"?"error":order.status==="PAID"||order.status==="SHIPPED"?"success":"warning"}>
+                            {order.status==="PAID"?"Pagato":order.status==="SHIPPED"?"Spedito":order.status==="REFUNDED"?"Rimborsato":order.status}
                           </Badge>
                         </div>
                         <p className="text-xs text-gray-400">{new Date(order.createdAt).toLocaleDateString("it-IT",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"})}</p>
