@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/primitives/Button";
 import { Input } from "@/components/ui/primitives/Input";
 import { Badge } from "@/components/ui/primitives/Badge";
 import { toast } from "sonner";
-import { Printer, Package, MapPin, User, Mail, ArrowLeft, Trash2, Star } from "lucide-react";
+import { Printer, Package, MapPin, User, Mail, ArrowLeft, Trash2, Star, CheckCircle } from "lucide-react";
 
 interface Product {
   id: string;
@@ -51,6 +51,7 @@ export default function AdminPage() {
   const [user, setUser] = useState<{ role: string } | null>(null);
   const [checking, setChecking] = useState(true);
   const [tab, setTab] = useState<"products" | "orders" | "reviews">("products");
+  const [orderView, setOrderView] = useState<"pending" | "shipped">("pending");
   const [orders, setOrders] = useState<Order[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -101,6 +102,31 @@ export default function AdminPage() {
     if (res.ok) {
       toast.success("Recensione eliminata");
       setReviews(reviews.filter(r => r.id !== id));
+    } else {
+      toast.error("Errore");
+    }
+  };
+
+  const markShipped = async (id: string) => {
+    const res = await fetch(`/api/admin/orders/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: "SHIPPED" }),
+    });
+    if (res.ok) {
+      toast.success("Ordine segnato come spedito");
+      setOrders(orders.map(o => o.id === id ? { ...o, status: "SHIPPED" } : o));
+    } else {
+      toast.error("Errore");
+    }
+  };
+
+  const deleteOrder = async (id: string) => {
+    if (!confirm("Eliminare definitivamente questo ordine? L'azione non è reversibile.")) return;
+    const res = await fetch(`/api/admin/orders/${id}`, { method: "DELETE" });
+    if (res.ok) {
+      toast.success("Ordine eliminato");
+      setOrders(orders.filter(o => o.id !== id));
     } else {
       toast.error("Errore");
     }
@@ -157,6 +183,10 @@ export default function AdminPage() {
 
   if (checking) return <div className="min-h-screen bg-text-primary flex items-center justify-center"><p className="text-gray-400">Caricamento...</p></div>;
   if (!user || user.role !== "ADMIN") return null;
+
+  const pendingOrders = orders.filter(o => o.status !== "SHIPPED");
+  const shippedOrders = orders.filter(o => o.status === "SHIPPED");
+  const visibleOrders = orderView === "pending" ? pendingOrders : shippedOrders;
 
   return (
     <div className="min-h-screen bg-text-primary p-8 pt-24">
@@ -215,14 +245,28 @@ export default function AdminPage() {
 
         {tab === "orders" && (
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl">
-            <h1 className="text-2xl font-bold text-white mb-6">Ordini</h1>
-            {orders.length === 0 ? <p className="text-gray-400">Nessun ordine ancora.</p> : (
+            <div className="flex items-center justify-between mb-6">
+              <h1 className="text-2xl font-bold text-white">Ordini</h1>
+              <div className="flex gap-2">
+                <button onClick={() => setOrderView("pending")} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${orderView==="pending"?"bg-accent-electric text-white":"bg-white/5 text-gray-400 border border-white/10"}`}>Da spedire ({pendingOrders.length})</button>
+                <button onClick={() => setOrderView("shipped")} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${orderView==="shipped"?"bg-accent-electric text-white":"bg-white/5 text-gray-400 border border-white/10"}`}>Spediti ({shippedOrders.length})</button>
+              </div>
+            </div>
+
+            {visibleOrders.length === 0 ? (
+              <p className="text-gray-400">{orderView === "pending" ? "Nessun ordine da spedire." : "Nessun ordine spedito ancora."}</p>
+            ) : (
               <div className="space-y-4">
-                {orders.map(order => (
+                {visibleOrders.map(order => (
                   <div key={order.id} className="bg-white/5 border border-white/10 p-5 rounded-xl space-y-3">
                     <div className="flex justify-between items-start">
                       <div>
-                        <div className="flex items-center gap-2 mb-1"><span className="text-xs text-gray-500">#{order.id.slice(0,8)}</span><Badge color={order.status==="PAID"?"success":"warning"}>{order.status==="PAID"?"Pagato":order.status}</Badge></div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-xs text-gray-500">#{order.id.slice(0,8)}</span>
+                          <Badge color={order.status==="PAID"?"success":order.status==="SHIPPED"?"success":"warning"}>
+                            {order.status==="PAID"?"Pagato":order.status==="SHIPPED"?"Spedito":order.status}
+                          </Badge>
+                        </div>
                         <p className="text-xs text-gray-400">{new Date(order.createdAt).toLocaleDateString("it-IT",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"})}</p>
                       </div>
                       <p className="text-xl font-bold text-white">€{order.total.toFixed(2)}</p>
@@ -233,7 +277,13 @@ export default function AdminPage() {
                       <div className="flex items-center gap-1.5 text-gray-300 col-span-2"><MapPin size={14} className="text-gray-500"/><span>{order.customerAddress||"Indirizzo non disponibile"}</span></div>
                     </div>
                     <div className="border-t border-white/10 pt-3"><div className="flex items-center gap-1.5 text-xs text-gray-400 mb-2"><Package size={14}/>Prodotti acquistati:</div><div className="flex flex-wrap gap-2">{order.items.map((item,i)=><span key={i} className="text-xs bg-white/10 text-white px-2 py-1 rounded-lg">{item.quantity}x {item.product.title}</span>)}</div></div>
-                    <div className="border-t border-white/10 pt-3"><Button variant="secondary" size="sm" onClick={()=>printLabel(order)} leftIcon={<Printer size={14}/>}>Stampa etichetta</Button></div>
+                    <div className="border-t border-white/10 pt-3 flex flex-wrap gap-2">
+                      <Button variant="secondary" size="sm" onClick={()=>printLabel(order)} leftIcon={<Printer size={14}/>}>Stampa etichetta</Button>
+                      {order.status !== "SHIPPED" && (
+                        <Button variant="secondary" size="sm" onClick={()=>markShipped(order.id)} leftIcon={<CheckCircle size={14}/>}>Segna come spedito</Button>
+                      )}
+                      <button onClick={() => deleteOrder(order.id)} className="text-gray-400 hover:text-red-400 p-2 ml-auto"><Trash2 size={16} /></button>
+                    </div>
                   </div>
                 ))}
               </div>
