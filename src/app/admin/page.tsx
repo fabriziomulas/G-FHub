@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/primitives/Button";
 import { Input } from "@/components/ui/primitives/Input";
 import { Badge } from "@/components/ui/primitives/Badge";
 import { toast } from "sonner";
-import { Printer, Package, MapPin, User, Mail, ArrowLeft, Trash2 } from "lucide-react";
+import { Printer, Package, MapPin, User, Mail, ArrowLeft, Trash2, Star } from "lucide-react";
 
 interface Product {
   id: string;
@@ -38,12 +38,22 @@ interface Order {
   items: OrderItem[];
 }
 
+interface Review {
+  id: string;
+  name: string;
+  stars: number;
+  text: string;
+  createdAt: string;
+  product: { title: string; handle: string };
+}
+
 export default function AdminPage() {
   const [user, setUser] = useState<{ role: string } | null>(null);
   const [checking, setChecking] = useState(true);
-  const [tab, setTab] = useState<"products" | "orders">("products");
+  const [tab, setTab] = useState<"products" | "orders" | "reviews">("products");
   const [orders, setOrders] = useState<Order[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -70,6 +80,7 @@ export default function AdminPage() {
     if (user?.role === "ADMIN") {
       fetch("/api/admin/orders").then(r => r.json()).then(setOrders);
       fetch("/api/admin/products").then(r => r.json()).then(setProducts);
+      fetch("/api/reviews").then(r => r.json()).then(setReviews);
     }
   }, [user, tab]);
 
@@ -79,6 +90,17 @@ export default function AdminPage() {
     if (res.ok) {
       toast.success("Prodotto eliminato");
       setProducts(products.filter(p => p.id !== id));
+    } else {
+      toast.error("Errore");
+    }
+  };
+
+  const deleteReview = async (id: string) => {
+    if (!confirm("Eliminare questa recensione?")) return;
+    const res = await fetch(`/api/reviews/${id}`, { method: "DELETE" });
+    if (res.ok) {
+      toast.success("Recensione eliminata");
+      setReviews(reviews.filter(r => r.id !== id));
     } else {
       toast.error("Errore");
     }
@@ -144,6 +166,7 @@ export default function AdminPage() {
         <div className="flex gap-4 mb-8">
           <button onClick={() => setTab("products")} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab==="products"?"bg-accent-electric text-white":"bg-white/5 text-gray-400 border border-white/10"}`}>Prodotti</button>
           <button onClick={() => setTab("orders")} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab==="orders"?"bg-accent-electric text-white":"bg-white/5 text-gray-400 border border-white/10"}`}>Ordini ({orders.length})</button>
+          <button onClick={() => setTab("reviews")} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab==="reviews"?"bg-accent-electric text-white":"bg-white/5 text-gray-400 border border-white/10"}`}>Recensioni ({reviews.length})</button>
         </div>
 
         {tab === "products" && (
@@ -211,6 +234,36 @@ export default function AdminPage() {
                     </div>
                     <div className="border-t border-white/10 pt-3"><div className="flex items-center gap-1.5 text-xs text-gray-400 mb-2"><Package size={14}/>Prodotti acquistati:</div><div className="flex flex-wrap gap-2">{order.items.map((item,i)=><span key={i} className="text-xs bg-white/10 text-white px-2 py-1 rounded-lg">{item.quantity}x {item.product.title}</span>)}</div></div>
                     <div className="border-t border-white/10 pt-3"><Button variant="secondary" size="sm" onClick={()=>printLabel(order)} leftIcon={<Printer size={14}/>}>Stampa etichetta</Button></div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {tab === "reviews" && (
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl">
+            <h1 className="text-2xl font-bold text-white mb-6">Recensioni</h1>
+            {reviews.length === 0 ? <p className="text-gray-400">Nessuna recensione ancora.</p> : (
+              <div className="space-y-3">
+                {reviews.map(review => (
+                  <div key={review.id} className="bg-white/5 border border-white/10 p-4 rounded-xl">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-white text-sm font-medium">{review.name}</span>
+                          <span className="text-gray-500 text-xs">· {review.product.title}</span>
+                        </div>
+                        <div className="flex gap-0.5 mb-2">
+                          {Array.from({ length: 5 }).map((_, s) => (
+                            <Star key={s} size={12} className={s < review.stars ? "text-accent-electric fill-accent-electric" : "text-gray-600"} />
+                          ))}
+                        </div>
+                        <p className="text-gray-300 text-sm">{review.text}</p>
+                        <p className="text-gray-500 text-xs mt-2">{new Date(review.createdAt).toLocaleDateString("it-IT",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"})}</p>
+                      </div>
+                      <button onClick={() => deleteReview(review.id)} className="text-gray-400 hover:text-red-400 p-1 shrink-0"><Trash2 size={16} /></button>
+                    </div>
                   </div>
                 ))}
               </div>
