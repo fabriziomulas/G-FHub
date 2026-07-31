@@ -13,19 +13,19 @@ export function Categories() {
     {
       title: t("categoryRingsTitle"),
       subtitle: t("categoryRingsSubtitle"),
-      image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1589207212797-cfd546dea0fe?w=800&q=80",
       href: "/shop/anelli",
     },
     {
       title: t("categoryNecklacesTitle"),
       subtitle: t("categoryNecklacesSubtitle"),
-      image: "https://images.unsplash.com/photo-1599643478518-a784e5f1f2b6?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1611583027838-515a1087afdb?w=800&q=80",
       href: "/shop/collane",
     },
     {
       title: t("categoryBraceletsTitle"),
       subtitle: t("categoryBraceletsSubtitle"),
-      image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=800&q=80",
       href: "/shop/bracciali",
     },
   ];

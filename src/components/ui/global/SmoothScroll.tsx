@@ -31,8 +31,11 @@ export function SmoothScroll() {
     // caricati via fetch, immagini che finiscono di caricare): senza questo
     // osservatore Lenis resta bloccato sull'altezza calcolata al mount e
     // impedisce di scorrere fino alla fine reale della pagina.
+    // Si osserva <body>, non <html>: <html> ha altezza fissata al 100% del
+    // viewport (classe h-full nel layout) e quindi non cambia mai dimensione
+    // anche quando il contenuto sotto cresce — <body> invece sì.
     const resizeObserver = new ResizeObserver(() => refresh());
-    resizeObserver.observe(document.documentElement);
+    resizeObserver.observe(document.body);
 
     return () => {
       lenis.destroy();
