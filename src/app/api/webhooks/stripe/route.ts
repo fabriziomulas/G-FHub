@@ -28,67 +28,75 @@ export async function POST(request: Request) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
     const total = (session.amount_total || 0) / 100;
-    const userEmail = session.customer_details?.email;
+    const customerName = session.customer_details?.name || "";
+    const customerEmail = session.customer_details?.email || "";
+    const address = session.customer_details?.address;
+    const customerAddress = address
+      ? `${address.line1 || ""}, ${address.postal_code || ""} ${address.city || ""}, ${address.country || ""}`
+      : "";
 
-    console.log("=== NUOVO ORDINE ===");
-    console.log("Email Stripe:", userEmail);
-    console.log("Totale:", total);
+    const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
 
-    // Salva ordine
+    // Salva ordine con dati cliente
+    const orderId = crypto.randomUUID();
     await prisma.$executeRaw`
-      INSERT INTO "Order" (id, status, total, "createdAt", "updatedAt")
-      VALUES (gen_random_uuid(), 'PAID', ${total}, NOW(), NOW())
+      INSERT INTO "Order" (id, status, total, "customerName", "customerEmail", "customerAddress", "createdAt", "updatedAt")
+      VALUES (${orderId}, 'PAID', ${total}, ${customerName}, ${customerEmail}, ${customerAddress}, NOW(), NOW())
     `;
 
-    if (userEmail) {
-      const user = await prisma.user.findUnique({ where: { email: userEmail } });
-      
-      if (user) {
-        console.log("Utente trovato:", user.email, "XP attuali:", user.xp, "Livello:", user.level);
+    // Salva OrderItems e scala stock
+    for (const item of lineItems.data) {
+      const productName = item.description || "";
+      const quantity = item.quantity || 0;
+      const price = (item.amount_total || 0) / 100;
 
+      if (productName && quantity > 0) {
+        const product = await prisma.product.findFirst({
+          where: { title: productName },
+        });
+
+        if (product) {
+          await prisma.$executeRaw`
+            INSERT INTO "OrderItem" (id, "orderId", "productId", quantity, price)
+            VALUES (${crypto.randomUUID()}, ${orderId}, ${product.id}, ${quantity}, ${price})
+          `;
+
+          const newStock = Math.max(0, product.stock - quantity);
+          await prisma.product.update({
+            where: { id: product.id },
+            data: { stock: newStock, inStock: newStock > 0 },
+          });
+        }
+      }
+    }
+
+    if (customerEmail) {
+      const user = await prisma.user.findUnique({ where: { email: customerEmail } });
+      if (user) {
         const xpGained = calculateXp(total);
         const newXp = user.xp + xpGained;
         const oldLevel = getLevel(user.xp);
         const newLevel = getLevel(newXp);
         const pointsGained = Math.round(total * newLevel.pointsMultiplier);
 
-        console.log("XP guadagnati:", xpGained, "Nuovo XP:", newXp);
-        console.log("Vecchio livello:", oldLevel.name, "Nuovo livello:", newLevel.name);
-
         await prisma.user.update({
           where: { id: user.id },
-          data: {
-            xp: newXp,
-            level: newLevel.name,
-            points: user.points + pointsGained,
-          },
+          data: { xp: newXp, level: newLevel.name, points: user.points + pointsGained },
         });
 
         if (oldLevel.name !== newLevel.name && LEVEL_COUPONS[newLevel.name]) {
           const couponConfig = LEVEL_COUPONS[newLevel.name];
-          const code = generateCode();
-          const expiresAt = new Date();
-          expiresAt.setDate(expiresAt.getDate() + 30);
-
-          console.log("CREAZIONE COUPON:", code, "Sconto:", couponConfig.discount, "€");
-
           await prisma.coupon.create({
             data: {
-              code,
+              code: generateCode(),
               userId: user.id,
               discount: couponConfig.discount,
               minSpent: couponConfig.minSpent,
-              expiresAt,
+              expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
             },
           });
-        } else if (oldLevel.name === newLevel.name) {
-          console.log("Nessun cambio livello, no coupon");
         }
-      } else {
-        console.log("UTENTE NON TROVATO per email:", userEmail);
       }
-    } else {
-      console.log("Nessuna email nel pagamento Stripe");
     }
   }
 
