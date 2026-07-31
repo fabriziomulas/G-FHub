@@ -1,74 +1,247 @@
 import { Navbar } from "@/components/ui/layout/Navbar";
 import { Footer } from "@/components/ui/layout/Footer";
 import { Button } from "@/components/ui/primitives/Button";
+import { Gem, Sparkles, ShieldCheck, Truck, ArrowRight, User, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 export default function ChiSiamoPage() {
   return (
     <>
-      <Navbar />
-      <main className="pt-24 min-h-screen">
-        {/* Hero */}
-        <section className="py-20 px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-text-primary mb-4">
-            La nostra <span className="text-gradient">storia</span>
-          </h1>
-          <p className="text-text-secondary text-lg max-w-2xl mx-auto">
-            Storeluxe nasce dalla passione per il design senza compromessi e la qualità artigianale.
-          </p>
-        </section>
+      <div
+        className="fixed inset-0 z-0"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1777286492764-456e3530e34c?w=1920&q=80')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+      <div className="fixed inset-0 z-1 bg-text-primary/80" />
 
-        {/* Mission */}
-        <section className="py-16 px-6 bg-background-secondary">
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-2xl font-bold text-text-primary mb-4">La nostra missione</h2>
-              <p className="text-text-secondary leading-relaxed">
-                Crediamo che ogni prodotto debba raccontare una storia. Selezioniamo con cura maniacale ogni materiale, 
-                curiamo ogni dettaglio e consegniamo solo ciò che supera i nostri standard. 
-                Non vendiamo prodotti, creiamo esperienze che durano nel tempo.
+      <div className="relative z-10">
+        <Navbar />
+        <main className="pt-24 min-h-screen">
+          {/* Hero */}
+          <section className="py-24 px-6 text-center">
+            <div className="max-w-3xl mx-auto">
+              <p className="text-accent-electric text-sm tracking-widest uppercase mb-4">
+                Dal 2024
+              </p>
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Il lusso è nei dettagli
+                <br />
+                che nessuno nota subito
+              </h1>
+              <p className="text-gray-300 text-lg leading-relaxed">
+                Storeluxe nasce da un&apos;idea semplice: chi acquista un pezzo importante
+                non compra solo un oggetto, ma la certezza che durerà. Ogni prodotto
+                che selezioniamo passa attraverso uno standard che non scende mai a compromessi.
               </p>
             </div>
-            <div className="glass p-8 rounded-2xl text-center">
-              <p className="text-5xl font-bold text-accent-electric mb-2">2024</p>
-              <p className="text-text-secondary">Anno di fondazione</p>
-            </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Valori */}
-        <section className="py-20 px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-text-primary mb-12">I nostri valori</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="glass p-6 rounded-2xl">
-                <span className="text-3xl mb-3 block">✨</span>
-                <h3 className="text-lg font-semibold text-text-primary mb-2">Qualità</h3>
-                <p className="text-text-secondary text-sm">Solo materiali premium e controlli rigorosi.</p>
+          {/* Storia / Missione */}
+          <section className="py-16 px-6">
+            <div className="max-w-5xl mx-auto bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-14 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-5">
+                  Perché esistiamo
+                </h2>
+                <p className="text-gray-300 leading-relaxed mb-4">
+                  Il mercato è pieno di prodotti che promettono qualità e la
+                  smentiscono al primo utilizzo. Abbiamo fondato Storeluxe per
+                  ribaltare questo schema: selezione severa dei materiali, controlli
+                  su ogni lotto, e un rapporto diretto e trasparente con chi acquista.
+                </p>
+                <p className="text-gray-300 leading-relaxed">
+                  Non inseguiamo il volume. Inseguiamo il pezzo giusto, per la
+                  persona giusta, che lo terrà per anni — non per una stagione.
+                </p>
               </div>
-              <div className="glass p-6 rounded-2xl">
-                <span className="text-3xl mb-3 block">🎨</span>
-                <h3 className="text-lg font-semibold text-text-primary mb-2">Design</h3>
-                <p className="text-text-secondary text-sm">Estetica senza tempo, funzionalità moderna.</p>
-              </div>
-              <div className="glass p-6 rounded-2xl">
-                <span className="text-3xl mb-3 block">🤝</span>
-                <h3 className="text-lg font-semibold text-text-primary mb-2">Fiducia</h3>
-                <p className="text-text-secondary text-sm">Trasparenza e rapporto diretto con i clienti.</p>
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
+                <p className="text-6xl font-bold text-accent-electric mb-2">2024</p>
+                <p className="text-gray-400 text-sm tracking-wide uppercase">Anno di fondazione</p>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* CTA */}
-        <section className="py-16 px-6 text-center">
-          <h2 className="text-2xl font-bold text-text-primary mb-4">Scopri la nostra collezione</h2>
-          <Link href="/shop">
-            <Button variant="primary" size="lg">Vai allo Shop</Button>
-          </Link>
-        </section>
-      </main>
-      <Footer />
+          {/* Valori */}
+          <section className="py-20 px-6">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-14">
+                <p className="text-accent-electric text-sm tracking-widest uppercase mb-3">
+                  Cosa ci guida
+                </p>
+                <h2 className="text-3xl md:text-4xl font-bold text-white">
+                  I nostri principi
+                </h2>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8">
+                  <div className="w-12 h-12 rounded-xl bg-accent-electric/10 flex items-center justify-center mb-5">
+                    <Gem size={22} className="text-accent-electric" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-white mb-2">Qualità senza sconti</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Ogni pezzo viene controllato singolarmente prima della spedizione.
+                    Se non supera il nostro standard, non arriva a te.
+                  </p>
+                </div>
+
+                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8">
+                  <div className="w-12 h-12 rounded-xl bg-accent-electric/10 flex items-center justify-center mb-5">
+                    <Sparkles size={22} className="text-accent-electric" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-white mb-2">Design che dura</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Nessuna moda passeggera. Selezioniamo pezzi che avranno lo stesso
+                    valore estetico tra cinque anni come oggi.
+                  </p>
+                </div>
+
+                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8">
+                  <div className="w-12 h-12 rounded-xl bg-accent-electric/10 flex items-center justify-center mb-5">
+                    <ShieldCheck size={22} className="text-accent-electric" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-white mb-2">Trasparenza totale</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Comunicazione diretta, politiche chiare su resi e spedizioni,
+                    nessuna sorpresa nascosta nelle condizioni di vendita.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Impegno / Spedizioni */}
+          <section className="py-16 px-6">
+            <div className="max-w-5xl mx-auto bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
+              <div className="w-16 h-16 rounded-2xl bg-accent-electric/10 flex items-center justify-center shrink-0">
+                <Truck size={28} className="text-accent-electric" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2">
+                  Ogni ordine, curato fino all&apos;ultimo passaggio
+                </h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Dalla verifica del prodotto all&apos;imballaggio, fino alla consegna:
+                  trattiamo ogni spedizione come se fosse per noi stessi. Perché la
+                  cura non finisce quando il pagamento è confermato — inizia lì.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Team */}
+          <section className="py-20 px-6">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-14">
+                <p className="text-accent-electric text-sm tracking-widest uppercase mb-3">
+                  Le persone dietro Storeluxe
+                </p>
+                <h2 className="text-3xl md:text-4xl font-bold text-white">
+                  Il team
+                </h2>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center"
+                  >
+                    <div className="w-20 h-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-4">
+                      <User size={32} className="text-gray-500" />
+                    </div>
+                    <h3 className="text-white font-semibold mb-1">Nome Cognome</h3>
+                    <p className="text-accent-electric text-xs uppercase tracking-wide mb-3">Ruolo</p>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      Breve descrizione del ruolo e del contributo al progetto.
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* FAQ */}
+          <section className="py-20 px-6">
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-14">
+                <p className="text-accent-electric text-sm tracking-widest uppercase mb-3">
+                  Domande frequenti
+                </p>
+                <h2 className="text-3xl md:text-4xl font-bold text-white">
+                  FAQ
+                </h2>
+              </div>
+
+              <div className="space-y-3">
+                <details className="group bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <summary className="flex items-center justify-between cursor-pointer text-white font-medium list-none">
+                    Quanto tempo richiede la spedizione?
+                    <ChevronDown size={18} className="text-gray-400 transition-transform group-open:rotate-180" />
+                  </summary>
+                  <p className="text-gray-400 text-sm leading-relaxed mt-4">
+                    I tempi di spedizione variano in base al prodotto e alla destinazione.
+                    Riceverai una email di conferma con i dettagli di tracciamento non
+                    appena il tuo ordine viene spedito.
+                  </p>
+                </details>
+
+                <details className="group bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <summary className="flex items-center justify-between cursor-pointer text-white font-medium list-none">
+                    Posso restituire un prodotto?
+                    <ChevronDown size={18} className="text-gray-400 transition-transform group-open:rotate-180" />
+                  </summary>
+                  <p className="text-gray-400 text-sm leading-relaxed mt-4">
+                    Sì, puoi richiedere un reso entro 14 giorni dalla consegna. Trovi
+                    tutti i dettagli e le condizioni nella nostra pagina dedicata ai resi.
+                  </p>
+                </details>
+
+                <details className="group bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <summary className="flex items-center justify-between cursor-pointer text-white font-medium list-none">
+                    I prodotti sono originali e garantiti?
+                    <ChevronDown size={18} className="text-gray-400 transition-transform group-open:rotate-180" />
+                  </summary>
+                  <p className="text-gray-400 text-sm leading-relaxed mt-4">
+                    Ogni prodotto viene selezionato e verificato personalmente prima
+                    di essere messo in vendita, per garantirti qualità e autenticità.
+                  </p>
+                </details>
+
+                <details className="group bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <summary className="flex items-center justify-between cursor-pointer text-white font-medium list-none">
+                    Come posso contattarvi?
+                    <ChevronDown size={18} className="text-gray-400 transition-transform group-open:rotate-180" />
+                  </summary>
+                  <p className="text-gray-400 text-sm leading-relaxed mt-4">
+                    Puoi scriverci in qualsiasi momento tramite il modulo di contatto
+                    presente sul sito. Rispondiamo il prima possibile.
+                  </p>
+                </details>
+              </div>
+            </div>
+          </section>
+
+          {/* CTA finale */}
+          <section className="py-20 px-6 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Scopri la collezione
+            </h2>
+            <p className="text-gray-400 mb-8 max-w-md mx-auto">
+              Ogni pezzo racconta una selezione fatta con cura. Vieni a vederli.
+            </p>
+            <Link href="/shop">
+              <Button variant="primary" size="lg" rightIcon={<ArrowRight size={18} />}>
+                Vai allo Shop
+              </Button>
+            </Link>
+          </section>
+        </main>
+        <Footer />
+      </div>
     </>
   );
 }
