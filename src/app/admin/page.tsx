@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/primitives/Button";
 import { Input } from "@/components/ui/primitives/Input";
 import { Badge } from "@/components/ui/primitives/Badge";
@@ -132,11 +133,11 @@ export default function AdminPage() {
     win?.document.write(label); win?.document.close();
   };
 
-  if (checking) return <div className="min-h-screen bg-[#0C0A09] flex items-center justify-center"><p className="text-gray-400">Caricamento...</p></div>;
+  if (checking) return <div className="min-h-screen bg-text-primary flex items-center justify-center"><p className="text-gray-400">Caricamento...</p></div>;
   if (!user || user.role !== "ADMIN") return null;
 
   return (
-    <div className="min-h-screen bg-[#0C0A09] p-8 pt-24">
+    <div className="min-h-screen bg-text-primary p-8 pt-24">
       <div className="max-w-4xl mx-auto">
         <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-6 text-sm"><ArrowLeft size={16} /> Torna al sito</Link>
 
@@ -160,11 +161,11 @@ export default function AdminPage() {
                   <label className="block text-sm font-medium text-gray-300 mb-1.5">Immagini</label>
                   <input type="file" accept="image/*" multiple onChange={handleFileUpload} disabled={uploading} className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-accent-electric file:text-white hover:file:bg-accent-purple file:transition-colors file:cursor-pointer" />
                   {uploading && <p className="text-xs text-gray-500 mt-1">Caricamento in corso...</p>}
-                  {form.images && <div className="flex gap-2 mt-2 flex-wrap">{form.images.split(",").filter(Boolean).map((url,i) => <img key={i} src={url} alt="" className="w-16 h-16 rounded-lg object-cover" />)}</div>}
+                  {form.images && <div className="flex gap-2 mt-2 flex-wrap">{form.images.split(",").filter(Boolean).map((url,i) => <Image key={i} src={url} alt="" width={64} height={64} className="rounded-lg object-cover" />)}</div>}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-1.5">Categoria</label>
-                  <select value={form.badge} onChange={e => setForm({...form, badge: e.target.value as ""|"new"|"bestseller"|"sale"})} className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm [&>option]:bg-[#0C0A09] [&>option]:text-white">
+                  <select value={form.badge} onChange={e => setForm({...form, badge: e.target.value as ""|"new"|"bestseller"|"sale"})} className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm [&>option]:bg-text-primary [&>option]:text-white">
                     <option value="">Nessuna</option><option value="new">Nuovi Arrivi</option><option value="bestseller">Best Seller</option><option value="sale">Offerte</option>
                   </select>
                 </div>

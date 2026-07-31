@@ -17,7 +17,7 @@ export default async function ProductPage({ params }: PageProps) {
   return (
     <>
       <Navbar />
-      <main className="pt-24 min-h-screen bg-[#0C0A09]">
+      <main className="pt-24 min-h-screen bg-text-primary">
         <Suspense fallback={<ProductSkeleton />}>
           <ProductContent handle={handle} />
         </Suspense>
@@ -74,7 +74,7 @@ async function ProductContent({ handle }: { handle: string }) {
       )}
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
-        <div className="bg-[#0C0A09]/50 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-12">
+        <div className="bg-text-primary/50 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <ProductGallery images={product.images} title={product.title} />
             <ProductInfo

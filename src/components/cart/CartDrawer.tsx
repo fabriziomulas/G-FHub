@@ -49,7 +49,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
         <>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm" onClick={onClose} />
 
-          <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", stiffness: 300, damping: 30 }} className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-[#0C0A09] border-l border-white/10 shadow-2xl flex flex-col">
+          <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", stiffness: 300, damping: 30 }} className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-text-primary border-l border-white/10 shadow-2xl flex flex-col">
             
             <header className="flex items-center justify-between p-4 border-b border-white/10 shrink-0">
               <div className="flex items-center gap-2">
@@ -64,7 +64,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
                 <div className="text-center py-12"><ShoppingBag size={40} className="text-gray-600 mx-auto mb-3" /><p className="text-gray-400">Il carrello è vuoto</p></div>
               ) : (
                 items.map((item) => (
-                  <div key={item.variantId} className="flex gap-3 bg-white/[0.03] border border-white/10 p-3 rounded-xl">
+                  <div key={item.variantId} className="flex gap-3 bg-white/3 border border-white/10 p-3 rounded-xl">
                     <div className="relative w-20 h-20 rounded-lg overflow-hidden bg-white/5 shrink-0">
                       {item.image && <Image src={item.image} alt={item.title} fill className="object-cover" sizes="80px" />}
                     </div>
@@ -85,7 +85,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
             </div>
 
             {items.length > 0 && (
-              <footer className="p-4 border-t border-white/10 bg-[#0C0A09] shrink-0">
+              <footer className="p-4 border-t border-white/10 bg-text-primary shrink-0">
                 <div className="flex justify-between text-white mb-3"><span>Totale</span><span className="font-bold">€{totalPrice().toFixed(2)}</span></div>
                 <Button size="lg" className="w-full" loading={loading} onClick={handleCheckout}>
                   Pagamento Sicuro
