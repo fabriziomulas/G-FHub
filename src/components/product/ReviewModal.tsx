@@ -34,8 +34,15 @@ export function ReviewModal({ productId }: { productId: string }) {
     setLoading(true);
 
     try {
-      // TODO: collegare API recensioni
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      const res = await fetch("/api/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId, name, stars, text }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Errore durante l'invio");
+      }
 
       toast.success("Recensione inviata! Grazie 🎉");
 

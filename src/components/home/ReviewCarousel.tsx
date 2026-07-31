@@ -1,12 +1,33 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Star, MessageSquare } from "lucide-react";
 
-// Recensioni vuote - verranno popolate dal database
-const reviews: Array<{ name: string; text: string; stars: number; product: string }> = [];
+interface Review {
+  id: string;
+  name: string;
+  text: string;
+  stars: number;
+  product: { title: string; handle: string };
+}
 
 export function ReviewCarousel() {
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/reviews")
+      .then((res) => res.json())
+      .then((data) => setReviews(data))
+      .catch(() => setReviews([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return null;
+  }
+
   if (reviews.length === 0) {
     return (
       <section className="py-20 px-6">
@@ -48,7 +69,7 @@ export function ReviewCarousel() {
         >
           {doubled.map((review, i) => (
             <div
-              key={i}
+              key={`${review.id}-${i}`}
               className="shrink-0 w-80 bg-white/0.03 backdrop-blur-md border border-white/10 rounded-2xl p-6"
             >
               <div className="flex gap-0.5 mb-3">
@@ -65,7 +86,7 @@ export function ReviewCarousel() {
               </p>
               <div className="border-t border-white/10 pt-3">
                 <p className="text-white text-sm font-medium">{review.name}</p>
-                <p className="text-gray-500 text-xs">{review.product}</p>
+                <p className="text-gray-500 text-xs">{review.product.title}</p>
               </div>
             </div>
           ))}
