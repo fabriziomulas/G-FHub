@@ -32,6 +32,7 @@ model Product {
   description    String        @default("")
   price          Float
   compareAtPrice Float?
+  stock          Int           @default(0)
   images         String[]      @default([])
   category       String        @default("")
   tags           String[]      @default([])
