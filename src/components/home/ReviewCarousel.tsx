@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Star, MessageSquare } from "lucide-react";
 
 interface Review {
@@ -15,6 +16,7 @@ interface Review {
 const MAX_VISIBLE = 6;
 
 export function ReviewCarousel() {
+  const t = useTranslations("Home");
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -35,15 +37,15 @@ export function ReviewCarousel() {
       <section className="py-14 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-accent-electric text-sm tracking-widest uppercase mb-3">
-            Cosa dicono di noi
+            {t("reviewsEyebrow")}
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Recensioni
+            {t("reviewsTitle")}
           </h2>
           <div className="bg-white/0.03 backdrop-blur-md border border-white/10 rounded-3xl p-12 max-w-lg mx-auto">
             <MessageSquare size={40} className="text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-400">Nessuna recensione ancora.</p>
-            <p className="text-gray-500 text-sm mt-2">Sii il primo a lasciare una recensione!</p>
+            <p className="text-gray-400">{t("reviewsEmptyTitle")}</p>
+            <p className="text-gray-500 text-sm mt-2">{t("reviewsEmptyText")}</p>
           </div>
         </div>
       </section>
@@ -57,10 +59,10 @@ export function ReviewCarousel() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <p className="text-accent-electric text-sm tracking-widest uppercase mb-3">
-            Cosa dicono di noi
+            {t("reviewsEyebrow")}
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-white">
-            Recensioni
+            {t("reviewsTitle")}
           </h2>
         </div>
 

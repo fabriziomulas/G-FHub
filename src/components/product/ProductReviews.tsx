@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { Star, MessageSquare } from "lucide-react";
 
 interface Review {
@@ -12,6 +13,7 @@ interface Review {
 }
 
 export function ProductReviews({ productId }: { productId: string }) {
+  const t = useTranslations("Reviews");
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -42,13 +44,13 @@ export function ProductReviews({ productId }: { productId: string }) {
   return (
     <div className="mt-12 border-t border-white/10 pt-10">
       <h2 className="text-xl font-bold text-white mb-6">
-        Recensioni ({reviews.length})
+        {t("title", { count: reviews.length })}
       </h2>
 
       {loading ? null : reviews.length === 0 ? (
         <div className="flex items-center gap-3 text-gray-500 text-sm">
           <MessageSquare size={18} />
-          Nessuna recensione. Sii il primo!
+          {t("empty")}
         </div>
       ) : (
         <div className="space-y-4">

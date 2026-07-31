@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { X, Minus, Plus, ShoppingBag, Trash2, Truck, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import { useCart } from "@/stores/cart";
@@ -15,6 +16,7 @@ interface CartDrawerProps {
 }
 
 export function CartDrawer({ open, onClose }: CartDrawerProps) {
+  const t = useTranslations("Cart");
   const { items, removeItem, updateQuantity, totalPrice } = useCart();
   const [loading, setLoading] = useState(false);
 
@@ -44,7 +46,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
       if (data.url) window.location.href = data.url;
       else throw new Error("Checkout fallito");
     } catch {
-      toast.error("Impossibile avviare il pagamento");
+      toast.error(t("checkoutError"));
     } finally {
       setLoading(false);
     }
@@ -61,14 +63,14 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
             <header className="flex items-center justify-between p-4 border-b border-white/10 shrink-0">
               <div className="flex items-center gap-2">
                 <ShoppingBag size={20} className="text-white" />
-                <h2 className="text-lg font-semibold text-white">Carrello ({items.length})</h2>
+                <h2 className="text-lg font-semibold text-white">{t("title")} ({items.length})</h2>
               </div>
               <button onClick={onClose} className="p-1 rounded-lg text-gray-400 hover:text-white hover:bg-white/10"><X size={20} /></button>
             </header>
 
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {items.length === 0 ? (
-                <div className="text-center py-12"><ShoppingBag size={40} className="text-gray-600 mx-auto mb-3" /><p className="text-gray-400">Il carrello è vuoto</p></div>
+                <div className="text-center py-12"><ShoppingBag size={40} className="text-gray-600 mx-auto mb-3" /><p className="text-gray-400">{t("empty")}</p></div>
               ) : (
                 items.map((item) => (
                   <div key={item.variantId} className="flex gap-3 bg-white/3 border border-white/10 p-3 rounded-xl">
@@ -93,13 +95,13 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 
             {items.length > 0 && (
               <footer className="p-4 border-t border-white/10 bg-text-primary shrink-0">
-                <div className="flex justify-between text-white mb-3"><span>Totale</span><span className="font-bold">€{totalPrice().toFixed(2)}</span></div>
+                <div className="flex justify-between text-white mb-3"><span>{t("total")}</span><span className="font-bold">€{totalPrice().toFixed(2)}</span></div>
                 <Button size="lg" className="w-full" loading={loading} onClick={handleCheckout}>
-                  Pagamento Sicuro
+                  {t("checkout")}
                 </Button>
                 <div className="flex items-center justify-center gap-4 mt-3 text-gray-500 text-[11px]">
-                  <span className="flex items-center gap-1"><Truck size={12} /> Spedizione rapida</span>
-                  <span className="flex items-center gap-1"><ShieldCheck size={12} /> Pagamento sicuro</span>
+                  <span className="flex items-center gap-1"><Truck size={12} /> {t("trustShipping")}</span>
+                  <span className="flex items-center gap-1"><ShieldCheck size={12} /> {t("trustSecure")}</span>
                 </div>
               </footer>
             )}

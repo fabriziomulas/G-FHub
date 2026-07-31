@@ -2,12 +2,14 @@
 
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/primitives/Button";
 import { CheckCircle } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
 export function SuccessContent() {
+  const t = useTranslations("Success");
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
 
@@ -33,13 +35,13 @@ export function SuccessContent() {
       <div className="text-center glass p-12 rounded-2xl max-w-md">
         <CheckCircle size={64} className="text-green-400 mx-auto mb-4" />
         <h1 className="text-2xl font-bold text-text-primary mb-2">
-          Pagamento riuscito!
+          {t("title")}
         </h1>
         <p className="text-text-secondary mb-6">
-          Grazie per il tuo ordine. Riceverai una email di conferma a breve.
+          {t("text")}
         </p>
         <Link href="/shop">
-          <Button variant="secondary">Continua lo shopping</Button>
+          <Button variant="secondary">{t("continueShopping")}</Button>
         </Link>
       </div>
     </div>

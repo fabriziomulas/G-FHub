@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const RETURNS_EMAIL = process.env.RETURNS_EMAIL || "info@gfhubs.com";
+const RETURNS_EMAIL = process.env.RETURNS_EMAIL || "g.f.hub0@gmail.com";
 
 const REASON_LABELS: Record<string, string> = {
   defective: "Prodotto difettoso o danneggiato",
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     const reasonLabel = REASON_LABELS[reason] || reason;
 
     await resend.emails.send({
-      from: "Storeluxe <noreply@gfhubs.com>",
+      from: "G&F Hub <noreply@gfhubs.com>",
       to: RETURNS_EMAIL,
       replyTo: email,
       subject: `Richiesta di reso — Ordine ${orderNumber}`,
@@ -46,25 +46,25 @@ export async function POST(request: Request) {
           </table>
           ${details ? `<div style="margin-top: 20px;"><p style="color: #A0A0A0; font-size: 13px; margin-bottom: 6px;">Dettagli aggiuntivi</p><p style="font-size: 14px; line-height: 1.6; white-space: pre-line;">${escapeHtml(details)}</p></div>` : ""}
           <hr style="border: 0; border-top: 1px solid #222; margin: 24px 0;" />
-          <p style="font-size: 11px; color: #444;">Richiesta inviata dal form resi del sito Storeluxe.</p>
+          <p style="font-size: 11px; color: #444;">Richiesta inviata dal form resi del sito G&F Hub.</p>
         </div>
       `,
     });
 
     await resend.emails.send({
-      from: "Storeluxe <noreply@gfhubs.com>",
+      from: "G&F Hub <noreply@gfhubs.com>",
       to: email,
       subject: "Abbiamo ricevuto la tua richiesta di reso",
       html: `
         <div style="max-width: 480px; margin: 0 auto; padding: 40px 20px; font-family: 'Inter', Arial, sans-serif; background-color: #0C0A09; color: #F4F5F6; border-radius: 16px; text-align: center;">
-          <h1 style="color: #B2B395; font-size: 24px; margin-bottom: 8px;">STORE<span style="color: #F4F5F6;">LUXE</span></h1>
+          <h1 style="color: #B2B395; font-size: 24px; margin-bottom: 8px;">G&F<span style="color: #F4F5F6;"> HUB</span></h1>
           <p style="font-size: 16px; margin-bottom: 8px; color: #F4F5F6;">Ciao ${escapeHtml(name)},</p>
           <p style="font-size: 14px; margin-bottom: 24px; color: #A0A0A0;">
             Abbiamo ricevuto la tua richiesta di reso per l'ordine <strong style="color:#F4F5F6;">${escapeHtml(orderNumber)}</strong>.
             Il nostro team la esaminerà e ti risponderà via email entro 48 ore lavorative con le istruzioni per la spedizione.
           </p>
           <hr style="border: 0; border-top: 1px solid #222; margin: 24px 0;" />
-          <p style="font-size: 11px; color: #444;">© ${new Date().getFullYear()} Storeluxe. Tutti i diritti riservati.</p>
+          <p style="font-size: 11px; color: #444;">© ${new Date().getFullYear()} G&F Hub. Tutti i diritti riservati.</p>
         </div>
       `,
     });

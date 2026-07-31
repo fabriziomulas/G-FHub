@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Heart, ShoppingBag } from "lucide-react";
 import { Card } from "@/components/ui/composites/Card";
 import { Badge } from "@/components/ui/primitives/Badge";
@@ -12,6 +12,7 @@ import { useWishlist } from "@/hooks/useWishlist";
 import { toast } from "sonner";
 import { cn } from "@/lib/cn";
 import { trackEvent } from "@/lib/analytics";
+import { Link } from "@/i18n/navigation";
 
 interface ProductCardProps {
   product: {
@@ -40,6 +41,7 @@ function isValidImageUrl(url: string): boolean {
 const PLACEHOLDER = "/placeholder.png";
 
 export function ProductCard({ product, index = 0 }: ProductCardProps) {
+  const t = useTranslations("Product");
   const hasDiscount = product.compareAtPrice && product.compareAtPrice !== product.price;
   const imageSrc = isValidImageUrl(product.image) ? product.image : PLACEHOLDER;
   const isAvailable = product.inStock !== false;
@@ -65,7 +67,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       value: parseFloat(product.price),
       currency: "EUR",
     });
-    toast.success(`${product.title} aggiunto al carrello!`);
+    toast.success(t("addedToCart", { title: product.title }));
   };
 
   const handleWishlist = (e: React.MouseEvent) => {
@@ -93,7 +95,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             />
             {!isAvailable && (
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">Esaurito</span>
+                <span className="text-white font-bold text-lg">{t("outOfStock")}</span>
               </div>
             )}
             {product.badge && (
@@ -109,13 +111,13 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
                   ? "bg-accent-electric text-white shadow-glow-blue"
                   : "bg-white/20 text-white opacity-0 group-hover:opacity-100 hover:bg-white/30"
               )}
-              aria-label={liked ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"}
+              aria-label={liked ? t("wishlistRemove") : t("wishlistAdd")}
             >
               <Heart size={18} className={cn(liked && "fill-white")} />
             </button>
             <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300 z-10">
               <Button size="sm" className="w-full" leftIcon={<ShoppingBag size={14} />} onClick={handleAddToCart} disabled={!isAvailable}>
-                {isAvailable ? "Aggiungi" : "Esaurito"}
+                {isAvailable ? t("addShort") : t("outOfStock")}
               </Button>
             </div>
           </div>

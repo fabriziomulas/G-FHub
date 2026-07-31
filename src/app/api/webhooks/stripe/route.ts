@@ -6,7 +6,7 @@ import { calculateXp, getLevel, LEVEL_COUPONS } from "@/lib/levels";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
-const ORDER_NOTIFY_EMAIL = process.env.ORDER_NOTIFY_EMAIL || "info@gfhubs.com";
+const ORDER_NOTIFY_EMAIL = process.env.ORDER_NOTIFY_EMAIL || "g.f.hub0@gmail.com";
 
 function generateCode(): string {
   return "SL-" + Math.random().toString(36).substring(2, 8).toUpperCase();
@@ -185,18 +185,18 @@ async function handleCheckoutExpired(session: Stripe.Checkout.Session) {
 
   try {
     await resend.emails.send({
-      from: "Storeluxe <noreply@gfhubs.com>",
+      from: "G&F Hub <noreply@gfhubs.com>",
       to: email,
       subject: "Hai lasciato qualcosa nel carrello",
       html: `
         <div style="max-width: 480px; margin: 0 auto; padding: 40px 20px; font-family: 'Inter', Arial, sans-serif; background-color: #0C0A09; color: #F4F5F6; border-radius: 16px; text-align: center;">
-          <h1 style="color: #B2B395; font-size: 24px; margin-bottom: 8px;">STORE<span style="color: #F4F5F6;">LUXE</span></h1>
+          <h1 style="color: #B2B395; font-size: 24px; margin-bottom: 8px;">G&F<span style="color: #F4F5F6;"> HUB</span></h1>
           <p style="font-size: 15px; margin-bottom: 24px; color: #A0A0A0;">
             Il pagamento non è stato completato e i prodotti sono ancora nel tuo carrello. Torna quando vuoi per finalizzare l&apos;ordine.
           </p>
           <a href="${process.env.NEXTAUTH_URL}/cart" style="display: inline-block; background-color: #B2B395; color: #0C0A09; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 15px;">Torna al carrello</a>
           <hr style="border: 0; border-top: 1px solid #222; margin: 24px 0;" />
-          <p style="font-size: 11px; color: #444;">© ${new Date().getFullYear()} Storeluxe. Tutti i diritti riservati.</p>
+          <p style="font-size: 11px; color: #444;">© ${new Date().getFullYear()} G&F Hub. Tutti i diritti riservati.</p>
         </div>
       `,
     });
@@ -211,18 +211,18 @@ async function handlePaymentFailed(paymentIntent: Stripe.PaymentIntent) {
 
   try {
     await resend.emails.send({
-      from: "Storeluxe <noreply@gfhubs.com>",
+      from: "G&F Hub <noreply@gfhubs.com>",
       to: email,
       subject: "Il tuo pagamento non è andato a buon fine",
       html: `
         <div style="max-width: 480px; margin: 0 auto; padding: 40px 20px; font-family: 'Inter', Arial, sans-serif; background-color: #0C0A09; color: #F4F5F6; border-radius: 16px; text-align: center;">
-          <h1 style="color: #B2B395; font-size: 24px; margin-bottom: 8px;">STORE<span style="color: #F4F5F6;">LUXE</span></h1>
+          <h1 style="color: #B2B395; font-size: 24px; margin-bottom: 8px;">G&F<span style="color: #F4F5F6;"> HUB</span></h1>
           <p style="font-size: 15px; margin-bottom: 24px; color: #A0A0A0;">
             Il pagamento del tuo ordine non è andato a buon fine. Nessun addebito è stato effettuato. Puoi riprovare in qualsiasi momento dal tuo carrello.
           </p>
           <a href="${process.env.NEXTAUTH_URL}/cart" style="display: inline-block; background-color: #B2B395; color: #0C0A09; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 15px;">Riprova il pagamento</a>
           <hr style="border: 0; border-top: 1px solid #222; margin: 24px 0;" />
-          <p style="font-size: 11px; color: #444;">© ${new Date().getFullYear()} Storeluxe. Tutti i diritti riservati.</p>
+          <p style="font-size: 11px; color: #444;">© ${new Date().getFullYear()} G&F Hub. Tutti i diritti riservati.</p>
         </div>
       `,
     });
@@ -266,12 +266,12 @@ async function sendOrderEmails(data: {
   try {
     if (customerEmail) {
       await resend.emails.send({
-        from: "Storeluxe <noreply@gfhubs.com>",
+        from: "G&F Hub <noreply@gfhubs.com>",
         to: customerEmail,
-        subject: "Conferma del tuo ordine Storeluxe",
+        subject: "Conferma del tuo ordine G&F Hub",
         html: `
           <div style="max-width: 520px; margin: 0 auto; padding: 32px; font-family: 'Inter', Arial, sans-serif; background-color: #0C0A09; color: #F4F5F6; border-radius: 16px;">
-            <h1 style="color: #B2B395; font-size: 22px; margin-bottom: 4px;">STORE<span style="color: #F4F5F6;">LUXE</span></h1>
+            <h1 style="color: #B2B395; font-size: 22px; margin-bottom: 4px;">G&F<span style="color: #F4F5F6;"> HUB</span></h1>
             <p style="font-size: 15px; color: #A0A0A0; margin-bottom: 24px;">Grazie ${escapeHtml(customerName || "")}, il tuo ordine è confermato.</p>
             <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px;">${itemsHtml}</table>
             <div style="border-top: 1px solid #222; padding-top: 12px; display: flex; justify-content: space-between; font-weight: 600;">
@@ -287,14 +287,14 @@ async function sendOrderEmails(data: {
                 : ""
             }
             <hr style="border: 0; border-top: 1px solid #222; margin: 24px 0;" />
-            <p style="font-size: 11px; color: #444;">© ${new Date().getFullYear()} Storeluxe. Tutti i diritti riservati.</p>
+            <p style="font-size: 11px; color: #444;">© ${new Date().getFullYear()} G&F Hub. Tutti i diritti riservati.</p>
           </div>
         `,
       });
     }
 
     await resend.emails.send({
-      from: "Storeluxe <noreply@gfhubs.com>",
+      from: "G&F Hub <noreply@gfhubs.com>",
       to: ORDER_NOTIFY_EMAIL,
       subject: `Nuovo ordine ricevuto — €${total.toFixed(2)}`,
       html: `

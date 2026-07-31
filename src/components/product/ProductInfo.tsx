@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/primitives/Button";
 import { Badge } from "@/components/ui/primitives/Badge";
 import { ShoppingBag, Heart, PenLine, Truck, RotateCcw, ShieldCheck, Flame } from "lucide-react";
@@ -39,6 +40,7 @@ export function ProductInfo({
   inStock,
   stock,
 }: ProductInfoProps) {
+  const t = useTranslations("Product");
   const hasVariants = variants.length > 0 && variants[0]?.title !== "Default Title";
   const [selectedVariant, setSelectedVariant] = useState(hasVariants ? variants[0] : null);
   const hasDiscount = compareAtPrice !== "0.00" && compareAtPrice !== price;
@@ -81,7 +83,7 @@ export function ProductInfo({
       value: parseFloat(price),
       currency: "EUR",
     });
-    toast.success(`${title} aggiunto al carrello!`);
+    toast.success(t("addedToCart", { title }));
   };
 
   const handleWishlist = () => {
@@ -111,7 +113,7 @@ export function ProductInfo({
         {!hasVariants && inStock && stock > 0 && stock <= 5 && (
           <p className="flex items-center gap-1.5 text-amber-400 text-sm mt-3">
             <Flame size={14} />
-            {stock === 1 ? "Ultimo pezzo disponibile" : `Solo ${stock} pezzi disponibili`}
+            {stock === 1 ? t("lastUnit") : t("unitsLeft", { count: stock })}
           </p>
         )}
       </div>
@@ -150,7 +152,7 @@ export function ProductInfo({
 
       <div className="flex gap-3 pt-4">
         <Button size="xl" className="flex-1" leftIcon={<ShoppingBag size={20} />} onClick={handleAddToCart} disabled={!isAvailable}>
-          {isAvailable ? "Aggiungi al carrello" : "Esaurito"}
+          {isAvailable ? t("addToCart") : t("outOfStock")}
         </Button>
         <Button
           size="xl"
@@ -167,20 +169,20 @@ export function ProductInfo({
       <div className="grid grid-cols-3 gap-3 text-center">
         <div className="flex flex-col items-center gap-1.5 py-3 px-2 bg-white/5 border border-white/10 rounded-xl">
           <Truck size={18} className="text-accent-electric" />
-          <span className="text-gray-300 text-xs leading-tight">Spedizione rapida</span>
+          <span className="text-gray-300 text-xs leading-tight">{t("trustShipping")}</span>
         </div>
         <div className="flex flex-col items-center gap-1.5 py-3 px-2 bg-white/5 border border-white/10 rounded-xl">
           <RotateCcw size={18} className="text-accent-electric" />
-          <span className="text-gray-300 text-xs leading-tight">Reso entro 14 giorni</span>
+          <span className="text-gray-300 text-xs leading-tight">{t("trustReturns")}</span>
         </div>
         <div className="flex flex-col items-center gap-1.5 py-3 px-2 bg-white/5 border border-white/10 rounded-xl">
           <ShieldCheck size={18} className="text-accent-electric" />
-          <span className="text-gray-300 text-xs leading-tight">Pagamento sicuro</span>
+          <span className="text-gray-300 text-xs leading-tight">{t("trustSecure")}</span>
         </div>
       </div>
 
       <Button size="xl" className="w-full" variant="primary" leftIcon={<PenLine size={20} />} onClick={handleOpenReview}>
-        Scrivi una recensione
+        {t("writeReview")}
       </Button>
     </div>
   );

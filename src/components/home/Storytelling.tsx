@@ -34,7 +34,7 @@ export function Storytelling() {
               <span className="text-gradient">durare nel tempo</span>
             </h2>
             <p className="text-text-secondary text-lg mb-8 leading-relaxed">
-              Ogni prodotto che trovi su Storeluxe è selezionato con cura maniacale.
+              Ogni prodotto che trovi su G&amp;F Hub è selezionato con cura maniacale.
               Materiali premium, design senza tempo, tecnologia all&apos;avanguardia.
               Non vendiamo prodotti, creiamo esperienze.
             </p>

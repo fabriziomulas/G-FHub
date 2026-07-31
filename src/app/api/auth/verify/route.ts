@@ -26,10 +26,10 @@ export async function POST(request: Request) {
   const verifyUrl = `${process.env.NEXTAUTH_URL}/api/auth/verify?token=${token}`;
 
   await resend.emails.send({
-    from: "Storeluxe <noreply@gfhubs.com>",
+    from: "G&F Hub <noreply@gfhubs.com>",
     to: email,
-    subject: "Verifica il tuo account Storeluxe",
-    html: `<h1>Benvenuto su Storeluxe!</h1><p>Clicca qui per verificare il tuo account:</p><a href="${verifyUrl}">${verifyUrl}</a>`,
+    subject: "Verifica il tuo account G&F Hub",
+    html: `<h1>Benvenuto su G&F Hub!</h1><p>Clicca qui per verificare il tuo account:</p><a href="${verifyUrl}">${verifyUrl}</a>`,
   });
 
   return NextResponse.json({ success: true });

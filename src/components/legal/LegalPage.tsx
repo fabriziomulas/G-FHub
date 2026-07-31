@@ -2,7 +2,17 @@ import { Navbar } from "@/components/ui/layout/Navbar";
 import { Footer } from "@/components/ui/layout/Footer";
 import { AlertTriangle } from "lucide-react";
 
-export function LegalPage({ title, updatedAt, children }: { title: string; updatedAt: string; children: React.ReactNode }) {
+export function LegalPage({
+  title,
+  updatedAtLabel,
+  updatedAt,
+  children,
+}: {
+  title: string;
+  updatedAtLabel: string;
+  updatedAt: string;
+  children: React.ReactNode;
+}) {
   return (
     <>
       <Navbar />
@@ -10,7 +20,7 @@ export function LegalPage({ title, updatedAt, children }: { title: string; updat
       <main className="pt-24 min-h-screen bg-text-primary">
         <div className="max-w-3xl mx-auto px-6 py-12">
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">{title}</h1>
-          <p className="text-gray-500 text-sm mb-10">Ultimo aggiornamento: {updatedAt}</p>
+          <p className="text-gray-500 text-sm mb-10">{updatedAtLabel} {updatedAt}</p>
 
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 space-y-8 text-gray-300 text-sm leading-relaxed">
             {children}

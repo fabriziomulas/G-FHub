@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Star, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/primitives/Button";
 import { toast } from "sonner";
 
 export function ReviewModal({ productId }: { productId: string }) {
+  const t = useTranslations("Reviews");
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [text, setText] = useState("");
@@ -27,7 +29,7 @@ export function ReviewModal({ productId }: { productId: string }) {
     e.preventDefault();
 
     if (!name || !text) {
-      toast.error("Compila tutti i campi");
+      toast.error(t("requiredToast"));
       return;
     }
 
@@ -44,7 +46,7 @@ export function ReviewModal({ productId }: { productId: string }) {
         throw new Error("Errore durante l'invio");
       }
 
-      toast.success("Recensione inviata! Grazie 🎉");
+      toast.success(t("successToast"));
 
       window.dispatchEvent(new CustomEvent("review-added", { detail: productId }));
 
@@ -53,7 +55,7 @@ export function ReviewModal({ productId }: { productId: string }) {
       setText("");
       setStars(5);
     } catch {
-      toast.error("Errore durante l'invio della recensione");
+      toast.error(t("errorToast"));
     } finally {
       setLoading(false);
     }
@@ -78,7 +80,7 @@ export function ReviewModal({ productId }: { productId: string }) {
           >
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-bold text-white">
-                Lascia una recensione
+                {t("modalTitle")}
               </h2>
 
               <button
@@ -92,7 +94,7 @@ export function ReviewModal({ productId }: { productId: string }) {
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Il tuo nome
+                  {t("nameLabel")}
                 </label>
 
                 <input
@@ -100,14 +102,14 @@ export function ReviewModal({ productId }: { productId: string }) {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:border-accent-electric focus:outline-none"
-                  placeholder="Es. Maria R."
+                  placeholder={t("namePlaceholder")}
                   required
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Valutazione
+                  {t("ratingLabel")}
                 </label>
 
                 <div className="flex gap-2">
@@ -133,14 +135,14 @@ export function ReviewModal({ productId }: { productId: string }) {
 
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  La tua recensione
+                  {t("textLabel")}
                 </label>
 
                 <textarea
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                   className="w-full h-32 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:border-accent-electric focus:outline-none resize-none"
-                  placeholder="Racconta la tua esperienza..."
+                  placeholder={t("textPlaceholder")}
                   required
                 />
               </div>
@@ -152,7 +154,7 @@ export function ReviewModal({ productId }: { productId: string }) {
                 size="lg"
                 leftIcon={<Send size={16} />}
               >
-                Invia recensione
+                {t("submit")}
               </Button>
             </form>
           </motion.div>

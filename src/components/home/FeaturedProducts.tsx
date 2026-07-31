@@ -2,7 +2,8 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { Button } from "@/components/ui/primitives/Button";
 import { ArrowRight } from "lucide-react";
@@ -17,6 +18,7 @@ interface Product {
 }
 
 export function FeaturedProducts({ products }: { products: Product[] }) {
+  const t = useTranslations("Home");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -31,15 +33,15 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
         >
           <div>
             <p className="text-accent-electric text-sm tracking-widest uppercase mb-3">
-              Novità
+              {t("featuredEyebrow")}
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-white">
-              Prodotti in evidenza
+              {t("featuredTitle")}
             </h2>
           </div>
           <Link href="/shop">
             <Button variant="link" rightIcon={<ArrowRight size={16} />}>
-              Vedi tutti
+              {t("viewAll")}
             </Button>
           </Link>
         </motion.div>

@@ -2,11 +2,13 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/primitives/Button";
 import { ArrowRight } from "lucide-react";
 
 export function Hero() {
+  const t = useTranslations("Hero");
   const ref = useRef<HTMLDivElement>(null);
 
   return (
@@ -26,7 +28,7 @@ export function Hero() {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="text-accent-electric text-sm md:text-base tracking-[0.2em] uppercase mb-6"
         >
-          Premium Collection 2026
+          {t("eyebrow")}
         </motion.p>
 
         <motion.h1
@@ -35,9 +37,9 @@ export function Hero() {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.9] tracking-tight mb-6"
         >
-          L&apos;eleganza
+          {t("titleLine1")}
           <br />
-          <span className="text-gradient">del futuro</span>
+          <span className="text-gradient">{t("titleLine2")}</span>
         </motion.h1>
 
         <motion.p
@@ -46,7 +48,7 @@ export function Hero() {
           transition={{ delay: 0.7, duration: 0.8 }}
           className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10"
         >
-          Design essenziale. Materiali premium. Esperienza senza compromessi.
+          {t("subtitle")}
         </motion.p>
 
         <motion.div
@@ -57,7 +59,7 @@ export function Hero() {
         >
           <Link href="/shop">
             <Button size="xl" rightIcon={<ArrowRight size={20} />}>
-              Esplora la collezione
+              {t("cta")}
             </Button>
           </Link>
         </motion.div>

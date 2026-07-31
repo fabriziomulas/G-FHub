@@ -1,6 +1,9 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export function Footer() {
+  const t = useTranslations("Footer");
+
   return (
     <footer className="bg-text-primary border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-center gap-6">
@@ -9,16 +12,16 @@ export function Footer() {
             href="/"
             className="text-lg font-bold text-white tracking-tight"
           >
-            STORELUXE
+            G&amp;F HUB
           </Link>
 
           <p className="text-gray-500 text-xs mt-1">
-            Gioielleria premium
+            {t("tagline")}
           </p>
         </div>
 
         <div className="flex gap-6 text-sm text-gray-400">
-          <span>📧 info@gfhubs.com</span>
+          <span>📧 g.f.hub0@gmail.com</span>
           <span>📱 +39 351 857 1990</span>
         </div>
 
@@ -27,28 +30,28 @@ export function Footer() {
             href="/privacy"
             className="text-gray-500 text-xs hover:text-gray-300 transition-colors"
           >
-            Privacy
+            {t("privacy")}
           </Link>
 
           <Link
             href="/termini"
             className="text-gray-500 text-xs hover:text-gray-300 transition-colors"
           >
-            Termini
+            {t("termini")}
           </Link>
 
           <Link
             href="/spedizioni"
             className="text-gray-500 text-xs hover:text-gray-300 transition-colors"
           >
-            Spedizioni
+            {t("spedizioni")}
           </Link>
 
           <Link
             href="/resi"
             className="text-gray-500 text-xs hover:text-gray-300 transition-colors"
           >
-            Resi
+            {t("resi")}
           </Link>
 
           <p className="text-gray-500 text-xs">
