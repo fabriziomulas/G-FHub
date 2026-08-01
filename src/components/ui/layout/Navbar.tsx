@@ -72,15 +72,18 @@ export function Navbar() {
         )}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <Link href="/" className="flex items-center shrink-0 hover:opacity-80 transition-opacity">
+          <Link href="/" className="flex items-center gap-2.5 shrink-0 hover:opacity-80 transition-opacity">
             <Image
-              src="/brand/logo-full.png"
-              alt="G&F Hub"
-              width={265}
-              height={240}
+              src="/brand/icon.png"
+              alt=""
+              width={274}
+              height={200}
               priority
-              className="h-11 w-auto"
+              className="h-9 w-auto"
             />
+            <span className="text-xl font-bold text-text-primary tracking-tight">
+              G&amp;F HUB
+            </span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-1">

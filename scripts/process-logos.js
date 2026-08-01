@@ -38,6 +38,15 @@ async function main() {
 
   // 3. src/app/icon.png — icon-only, cropped to content, padded into square transparent canvas, 256x256
   const iconBuf = await sharp(LOGO_ICON_CLEAN).extract(iconBbox).toBuffer();
+
+  // 3b. public/brand/icon.png — icon-only, tightly cropped, transparent, for use next to
+  // real HTML text (e.g. navbar "icon + G&F HUB" lockup) instead of the baked icon+text image.
+  await sharp(iconBuf)
+    .resize({ height: 200, withoutEnlargement: true })
+    .png({ compressionLevel: 9 })
+    .toFile(path.join(ROOT, "public", "brand", "icon.png"));
+  console.log("wrote public/brand/icon.png");
+
   const targetCanvas = 256;
   const padding = Math.round(targetCanvas * 0.12); // slight padding so it's not edge-to-edge
   const innerSize = targetCanvas - padding * 2;
