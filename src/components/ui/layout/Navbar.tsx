@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 import NextLink from "next/link";
-import Image from "next/image";
 import { Menu, X, User, LogOut, ChevronDown, ShoppingBag, Heart, Globe } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { useCart } from "@/stores/cart";
@@ -72,15 +71,7 @@ export function Navbar() {
         )}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5 shrink-0 hover:opacity-80 transition-opacity">
-            <Image
-              src="/brand/icon.png"
-              alt=""
-              width={274}
-              height={200}
-              priority
-              className="h-9 w-auto"
-            />
+          <Link href="/" className="flex items-center shrink-0 hover:opacity-80 transition-opacity">
             <span className="text-xl font-bold text-text-primary tracking-tight">
               G&amp;F HUB
             </span>
