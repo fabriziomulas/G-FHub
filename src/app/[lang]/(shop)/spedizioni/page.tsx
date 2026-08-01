@@ -1,6 +1,29 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Truck, Clock, MapPin, PackageCheck } from "lucide-react";
 import { LegalPage, LegalSection, PlaceholderNote } from "@/components/legal/LegalPage";
+import { buildLanguageAlternates, canonicalFor } from "@/lib/seo";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const [tLegal, tMeta] = await Promise.all([
+    getTranslations({ locale: lang, namespace: "Legal" }),
+    getTranslations({ locale: lang, namespace: "Meta" }),
+  ]);
+
+  return {
+    title: tLegal("spedizioniTitle"),
+    description: tMeta("spedizioniDescription"),
+    alternates: {
+      canonical: canonicalFor(lang, "/spedizioni"),
+      languages: buildLanguageAlternates("/spedizioni"),
+    },
+  };
+}
 
 export default async function SpedizioniPage() {
   const t = await getTranslations("Legal");

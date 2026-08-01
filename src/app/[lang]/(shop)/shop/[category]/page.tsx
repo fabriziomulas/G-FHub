@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Navbar } from "@/components/ui/layout/Navbar";
@@ -6,6 +7,7 @@ import { Footer } from "@/components/ui/layout/Footer";
 import { ShopGrid } from "@/components/shop/ShopGrid";
 import { Skeleton } from "@/components/ui/primitives/Skeleton";
 import { getProductsByCategory } from "@/lib/queries/products";
+import { buildLanguageAlternates, canonicalFor } from "@/lib/seo";
 
 const CATEGORY_KEYS: Record<string, "categoryRingsTitle" | "categoryNecklacesTitle" | "categoryBraceletsTitle"> = {
   anelli: "categoryRingsTitle",
@@ -14,7 +16,31 @@ const CATEGORY_KEYS: Record<string, "categoryRingsTitle" | "categoryNecklacesTit
 };
 
 interface PageProps {
-  params: Promise<{ category: string }>;
+  params: Promise<{ category: string; lang: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { category, lang } = await params;
+  const labelKey = CATEGORY_KEYS[category];
+  if (!labelKey) return {};
+
+  const [tShop, tMeta] = await Promise.all([
+    getTranslations({ locale: lang, namespace: "Shop" }),
+    getTranslations({ locale: lang, namespace: "Meta" }),
+  ]);
+  const label = tShop(labelKey);
+  const description = tMeta("categoryDescription", { category: label });
+  const path = `/shop/${category}`;
+
+  return {
+    title: label,
+    description,
+    alternates: {
+      canonical: canonicalFor(lang, path),
+      languages: buildLanguageAlternates(path),
+    },
+    openGraph: { title: label, description, url: canonicalFor(lang, path) },
+  };
 }
 
 export default async function CategoryPage({ params }: PageProps) {

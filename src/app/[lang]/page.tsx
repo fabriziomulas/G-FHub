@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { Navbar } from "@/components/ui/layout/Navbar";
 import { Footer } from "@/components/ui/layout/Footer";
 import { Hero } from "@/components/home/Hero";
@@ -5,6 +7,26 @@ import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 import { Categories } from "@/components/home/Categories";
 import { ReviewCarousel } from "@/components/home/ReviewCarousel";
 import { getFeaturedProducts } from "@/lib/queries/products";
+import { buildLanguageAlternates, canonicalFor } from "@/lib/seo";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const t = await getTranslations({ locale: lang, namespace: "Meta" });
+
+  return {
+    title: t("homeTitle"),
+    description: t("homeDescription"),
+    alternates: {
+      canonical: canonicalFor(lang, "/"),
+      languages: buildLanguageAlternates("/"),
+    },
+    openGraph: { title: t("homeTitle"), description: t("homeDescription"), url: canonicalFor(lang, "/") },
+  };
+}
 
 export default async function Home() {
   const products = await getFeaturedProducts();

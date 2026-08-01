@@ -64,7 +64,7 @@ export function Storytelling() {
             >
               <Image
                 src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&q=80"
-                alt="Product 1"
+                alt="Gioiello G&F Hub in primo piano"
                 fill
                 className="object-cover"
                 sizes="300px"
@@ -76,7 +76,7 @@ export function Storytelling() {
             >
               <Image
                 src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&q=80"
-                alt="Product 2"
+                alt="Dettaglio artigianale di un gioiello G&F Hub"
                 fill
                 className="object-cover"
                 sizes="260px"

@@ -1,10 +1,35 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Navbar } from "@/components/ui/layout/Navbar";
 import { Footer } from "@/components/ui/layout/Footer";
 import { ShopGrid } from "@/components/shop/ShopGrid";
 import { Skeleton } from "@/components/ui/primitives/Skeleton";
 import { prisma } from "@/lib/prisma";
+import { buildLanguageAlternates, canonicalFor } from "@/lib/seo";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const t = await getTranslations({ locale: lang, namespace: "Meta" });
+
+  return {
+    title: t("shopOfferteTitle"),
+    description: t("shopOfferteDescription"),
+    alternates: {
+      canonical: canonicalFor(lang, "/shop/offerte"),
+      languages: buildLanguageAlternates("/shop/offerte"),
+    },
+    openGraph: {
+      title: t("shopOfferteTitle"),
+      description: t("shopOfferteDescription"),
+      url: canonicalFor(lang, "/shop/offerte"),
+    },
+  };
+}
 
 export default async function OffertePage() {
   const t = await getTranslations("Shop");

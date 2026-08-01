@@ -1,9 +1,30 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Navbar } from "@/components/ui/layout/Navbar";
 import { Footer } from "@/components/ui/layout/Footer";
 import { Button } from "@/components/ui/primitives/Button";
 import { Gem, Sparkles, ShieldCheck, Truck, ArrowRight, User, ChevronDown } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { buildLanguageAlternates, canonicalFor } from "@/lib/seo";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const t = await getTranslations({ locale: lang, namespace: "Meta" });
+
+  return {
+    title: t("chiSiamoTitle"),
+    description: t("chiSiamoDescription"),
+    alternates: {
+      canonical: canonicalFor(lang, "/chi-siamo"),
+      languages: buildLanguageAlternates("/chi-siamo"),
+    },
+    openGraph: { title: t("chiSiamoTitle"), description: t("chiSiamoDescription"), url: canonicalFor(lang, "/chi-siamo") },
+  };
+}
 
 export default async function ChiSiamoPage() {
   const t = await getTranslations("ChiSiamo");

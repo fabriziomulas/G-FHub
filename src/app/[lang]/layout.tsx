@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import "../globals.css";
 import { Providers } from "../providers";
 import { Toaster } from "sonner";
@@ -9,19 +10,66 @@ import { SmoothScroll } from "@/components/ui/global/SmoothScroll";
 import { Analytics } from "@/components/analytics/Analytics";
 import { ChatWidget } from "@/components/chat/ChatWidget";
 import { routing } from "@/i18n/routing";
+import { SITE_URL, SITE_NAME, buildLanguageAlternates, canonicalFor } from "@/lib/seo";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 });
 
-export const metadata: Metadata = {
-  title: "G&F Hub - Premium E-Commerce",
-  description: "Esperienza di shopping premium, futuristica ed elegante.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const t = await getTranslations({ locale: lang, namespace: "Meta" });
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: { default: t("defaultTitle"), template: `%s | ${SITE_NAME}` },
+    description: t("defaultDescription"),
+    alternates: {
+      canonical: canonicalFor(lang, "/"),
+      languages: buildLanguageAlternates("/"),
+    },
+    openGraph: {
+      type: "website",
+      siteName: SITE_NAME,
+      locale: lang,
+      url: canonicalFor(lang, "/"),
+      title: t("defaultTitle"),
+      description: t("defaultDescription"),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("defaultTitle"),
+      description: t("defaultDescription"),
+    },
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((lang) => ({ lang }));
+}
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_NAME,
+  url: SITE_URL,
+  logo: `${SITE_URL}/brand/logo-full.png`,
+  sameAs: [],
+};
+
+function websiteJsonLd(lang: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: SITE_URL,
+    inLanguage: lang,
+  };
 }
 
 export default async function RootLayout({
@@ -40,6 +88,14 @@ export default async function RootLayout({
   return (
     <html lang={lang} className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-background-primary text-text-primary">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd(lang)) }}
+        />
         <NextIntlClientProvider>
           <Analytics />
           <Providers>

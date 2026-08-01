@@ -29,7 +29,13 @@ export async function POST(request: Request) {
     from: "G&F Hub <noreply@gfhubs.com>",
     to: email,
     subject: "Verifica il tuo account G&F Hub",
-    html: `<h1>Benvenuto su G&F Hub!</h1><p>Clicca qui per verificare il tuo account:</p><a href="${verifyUrl}">${verifyUrl}</a>`,
+    html: `
+      <div style="max-width: 480px; margin: 0 auto; padding: 40px 20px; font-family: 'Inter', Arial, sans-serif; background-color: #0C0A09; color: #F4F5F6; border-radius: 16px; text-align: center;">
+        <img src="${process.env.NEXTAUTH_URL}/brand/logo-full.png" alt="G&F Hub" width="150" style="display: block; margin: 0 auto 16px; height: auto;" />
+        <p style="font-size: 16px; margin-bottom: 24px; color: #A0A0A0;">Benvenuto! Clicca qui per verificare il tuo account.</p>
+        <a href="${verifyUrl}" style="display: inline-block; background-color: #B2B395; color: #0C0A09; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 15px;">Verifica Email</a>
+      </div>
+    `,
   });
 
   return NextResponse.json({ success: true });

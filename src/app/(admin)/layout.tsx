@@ -12,6 +12,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "G&F Hub - Admin",
   description: "Pannello di amministrazione G&F Hub.",
+  robots: { index: false, follow: false },
 };
 
 export default function AdminRootLayout({

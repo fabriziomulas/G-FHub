@@ -1,6 +1,29 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { LegalPage, LegalSection, PlaceholderNote } from "@/components/legal/LegalPage";
 import { Link } from "@/i18n/navigation";
+import { buildLanguageAlternates, canonicalFor } from "@/lib/seo";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const [tLegal, tMeta] = await Promise.all([
+    getTranslations({ locale: lang, namespace: "Legal" }),
+    getTranslations({ locale: lang, namespace: "Meta" }),
+  ]);
+
+  return {
+    title: tLegal("terminiTitle"),
+    description: tMeta("terminiDescription"),
+    alternates: {
+      canonical: canonicalFor(lang, "/termini"),
+      languages: buildLanguageAlternates("/termini"),
+    },
+  };
+}
 
 export default async function TerminiPage() {
   const t = await getTranslations("Legal");

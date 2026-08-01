@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
@@ -8,11 +9,14 @@ export function Footer() {
     <footer className="bg-text-primary border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-center gap-6">
         <div>
-          <Link
-            href="/"
-            className="text-lg font-bold text-white tracking-tight"
-          >
-            G&amp;F HUB
+          <Link href="/" className="inline-flex hover:opacity-80 transition-opacity">
+            <Image
+              src="/brand/logo-full.png"
+              alt="G&F Hub"
+              width={265}
+              height={240}
+              className="h-9 w-auto"
+            />
           </Link>
 
           <p className="text-gray-500 text-xs mt-1">

@@ -205,27 +205,75 @@
     "privacyTitle": "Informativa sulla Privacy",
     "privacyPlaceholderNote": "Questa informativa contiene testo standard conforme al GDPR (Regolamento UE 2016/679), ma i dati identificativi del titolare del trattamento sono segnaposto. Vanno completati con ragione sociale, P.IVA, sede legale ed email prima di pubblicare la pagina.",
     "privacySections": [
-      { "title": "1. Titolare del trattamento", "body": "I dati identificativi del titolare del trattamento sono indicati in cima a questa pagina. Per qualsiasi richiesta relativa al trattamento dei tuoi dati personali puoi scrivere a g.f.hub0@gmail.com." },
-      { "title": "2. Dati raccolti", "body": "Nel corso della navigazione e dell'utilizzo del sito raccogliamo: dati forniti volontariamente in fase di registrazione o acquisto (nome, email, indirizzo di spedizione, telefono); dati relativi agli ordini e allo storico acquisti; dati tecnici di navigazione (IP, browser, pagine visitate); dati di pagamento gestiti direttamente da Stripe, che non conserviamo." },
-      { "title": "3. Finalità e base giuridica del trattamento", "body": "I tuoi dati vengono trattati per: gestione ed evasione degli ordini e comunicazioni sullo stato della spedizione (esecuzione del contratto); gestione dell'account, wishlist e programma fedeltà (esecuzione del contratto); gestione di resi e assistenza clienti (esecuzione del contratto / legittimo interesse); adempimento di obblighi legali e fiscali (obbligo di legge)." },
-      { "title": "4. Conservazione dei dati", "body": "I dati relativi agli ordini sono conservati per il tempo necessario ad adempiere agli obblighi fiscali e contabili previsti dalla legge italiana. I dati dell'account restano attivi finché non richiedi la cancellazione." },
-      { "title": "5. Comunicazione dei dati a terzi", "body": "I tuoi dati possono essere comunicati a fornitori terzi strettamente necessari all'erogazione del servizio: gestore dei pagamenti (Stripe), corriere per la spedizione, provider di invio email transazionali (Resend), nel rispetto della normativa vigente." },
-      { "title": "6. I tuoi diritti", "body": "Hai diritto di: accedere ai tuoi dati e ottenerne copia; richiederne la rettifica; richiederne la cancellazione salvo obblighi di legge; opporti al trattamento o richiederne la limitazione; richiederne la portabilità; proporre reclamo al Garante Privacy. Per esercitare questi diritti scrivi a g.f.hub0@gmail.com." },
-      { "title": "7. Cookie", "body": "Il sito utilizza cookie tecnici necessari al funzionamento (autenticazione, carrello) e cookie di terze parti legati ai servizi di pagamento. Non vengono utilizzati cookie di profilazione pubblicitaria al di fuori di quelli eventualmente configurati tramite strumenti di analisi, per i quali verrà richiesto il consenso esplicito ove previsto." },
-      { "title": "8. Modifiche a questa informativa", "body": "Questa informativa può essere aggiornata periodicamente. La data di ultimo aggiornamento è indicata in cima alla pagina." }
+      {
+        "title": "1. Titolare del trattamento",
+        "body": "I dati identificativi del titolare del trattamento sono indicati in cima a questa pagina. Per qualsiasi richiesta relativa al trattamento dei tuoi dati personali puoi scrivere a g.f.hub0@gmail.com."
+      },
+      {
+        "title": "2. Dati raccolti",
+        "body": "Nel corso della navigazione e dell'utilizzo del sito raccogliamo: dati forniti volontariamente in fase di registrazione o acquisto (nome, email, indirizzo di spedizione, telefono); dati relativi agli ordini e allo storico acquisti; dati tecnici di navigazione (IP, browser, pagine visitate); dati di pagamento gestiti direttamente da Stripe, che non conserviamo."
+      },
+      {
+        "title": "3. Finalità e base giuridica del trattamento",
+        "body": "I tuoi dati vengono trattati per: gestione ed evasione degli ordini e comunicazioni sullo stato della spedizione (esecuzione del contratto); gestione dell'account, wishlist e programma fedeltà (esecuzione del contratto); gestione di resi e assistenza clienti (esecuzione del contratto / legittimo interesse); adempimento di obblighi legali e fiscali (obbligo di legge)."
+      },
+      {
+        "title": "4. Conservazione dei dati",
+        "body": "I dati relativi agli ordini sono conservati per il tempo necessario ad adempiere agli obblighi fiscali e contabili previsti dalla legge italiana. I dati dell'account restano attivi finché non richiedi la cancellazione."
+      },
+      {
+        "title": "5. Comunicazione dei dati a terzi",
+        "body": "I tuoi dati possono essere comunicati a fornitori terzi strettamente necessari all'erogazione del servizio: gestore dei pagamenti (Stripe), corriere per la spedizione, provider di invio email transazionali (Resend), nel rispetto della normativa vigente."
+      },
+      {
+        "title": "6. I tuoi diritti",
+        "body": "Hai diritto di: accedere ai tuoi dati e ottenerne copia; richiederne la rettifica; richiederne la cancellazione salvo obblighi di legge; opporti al trattamento o richiederne la limitazione; richiederne la portabilità; proporre reclamo al Garante Privacy. Per esercitare questi diritti scrivi a g.f.hub0@gmail.com."
+      },
+      {
+        "title": "7. Cookie",
+        "body": "Il sito utilizza cookie tecnici necessari al funzionamento (autenticazione, carrello) e cookie di terze parti legati ai servizi di pagamento. Non vengono utilizzati cookie di profilazione pubblicitaria al di fuori di quelli eventualmente configurati tramite strumenti di analisi, per i quali verrà richiesto il consenso esplicito ove previsto."
+      },
+      {
+        "title": "8. Modifiche a questa informativa",
+        "body": "Questa informativa può essere aggiornata periodicamente. La data di ultimo aggiornamento è indicata in cima alla pagina."
+      }
     ],
     "terminiTitle": "Termini e Condizioni di Vendita",
     "terminiPlaceholderNote": "Testo standard conforme al Codice del Consumo italiano (D.Lgs. 206/2005). I dati identificativi del venditore sono segnaposto e vanno completati prima di pubblicare la pagina.",
     "terminiSeller": "I dati identificativi del venditore sono indicati in cima a questa pagina (di seguito \"G&F Hub\"). Contatti: g.f.hub0@gmail.com — +39 351 857 1990.",
     "terminiSections": [
-      { "title": "1. Il venditore", "body": "" },
-      { "title": "2. Conclusione del contratto", "body": "La visualizzazione dei prodotti sul sito costituisce un invito ad offrire e non un'offerta al pubblico. L'ordine effettuato dal cliente costituisce una proposta di acquisto, che si considera accettata al momento della conferma del pagamento tramite il nostro provider Stripe." },
-      { "title": "3. Prezzi e pagamento", "body": "Tutti i prezzi indicati sul sito sono espressi in Euro (€) e si intendono comprensivi di IVA, salvo eventuali costi di spedizione indicati separatamente in fase di checkout. I pagamenti sono processati in modo sicuro tramite Stripe con le modalità disponibili al checkout." },
-      { "title": "4. Spedizione", "body": "Le condizioni di spedizione, i tempi di consegna e i relativi costi sono indicati nella pagina dedicata Spedizioni." },
-      { "title": "5. Diritto di recesso", "body": "Ai sensi degli artt. 52-59 del Codice del Consumo, il cliente consumatore ha diritto di recedere dal contratto senza dover fornire alcuna motivazione entro 14 giorni dalla data di ricezione del prodotto. Per esercitare il diritto di recesso è possibile utilizzare il modulo disponibile nella pagina Resi. Il prodotto dovrà essere restituito integro, non utilizzato e nella confezione originale. Il rimborso verrà effettuato con lo stesso metodo di pagamento utilizzato per l'acquisto, entro 14 giorni dal ricevimento del reso." },
-      { "title": "6. Garanzia legale di conformità", "body": "Tutti i prodotti venduti sono coperti dalla garanzia legale di conformità di 24 mesi prevista dagli artt. 128-135 del Codice del Consumo, valida per difetti di conformità esistenti al momento della consegna." },
-      { "title": "7. Limitazione di responsabilità", "body": "G&F Hub non è responsabile per ritardi o disservizi dovuti a cause di forza maggiore, né per un uso improprio dei prodotti acquistati rispetto alla loro destinazione d'uso." },
-      { "title": "8. Legge applicabile e foro competente", "body": "Il presente contratto è regolato dalla legge italiana. Per le controversie relative a contratti conclusi con consumatori è competente il foro del luogo di residenza o domicilio del consumatore, se ubicato in Italia." }
+      {
+        "title": "1. Il venditore",
+        "body": ""
+      },
+      {
+        "title": "2. Conclusione del contratto",
+        "body": "La visualizzazione dei prodotti sul sito costituisce un invito ad offrire e non un'offerta al pubblico. L'ordine effettuato dal cliente costituisce una proposta di acquisto, che si considera accettata al momento della conferma del pagamento tramite il nostro provider Stripe."
+      },
+      {
+        "title": "3. Prezzi e pagamento",
+        "body": "Tutti i prezzi indicati sul sito sono espressi in Euro (€) e si intendono comprensivi di IVA, salvo eventuali costi di spedizione indicati separatamente in fase di checkout. I pagamenti sono processati in modo sicuro tramite Stripe con le modalità disponibili al checkout."
+      },
+      {
+        "title": "4. Spedizione",
+        "body": "Le condizioni di spedizione, i tempi di consegna e i relativi costi sono indicati nella pagina dedicata Spedizioni."
+      },
+      {
+        "title": "5. Diritto di recesso",
+        "body": "Ai sensi degli artt. 52-59 del Codice del Consumo, il cliente consumatore ha diritto di recedere dal contratto senza dover fornire alcuna motivazione entro 14 giorni dalla data di ricezione del prodotto. Per esercitare il diritto di recesso è possibile utilizzare il modulo disponibile nella pagina Resi. Il prodotto dovrà essere restituito integro, non utilizzato e nella confezione originale. Il rimborso verrà effettuato con lo stesso metodo di pagamento utilizzato per l'acquisto, entro 14 giorni dal ricevimento del reso."
+      },
+      {
+        "title": "6. Garanzia legale di conformità",
+        "body": "Tutti i prodotti venduti sono coperti dalla garanzia legale di conformità di 24 mesi prevista dagli artt. 128-135 del Codice del Consumo, valida per difetti di conformità esistenti al momento della consegna."
+      },
+      {
+        "title": "7. Limitazione di responsabilità",
+        "body": "G&F Hub non è responsabile per ritardi o disservizi dovuti a cause di forza maggiore, né per un uso improprio dei prodotti acquistati rispetto alla loro destinazione d'uso."
+      },
+      {
+        "title": "8. Legge applicabile e foro competente",
+        "body": "Il presente contratto è regolato dalla legge italiana. Per le controversie relative a contratti conclusi con consumatori è competente il foro del luogo di residenza o domicilio del consumatore, se ubicato in Italia."
+      }
     ],
     "recessoExclusionNote": "Se alcuni prodotti (es. gioielli personalizzati o realizzati su misura) sono esclusi dal diritto di recesso ai sensi dell'art. 59 del Codice del Consumo, va specificato qui quali categorie sono escluse.",
     "spedizioniTitle": "Spedizioni",
@@ -295,5 +343,29 @@
     "ctaTitle": "Scopri la collezione",
     "ctaText": "Ogni pezzo racconta una selezione fatta con cura. Vieni a vederli.",
     "ctaButton": "Vai allo Shop"
+  },
+  "Meta": {
+    "siteName": "G&F Hub",
+    "titleTemplate": "%s | G&F Hub",
+    "defaultTitle": "G&F Hub — Gioielleria Premium Online",
+    "defaultDescription": "Scopri anelli, collane e bracciali di gioielleria premium su G&F Hub. Spedizione curata, pagamenti sicuri e assistenza dedicata.",
+    "homeTitle": "G&F Hub — Gioielleria Premium Online",
+    "homeDescription": "Anelli, collane e bracciali di alta gioielleria. Scopri le nuove collezioni G&F Hub, eleganza senza tempo con spedizione rapida e sicura.",
+    "shopTitle": "Tutti i Gioielli",
+    "shopDescription": "Sfoglia l'intera collezione di gioielli G&F Hub: anelli, collane e bracciali selezionati per te.",
+    "shopNewTitle": "Nuovi Arrivi",
+    "shopNewDescription": "Le ultime novità firmate G&F Hub, appena arrivate in collezione.",
+    "shopBestSellerTitle": "I Più Venduti",
+    "shopBestSellerDescription": "I gioielli più amati dai nostri clienti, i best seller G&F Hub.",
+    "shopOfferteTitle": "Offerte Speciali",
+    "shopOfferteDescription": "Approfitta delle offerte a tempo limitato su una selezione di gioielli G&F Hub.",
+    "chiSiamoTitle": "Chi Siamo",
+    "chiSiamoDescription": "Scopri la storia, i valori e l'impegno di G&F Hub per una gioielleria premium accessibile.",
+    "resiTitle": "Resi e Rimborsi",
+    "resiDescription": "Richiedi un reso in pochi passaggi. Scopri la nostra politica di reso e assistenza clienti G&F Hub.",
+    "categoryDescription": "Scopri la collezione {category} di G&F Hub: qualità, eleganza e stile in ogni pezzo.",
+    "privacyDescription": "Informativa sulla privacy di G&F Hub: come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali.",
+    "terminiDescription": "Termini e condizioni di vendita di G&F Hub: modalità d'acquisto, diritto di recesso e garanzie.",
+    "spedizioniDescription": "Tempi, costi e modalità di spedizione degli ordini G&F Hub in Italia e all'estero."
   }
 }

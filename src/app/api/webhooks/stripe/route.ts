@@ -190,7 +190,7 @@ async function handleCheckoutExpired(session: Stripe.Checkout.Session) {
       subject: "Hai lasciato qualcosa nel carrello",
       html: `
         <div style="max-width: 480px; margin: 0 auto; padding: 40px 20px; font-family: 'Inter', Arial, sans-serif; background-color: #0C0A09; color: #F4F5F6; border-radius: 16px; text-align: center;">
-          <h1 style="color: #B2B395; font-size: 24px; margin-bottom: 8px;">G&F<span style="color: #F4F5F6;"> HUB</span></h1>
+          <img src="${process.env.NEXTAUTH_URL}/brand/logo-full.png" alt="G&F Hub" width="150" style="display: block; margin: 0 auto 16px; height: auto;" />
           <p style="font-size: 15px; margin-bottom: 24px; color: #A0A0A0;">
             Il pagamento non è stato completato e i prodotti sono ancora nel tuo carrello. Torna quando vuoi per finalizzare l&apos;ordine.
           </p>
@@ -216,7 +216,7 @@ async function handlePaymentFailed(paymentIntent: Stripe.PaymentIntent) {
       subject: "Il tuo pagamento non è andato a buon fine",
       html: `
         <div style="max-width: 480px; margin: 0 auto; padding: 40px 20px; font-family: 'Inter', Arial, sans-serif; background-color: #0C0A09; color: #F4F5F6; border-radius: 16px; text-align: center;">
-          <h1 style="color: #B2B395; font-size: 24px; margin-bottom: 8px;">G&F<span style="color: #F4F5F6;"> HUB</span></h1>
+          <img src="${process.env.NEXTAUTH_URL}/brand/logo-full.png" alt="G&F Hub" width="150" style="display: block; margin: 0 auto 16px; height: auto;" />
           <p style="font-size: 15px; margin-bottom: 24px; color: #A0A0A0;">
             Il pagamento del tuo ordine non è andato a buon fine. Nessun addebito è stato effettuato. Puoi riprovare in qualsiasi momento dal tuo carrello.
           </p>
@@ -271,7 +271,7 @@ async function sendOrderEmails(data: {
         subject: "Conferma del tuo ordine G&F Hub",
         html: `
           <div style="max-width: 520px; margin: 0 auto; padding: 32px; font-family: 'Inter', Arial, sans-serif; background-color: #0C0A09; color: #F4F5F6; border-radius: 16px;">
-            <h1 style="color: #B2B395; font-size: 22px; margin-bottom: 4px;">G&F<span style="color: #F4F5F6;"> HUB</span></h1>
+            <img src="${process.env.NEXTAUTH_URL}/brand/logo-full.png" alt="G&F Hub" width="130" style="display: block; margin: 0 0 12px; height: auto;" />
             <p style="font-size: 15px; color: #A0A0A0; margin-bottom: 24px;">Grazie ${escapeHtml(customerName || "")}, il tuo ordine è confermato.</p>
             <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px;">${itemsHtml}</table>
             <div style="border-top: 1px solid #222; padding-top: 12px; display: flex; justify-content: space-between; font-weight: 600;">

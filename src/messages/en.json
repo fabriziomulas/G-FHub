@@ -205,27 +205,75 @@
     "privacyTitle": "Privacy Policy",
     "privacyPlaceholderNote": "This policy contains standard text compliant with GDPR (EU Regulation 2016/679), but the data controller's identifying details are placeholders. They must be completed with company name, VAT number, registered address and email before publishing this page.",
     "privacySections": [
-      { "title": "1. Data controller", "body": "The data controller's identifying details are shown at the top of this page. For any request regarding the processing of your personal data, you can write to g.f.hub0@gmail.com." },
-      { "title": "2. Data we collect", "body": "While browsing and using the site, we collect: data you provide voluntarily during registration or purchase (name, email, shipping address, phone number); data related to your orders and purchase history; technical browsing data (IP, browser, pages visited); payment data, handled directly by Stripe, which we do not store." },
-      { "title": "3. Purpose and legal basis of processing", "body": "Your data is processed to: manage and fulfill orders and communicate shipping status (performance of a contract); manage your account, wishlist and loyalty program (performance of a contract); handle returns and customer support (performance of a contract / legitimate interest); comply with legal and tax obligations (legal obligation)." },
-      { "title": "4. Data retention", "body": "Order-related data is kept for as long as required to comply with Italian tax and accounting obligations. Account data remains active until you request its deletion." },
-      { "title": "5. Sharing data with third parties", "body": "Your data may be shared with third-party providers strictly necessary to deliver the service: payment processor (Stripe), shipping carrier, transactional email provider (Resend), in compliance with applicable law." },
-      { "title": "6. Your rights", "body": "You have the right to: access your data and obtain a copy; request its correction; request its deletion, subject to legal retention obligations; object to processing or request its restriction; request data portability; file a complaint with the data protection authority. To exercise these rights, write to g.f.hub0@gmail.com." },
-      { "title": "7. Cookies", "body": "The site uses technical cookies necessary for its operation (authentication, cart) and third-party cookies related to payment services. No advertising profiling cookies are used beyond those that may be configured through analytics tools, for which explicit consent will be requested where required." },
-      { "title": "8. Changes to this policy", "body": "This policy may be updated periodically. The last update date is shown at the top of the page." }
+      {
+        "title": "1. Data controller",
+        "body": "The data controller's identifying details are shown at the top of this page. For any request regarding the processing of your personal data, you can write to g.f.hub0@gmail.com."
+      },
+      {
+        "title": "2. Data we collect",
+        "body": "While browsing and using the site, we collect: data you provide voluntarily during registration or purchase (name, email, shipping address, phone number); data related to your orders and purchase history; technical browsing data (IP, browser, pages visited); payment data, handled directly by Stripe, which we do not store."
+      },
+      {
+        "title": "3. Purpose and legal basis of processing",
+        "body": "Your data is processed to: manage and fulfill orders and communicate shipping status (performance of a contract); manage your account, wishlist and loyalty program (performance of a contract); handle returns and customer support (performance of a contract / legitimate interest); comply with legal and tax obligations (legal obligation)."
+      },
+      {
+        "title": "4. Data retention",
+        "body": "Order-related data is kept for as long as required to comply with Italian tax and accounting obligations. Account data remains active until you request its deletion."
+      },
+      {
+        "title": "5. Sharing data with third parties",
+        "body": "Your data may be shared with third-party providers strictly necessary to deliver the service: payment processor (Stripe), shipping carrier, transactional email provider (Resend), in compliance with applicable law."
+      },
+      {
+        "title": "6. Your rights",
+        "body": "You have the right to: access your data and obtain a copy; request its correction; request its deletion, subject to legal retention obligations; object to processing or request its restriction; request data portability; file a complaint with the data protection authority. To exercise these rights, write to g.f.hub0@gmail.com."
+      },
+      {
+        "title": "7. Cookies",
+        "body": "The site uses technical cookies necessary for its operation (authentication, cart) and third-party cookies related to payment services. No advertising profiling cookies are used beyond those that may be configured through analytics tools, for which explicit consent will be requested where required."
+      },
+      {
+        "title": "8. Changes to this policy",
+        "body": "This policy may be updated periodically. The last update date is shown at the top of the page."
+      }
     ],
     "terminiTitle": "Terms & Conditions of Sale",
     "terminiPlaceholderNote": "Standard text compliant with the Italian Consumer Code (Legislative Decree 206/2005). The seller's identifying details are placeholders and must be completed before publishing this page.",
     "terminiSeller": "The seller's identifying details are shown at the top of this page (hereinafter \"G&F Hub\"). Contact: g.f.hub0@gmail.com — +39 351 857 1990.",
     "terminiSections": [
-      { "title": "1. The seller", "body": "" },
-      { "title": "2. Formation of the contract", "body": "Displaying products on the site constitutes an invitation to treat, not a public offer. An order placed by the customer constitutes a purchase proposal, considered accepted once payment is confirmed through our provider, Stripe." },
-      { "title": "3. Prices and payment", "body": "All prices shown on the site are in Euro (€) and include VAT, excluding any shipping costs shown separately at checkout. Payments are securely processed via Stripe using the methods available at checkout." },
-      { "title": "4. Shipping", "body": "Shipping terms, delivery times and related costs are listed on the dedicated Shipping page." },
-      { "title": "5. Right of withdrawal", "body": "Under articles 52-59 of the Italian Consumer Code, consumers have the right to withdraw from the contract without giving any reason within 14 days of receiving the product. To exercise this right, use the form available on the Returns page. The product must be returned unused, intact and in its original packaging. The refund will be issued using the same payment method used for the purchase, within 14 days of receiving the return." },
-      { "title": "6. Legal warranty of conformity", "body": "All products sold are covered by the 24-month legal warranty of conformity provided under articles 128-135 of the Italian Consumer Code, valid for conformity defects existing at the time of delivery." },
-      { "title": "7. Limitation of liability", "body": "G&F Hub is not liable for delays or disruptions due to force majeure, nor for improper use of purchased products relative to their intended purpose." },
-      { "title": "8. Governing law and jurisdiction", "body": "This contract is governed by Italian law. For disputes relating to contracts concluded with consumers, the competent court is that of the consumer's place of residence or domicile, if located in Italy." }
+      {
+        "title": "1. The seller",
+        "body": ""
+      },
+      {
+        "title": "2. Formation of the contract",
+        "body": "Displaying products on the site constitutes an invitation to treat, not a public offer. An order placed by the customer constitutes a purchase proposal, considered accepted once payment is confirmed through our provider, Stripe."
+      },
+      {
+        "title": "3. Prices and payment",
+        "body": "All prices shown on the site are in Euro (€) and include VAT, excluding any shipping costs shown separately at checkout. Payments are securely processed via Stripe using the methods available at checkout."
+      },
+      {
+        "title": "4. Shipping",
+        "body": "Shipping terms, delivery times and related costs are listed on the dedicated Shipping page."
+      },
+      {
+        "title": "5. Right of withdrawal",
+        "body": "Under articles 52-59 of the Italian Consumer Code, consumers have the right to withdraw from the contract without giving any reason within 14 days of receiving the product. To exercise this right, use the form available on the Returns page. The product must be returned unused, intact and in its original packaging. The refund will be issued using the same payment method used for the purchase, within 14 days of receiving the return."
+      },
+      {
+        "title": "6. Legal warranty of conformity",
+        "body": "All products sold are covered by the 24-month legal warranty of conformity provided under articles 128-135 of the Italian Consumer Code, valid for conformity defects existing at the time of delivery."
+      },
+      {
+        "title": "7. Limitation of liability",
+        "body": "G&F Hub is not liable for delays or disruptions due to force majeure, nor for improper use of purchased products relative to their intended purpose."
+      },
+      {
+        "title": "8. Governing law and jurisdiction",
+        "body": "This contract is governed by Italian law. For disputes relating to contracts concluded with consumers, the competent court is that of the consumer's place of residence or domicile, if located in Italy."
+      }
     ],
     "recessoExclusionNote": "If some products (e.g. personalized or made-to-order jewelry) are excluded from the right of withdrawal under article 59 of the Consumer Code, the excluded categories must be specified here.",
     "spedizioniTitle": "Shipping",
@@ -295,5 +343,29 @@
     "ctaTitle": "Discover the collection",
     "ctaText": "Every piece tells the story of a careful selection. Come take a look.",
     "ctaButton": "Go to Shop"
+  },
+  "Meta": {
+    "siteName": "G&F Hub",
+    "titleTemplate": "%s | G&F Hub",
+    "defaultTitle": "G&F Hub — Premium Online Jewelry",
+    "defaultDescription": "Discover rings, necklaces and bracelets of premium jewelry at G&F Hub. Curated shipping, secure payments and dedicated support.",
+    "homeTitle": "G&F Hub — Premium Online Jewelry",
+    "homeDescription": "Rings, necklaces and bracelets of fine jewelry. Discover the new G&F Hub collections, timeless elegance with fast and secure shipping.",
+    "shopTitle": "All Jewelry",
+    "shopDescription": "Browse the entire G&F Hub jewelry collection: rings, necklaces and bracelets selected for you.",
+    "shopNewTitle": "New Arrivals",
+    "shopNewDescription": "The latest G&F Hub pieces, just added to the collection.",
+    "shopBestSellerTitle": "Best Sellers",
+    "shopBestSellerDescription": "The jewelry our customers love most, the G&F Hub best sellers.",
+    "shopOfferteTitle": "Special Offers",
+    "shopOfferteDescription": "Take advantage of limited-time offers on a selection of G&F Hub jewelry.",
+    "chiSiamoTitle": "About Us",
+    "chiSiamoDescription": "Discover the story, values and commitment of G&F Hub to accessible premium jewelry.",
+    "resiTitle": "Returns & Refunds",
+    "resiDescription": "Request a return in a few steps. Discover our return policy and G&F Hub customer support.",
+    "categoryDescription": "Discover the {category} collection by G&F Hub: quality, elegance and style in every piece.",
+    "privacyDescription": "G&F Hub privacy policy: how we collect, use and protect your personal data.",
+    "terminiDescription": "G&F Hub terms and conditions of sale: purchase process, right of withdrawal and warranties.",
+    "spedizioniDescription": "Shipping times, costs and options for G&F Hub orders in Italy and abroad."
   }
 }

@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Navbar } from "@/components/ui/layout/Navbar";
 import { Footer } from "@/components/ui/layout/Footer";
@@ -8,23 +9,121 @@ import { ReviewModal } from "@/components/product/ReviewModal";
 import { ProductReviews } from "@/components/product/ProductReviews";
 import { Skeleton } from "@/components/ui/primitives/Skeleton";
 import { getProductByHandle } from "@/lib/queries/products";
+import { buildLanguageAlternates, canonicalFor } from "@/lib/seo";
 
 interface PageProps {
-  params: Promise<{ handle: string }>;
+  params: Promise<{ handle: string; lang: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { handle, lang } = await params;
+  const product = await getProductByHandle(handle);
+  if (!product) return {};
+
+  const path = `/product/${handle}`;
+  const description = product.description
+    ? product.description.slice(0, 160)
+    : product.title;
+
+  return {
+    title: product.title,
+    description,
+    alternates: {
+      canonical: canonicalFor(lang, path),
+      languages: buildLanguageAlternates(path),
+    },
+    openGraph: {
+      title: product.title,
+      description,
+      url: canonicalFor(lang, path),
+      images: product.images?.[0] ? [{ url: product.images[0] }] : undefined,
+    },
+  };
 }
 
 export default async function ProductPage({ params }: PageProps) {
-  const { handle } = await params;
+  const { handle, lang } = await params;
+  const product = await getProductByHandle(handle);
 
   return (
     <>
       <Navbar />
       <main className="pt-24 min-h-screen bg-text-primary">
+        {product && <ProductJsonLd product={product} lang={lang} />}
         <Suspense fallback={<ProductSkeleton />}>
           <ProductContent handle={handle} />
         </Suspense>
       </main>
       <Footer />
+    </>
+  );
+}
+
+function ProductJsonLd({
+  product,
+  lang,
+}: {
+  product: NonNullable<Awaited<ReturnType<typeof getProductByHandle>>>;
+  lang: string;
+}) {
+  const url = canonicalFor(lang, `/product/${product.handle}`);
+
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.title,
+    description: product.description || product.title,
+    image: product.images,
+    sku: product.id,
+    url,
+    offers: {
+      "@type": "Offer",
+      url,
+      priceCurrency: "EUR",
+      price: product.price,
+      availability: product.inStock
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+    },
+    ...(product.reviewCount > 0 && product.averageRating
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: product.averageRating.toFixed(1),
+            reviewCount: product.reviewCount,
+          },
+        }
+      : {}),
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Shop", item: canonicalFor(lang, "/shop") },
+      ...(product.category
+        ? [
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: product.category,
+              item: canonicalFor(lang, `/shop/${product.category}`),
+            },
+          ]
+        : []),
+      {
+        "@type": "ListItem",
+        position: product.category ? 3 : 2,
+        name: product.title,
+        item: url,
+      },
+    ],
+  };
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
     </>
   );
 }

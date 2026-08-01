@@ -30,7 +30,7 @@ export async function PATCH(
         subject: "Il tuo ordine G&F Hub è in viaggio",
         html: `
           <div style="max-width: 480px; margin: 0 auto; padding: 40px 20px; font-family: 'Inter', Arial, sans-serif; background-color: #0C0A09; color: #F4F5F6; border-radius: 16px; text-align: center;">
-            <h1 style="color: #B2B395; font-size: 24px; margin-bottom: 8px;">G&F<span style="color: #F4F5F6;"> HUB</span></h1>
+            <img src="${process.env.NEXTAUTH_URL}/brand/logo-full.png" alt="G&F Hub" width="150" style="display: block; margin: 0 auto 16px; height: auto;" />
             <p style="font-size: 16px; margin-bottom: 8px; color: #F4F5F6;">Ciao ${order.customerName || ""},</p>
             <p style="font-size: 14px; margin-bottom: 24px; color: #A0A0A0;">
               Il tuo ordine <strong style="color:#F4F5F6;">#${order.id.slice(0, 8)}</strong> è stato spedito ed è in viaggio verso di te.

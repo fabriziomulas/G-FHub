@@ -43,3 +43,9 @@ next-env.d.ts
 /src/generated/prisma
 
 .env.local
+
+# raw logo source uploads (processed assets live in public/brand and src/app/icon*.png)
+/gfhub-logo-final.png
+/gfhub-logo-final-2.png
+/logo finale - 3.png
+/logogfhub.png

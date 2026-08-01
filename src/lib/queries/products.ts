@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { prisma } from "@/lib/prisma";
 
 interface ProductBase {
@@ -58,13 +59,18 @@ export async function getProductsByCategory(category: string) {
   }));
 }
 
-export async function getProductByHandle(handle: string) {
+export const getProductByHandle = cache(async (handle: string) => {
   const product = await prisma.product.findUnique({
     where: { handle },
-    include: { variants: true },
+    include: { variants: true, reviews: { select: { stars: true } } },
   });
 
   if (!product) return null;
+
+  const reviewCount = product.reviews.length;
+  const averageRating = reviewCount
+    ? product.reviews.reduce((sum, r) => sum + r.stars, 0) / reviewCount
+    : null;
 
   return {
     id: product.id,
@@ -72,10 +78,13 @@ export async function getProductByHandle(handle: string) {
     handle: product.handle,
     description: product.description,
     images: product.images,
+    category: product.category,
     price: product.price.toFixed(2),
     compareAtPrice: product.compareAtPrice ? product.compareAtPrice.toFixed(2) : "0.00",
     inStock: product.inStock,
     stock: product.stock,
     variants: product.variants,
+    averageRating,
+    reviewCount,
   };
-}
+});
