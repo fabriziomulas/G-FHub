@@ -10,6 +10,7 @@ import { useCart } from "@/stores/cart";
 import { useUser } from "@/hooks/useUser";
 import { useWishlist } from "@/hooks/useWishlist";
 import { CartDrawer } from "@/components/cart/CartDrawer";
+import { SearchBar } from "@/components/shop/SearchBar";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 
@@ -31,6 +32,7 @@ export function Navbar() {
   const [cartOpen, setCartOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [mobileSearch, setMobileSearch] = useState("");
 
   const { totalItems } = useCart();
   const { user, logout } = useUser();
@@ -86,6 +88,8 @@ export function Navbar() {
           </nav>
 
           <div className="hidden md:flex items-center gap-2">
+            <SearchBar />
+
             <div className="relative">
               <button onClick={() => setLangOpen(!langOpen)} className="flex items-center gap-1 px-2.5 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-text-primary/5 rounded-lg transition-all">
                 <Globe size={16} />
@@ -181,6 +185,24 @@ export function Navbar() {
           {mobileOpen && (
             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="md:hidden bg-white border-t border-text-primary/10 mt-3">
               <div className="px-6 py-4 flex flex-col gap-1">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const q = mobileSearch.trim();
+                    if (!q) return;
+                    setMobileOpen(false);
+                    router.push(`/shop?q=${encodeURIComponent(q)}`);
+                  }}
+                  className="mb-2"
+                >
+                  <input
+                    type="text"
+                    value={mobileSearch}
+                    onChange={(e) => setMobileSearch(e.target.value)}
+                    placeholder={t("searchPlaceholder")}
+                    className="w-full px-3 py-2.5 text-sm rounded-lg bg-text-primary/5 border border-text-primary/10 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-electric"
+                  />
+                </form>
                 {navLinks.map((link) => (
                   <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="text-text-secondary hover:text-text-primary transition-colors py-2">{link.label}</Link>
                 ))}

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { Minus, Plus, ShoppingBag, Trash2, ArrowLeft, Truck, ShieldCheck, RotateCcw } from "lucide-react";
+import { Minus, Plus, ShoppingBag, Trash2, ArrowLeft, Truck, ShieldCheck, RotateCcw, Gift } from "lucide-react";
 import { toast } from "sonner";
 import { Navbar } from "@/components/ui/layout/Navbar";
 import { Footer } from "@/components/ui/layout/Footer";
@@ -17,6 +17,8 @@ export default function CartPage() {
   const t = useTranslations("Cart");
   const { items, removeItem, updateQuantity, totalPrice } = useCart();
   const [loading, setLoading] = useState(false);
+  const [giftWrap, setGiftWrap] = useState(false);
+  const [giftMessage, setGiftMessage] = useState("");
 
   const handleCheckout = async () => {
     if (items.length === 0) return;
@@ -38,6 +40,7 @@ export default function CartPage() {
             quantity: item.quantity,
             image: item.image?.startsWith("http") ? item.image : undefined,
           })),
+          gift: giftWrap ? { wrap: true, message: giftMessage.slice(0, 300) } : undefined,
         }),
       });
       const data = await res.json();
@@ -114,6 +117,29 @@ export default function CartPage() {
                   <span>€{totalPrice().toFixed(2)}</span>
                 </div>
                 <p className="text-gray-500 text-xs mb-4">{t("shippingNote")}</p>
+
+                <div className="border-t border-white/10 pt-4 pb-1">
+                  <label className="flex items-center gap-2 text-sm text-gray-300 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={giftWrap}
+                      onChange={(e) => setGiftWrap(e.target.checked)}
+                      className="rounded"
+                    />
+                    <Gift size={15} className="text-accent-electric" />
+                    {t("giftOption")}
+                  </label>
+                  {giftWrap && (
+                    <textarea
+                      value={giftMessage}
+                      onChange={(e) => setGiftMessage(e.target.value)}
+                      placeholder={t("giftMessagePlaceholder")}
+                      maxLength={300}
+                      className="w-full h-20 mt-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-xs resize-none placeholder:text-gray-500"
+                    />
+                  )}
+                </div>
+
                 <div className="border-t border-white/10 pt-4 flex justify-between text-white font-bold mb-6">
                   <span>{t("total")}</span>
                   <span>€{totalPrice().toFixed(2)}</span>

@@ -1,4 +1,5 @@
 import { cache } from "react";
+import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
 interface ProductBase {
@@ -31,6 +32,48 @@ export async function getAllProducts() {
   const products = await prisma.product.findMany({
     orderBy: { createdAt: "desc" },
   });
+
+  return products.map((p) => ({
+    id: p.id,
+    title: p.title,
+    handle: p.handle,
+    image: p.images[0] || "/placeholder.png",
+    price: p.price.toFixed(2),
+    compareAtPrice: p.compareAtPrice ? p.compareAtPrice.toFixed(2) : undefined,
+    inStock: p.inStock,
+  }));
+}
+
+export type ProductSort = "newest" | "price-asc" | "price-desc";
+
+export async function getFilteredProducts(params: {
+  category?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  sort?: ProductSort;
+  q?: string;
+}) {
+  const where: Prisma.ProductWhereInput = {};
+
+  if (params.category) where.category = params.category;
+  if (params.minPrice !== undefined || params.maxPrice !== undefined) {
+    where.price = {
+      ...(params.minPrice !== undefined ? { gte: params.minPrice } : {}),
+      ...(params.maxPrice !== undefined ? { lte: params.maxPrice } : {}),
+    };
+  }
+  if (params.q) {
+    where.title = { contains: params.q, mode: "insensitive" };
+  }
+
+  const orderBy: Prisma.ProductOrderByWithRelationInput =
+    params.sort === "price-asc"
+      ? { price: "asc" }
+      : params.sort === "price-desc"
+        ? { price: "desc" }
+        : { createdAt: "desc" };
+
+  const products = await prisma.product.findMany({ where, orderBy });
 
   return products.map((p) => ({
     id: p.id,

@@ -17,6 +17,8 @@ const STATIC_PATHS = [
   "/termini",
   "/spedizioni",
   "/resi",
+  "/guida-taglie",
+  "/cura-gioielli",
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

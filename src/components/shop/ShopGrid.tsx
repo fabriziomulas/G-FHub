@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
+import { SearchX } from "lucide-react";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { LayoutGrid, List } from "lucide-react";
 
@@ -15,7 +17,17 @@ interface Product {
 }
 
 export function ShopGrid({ products }: { products: Product[] }) {
+  const t = useTranslations("Shop");
   const [view, setView] = useState<"grid" | "list">("grid");
+
+  if (products.length === 0) {
+    return (
+      <div className="flex flex-col items-center text-center py-20 bg-white/5 border border-white/10 rounded-3xl">
+        <SearchX size={40} className="text-gray-600 mb-4" />
+        <p className="text-gray-400">{t("noResults")}</p>
+      </div>
+    );
+  }
 
   return (
     <div>

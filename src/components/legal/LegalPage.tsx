@@ -9,8 +9,8 @@ export function LegalPage({
   children,
 }: {
   title: string;
-  updatedAtLabel: string;
-  updatedAt: string;
+  updatedAtLabel?: string;
+  updatedAt?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -19,8 +19,10 @@ export function LegalPage({
 
       <main className="pt-24 min-h-screen bg-text-primary">
         <div className="max-w-3xl mx-auto px-6 py-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">{title}</h1>
-          <p className="text-gray-500 text-sm mb-10">{updatedAtLabel} {updatedAt}</p>
+          <h1 className={`text-3xl md:text-4xl font-bold text-white ${updatedAtLabel && updatedAt ? "mb-2" : "mb-8"}`}>{title}</h1>
+          {updatedAtLabel && updatedAt && (
+            <p className="text-gray-500 text-sm mb-10">{updatedAtLabel} {updatedAt}</p>
+          )}
 
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 space-y-8 text-gray-300 text-sm leading-relaxed">
             {children}

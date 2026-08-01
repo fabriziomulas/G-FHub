@@ -11,14 +11,22 @@
     "cart": "Panier",
     "admin": "Admin",
     "logout": "Déconnexion",
-    "login": "Connexion"
+    "login": "Connexion",
+    "searchPlaceholder": "Rechercher des bijoux...",
+    "searchViewAll": "Voir tous les résultats pour \"{q}\"",
+    "searchNoResults": "Aucun résultat",
+    "searchLabel": "Rechercher"
   },
   "Footer": {
     "tagline": "Bijoux en argent 925 et titane",
     "privacy": "Confidentialité",
     "termini": "Conditions",
     "spedizioni": "Livraison",
-    "resi": "Retours"
+    "resi": "Retours",
+    "instagramLabel": "Suivez-nous sur Instagram",
+    "tiktokLabel": "Suivez-nous sur TikTok",
+    "guidaTaglie": "Guide des Tailles",
+    "curaGioielli": "Entretien Bijoux"
   },
   "Hero": {
     "eyebrow": "Bagues · Colliers · Bracelets",
@@ -57,7 +65,19 @@
     "categoryRingsTitle": "Bagues",
     "categoryNecklacesTitle": "Colliers",
     "categoryBraceletsTitle": "Bracelets",
-    "categorySubtitle": "Découvrez notre collection de {category}"
+    "categorySubtitle": "Découvrez notre collection de {category}",
+    "filterAllCategories": "Toutes les catégories",
+    "filterCategory_anelli": "Bagues",
+    "filterCategory_collane": "Colliers",
+    "filterCategory_bracciali": "Bracelets",
+    "filterMinPrice": "Min €",
+    "filterMaxPrice": "Max €",
+    "sortNewest": "Plus récents",
+    "sortPriceAsc": "Prix croissant",
+    "sortPriceDesc": "Prix décroissant",
+    "filterClear": "Effacer les filtres",
+    "searchResultsFor": "Résultats pour \"{q}\"",
+    "noResults": "Aucun produit trouvé avec ces filtres."
   },
   "Product": {
     "addToCart": "Ajouter au panier",
@@ -87,7 +107,13 @@
     "submit": "Envoyer l'avis",
     "successToast": "Avis envoyé ! Merci 🎉",
     "errorToast": "Une erreur est survenue lors de l'envoi de l'avis",
-    "requiredToast": "Veuillez remplir tous les champs"
+    "requiredToast": "Veuillez remplir tous les champs",
+    "emailLabel": "Votre email",
+    "emailPlaceholder": "utilisé pour vérifier votre achat",
+    "photosLabel": "Photos (facultatif)",
+    "photosHint": "Jusqu'à 3 photos, 5 Mo max chacune",
+    "verifiedBadge": "Achat vérifié",
+    "uploadError": "Erreur lors du téléchargement de la photo"
   },
   "Cart": {
     "title": "Votre panier",
@@ -103,7 +129,9 @@
     "checkoutError": "Impossible de démarrer le paiement",
     "trustShipping": "Livraison rapide",
     "trustReturns": "Retour sous 14 jours",
-    "trustSecure": "Paiement sécurisé"
+    "trustSecure": "Paiement sécurisé",
+    "giftOption": "C'est un cadeau ? Ajoutez un message",
+    "giftMessagePlaceholder": "Écrivez votre message ici (facultatif)..."
   },
   "Resi": {
     "title": "Retours et remboursements",
@@ -381,5 +409,143 @@
     "stat3Value": "14 j",
     "stat3Label": "Retour gratuit",
     "cta": "Découvrir notre histoire"
+  },
+  "SizeGuide": {
+    "metaTitle": "Guide des Tailles",
+    "metaDescription": "Comment trouver la bonne taille pour les bagues, colliers et bracelets G&F Hub.",
+    "title": "Guide des Tailles",
+    "intro": "Les bonnes mesures pour des bagues, colliers et bracelets qui vont bien dès le premier jour.",
+    "ringsTitle": "Bagues",
+    "ringsMethodsTitle": "Comment mesurer votre taille",
+    "ringsMethod1": "Avec une bague que vous possédez déjà : mesurez le diamètre intérieur en millimètres avec une règle et comparez-le au tableau ci-dessous.",
+    "ringsMethod2": "Avec un fil : enroulez-le autour du doigt, marquez l'endroit où il se chevauche, mesurez la longueur en millimètres et divisez-la par 3,14 pour obtenir le diamètre.",
+    "ringsTip": "Si vous êtes entre deux tailles, choisissez toujours la plus grande — surtout si vos articulations sont plus larges que la base du doigt.",
+    "ringsTableSize": "Taille EU",
+    "ringsTableDiameter": "Diamètre intérieur",
+    "ringsTable": [
+      {
+        "size": "8",
+        "mm": "14.1"
+      },
+      {
+        "size": "10",
+        "mm": "14.5"
+      },
+      {
+        "size": "12",
+        "mm": "15.3"
+      },
+      {
+        "size": "14",
+        "mm": "16.1"
+      },
+      {
+        "size": "16",
+        "mm": "16.9"
+      },
+      {
+        "size": "18",
+        "mm": "17.7"
+      },
+      {
+        "size": "20",
+        "mm": "18.5"
+      },
+      {
+        "size": "22",
+        "mm": "19.4"
+      }
+    ],
+    "necklacesTitle": "Colliers",
+    "necklacesIntro": "Les longueurs les plus courantes et où elles tombent.",
+    "necklaceLengths": [
+      {
+        "cm": "40",
+        "label": "Ras-de-cou, près de la base du cou"
+      },
+      {
+        "cm": "45",
+        "label": "Sous la clavicule — la longueur la plus polyvalente"
+      },
+      {
+        "cm": "50",
+        "label": "Au niveau du sternum"
+      },
+      {
+        "cm": "60",
+        "label": "Long, sur la poitrine — idéal à superposer"
+      }
+    ],
+    "braceletsTitle": "Bracelets",
+    "braceletsIntro": "Enroulez un mètre de couturière (ou un fil, puis mesurez-le avec une règle) autour du poignet, juste sous l'os. Ajoutez 1 à 1,5 cm pour un ajustement confortable, ou gardez la mesure exacte pour un rendu plus près du poignet.",
+    "braceletsTableSize": "Taille",
+    "braceletsTableWrist": "Circonférence du poignet",
+    "braceletsTable": [
+      {
+        "size": "S",
+        "range": "14–15 cm"
+      },
+      {
+        "size": "M",
+        "range": "15–17 cm"
+      },
+      {
+        "size": "L",
+        "range": "17–19 cm"
+      }
+    ]
+  },
+  "CareGuide": {
+    "metaTitle": "Entretien de l'Argent 925 et du Titane",
+    "metaDescription": "Comment nettoyer et conserver les bijoux en argent 925 et titane G&F Hub.",
+    "title": "Entretien de l'Argent 925 et du Titane",
+    "intro": "Deux matériaux, deux façons différentes d'être portés chaque jour sans y penser.",
+    "whyTitle": "Pourquoi nous avons choisi ces deux matériaux",
+    "whyText": "L'argent 925 est un métal noble, mais comme tout argent véritable, il peut légèrement s'oxyder au contact de l'air et de l'humidité — c'est un signe d'authenticité, pas un défaut, et cela s'enlève en quelques secondes. Le titane, lui, ne s'oxyde pas et ne ternit pas : c'est le bon choix pour celles qui le portent tous les jours sans vouloir y penser.",
+    "silverTitle": "Comment nettoyer l'argent 925",
+    "silverTips": [
+      "Passez un chiffon doux en microfibre après chaque port, pour enlever les résidus de sueur et de cosmétiques.",
+      "S'il a légèrement terni, utilisez un chiffon polissant pour argent ou de l'eau tiède avec un savon doux, puis séchez bien.",
+      "Évitez l'eau de Javel, le chlore et les produits ménagers en contact direct.",
+      "Rangez-le dans une pochette fermée ou une boîte, à l'abri de l'humidité, quand vous ne le portez pas."
+    ],
+    "titaniumTitle": "Comment entretenir le titane",
+    "titaniumTips": [
+      "Presque aucun entretien nécessaire : il résiste à l'eau, à la sueur et à la plupart des produits chimiques.",
+      "Vous pouvez le porter sous la douche, à la piscine ou à la mer sans problème.",
+      "Un chiffon doux de temps en temps suffit à le garder brillant."
+    ],
+    "avoidTitle": "À éviter pour les deux",
+    "avoidTips": [
+      "Vaporiser du parfum ou appliquer des crèmes directement sur le bijou.",
+      "Les chocs violents sur des surfaces dures — ils peuvent déformer les parties les plus fines.",
+      "Les produits ménagers agressifs."
+    ],
+    "summaryTitle": "En résumé",
+    "summaryAspect": "",
+    "summarySilver": "Argent 925",
+    "summaryTitanium": "Titane",
+    "summaryRows": [
+      {
+        "aspect": "Oxydation",
+        "silver": "Légère, facile à enlever",
+        "titanium": "Ne s'oxyde pas"
+      },
+      {
+        "aspect": "Entretien",
+        "silver": "Nettoyage occasionnel recommandé",
+        "titanium": "Quasiment aucun"
+      },
+      {
+        "aspect": "Eau et sueur",
+        "silver": "À retirer en cas d'exposition prolongée",
+        "titanium": "Résistant"
+      },
+      {
+        "aspect": "Hypoallergénique",
+        "silver": "Oui, pour la plupart des personnes",
+        "titanium": "Oui, à 100 %"
+      }
+    ]
   }
 }

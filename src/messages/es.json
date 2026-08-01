@@ -11,14 +11,22 @@
     "cart": "Carrito",
     "admin": "Admin",
     "logout": "Cerrar sesión",
-    "login": "Iniciar sesión"
+    "login": "Iniciar sesión",
+    "searchPlaceholder": "Buscar joyas...",
+    "searchViewAll": "Ver todos los resultados de \"{q}\"",
+    "searchNoResults": "Sin resultados",
+    "searchLabel": "Buscar"
   },
   "Footer": {
     "tagline": "Joyas en plata 925 y titanio",
     "privacy": "Privacidad",
     "termini": "Términos",
     "spedizioni": "Envíos",
-    "resi": "Devoluciones"
+    "resi": "Devoluciones",
+    "instagramLabel": "Síguenos en Instagram",
+    "tiktokLabel": "Síguenos en TikTok",
+    "guidaTaglie": "Guía de Tallas",
+    "curaGioielli": "Cuidado de Joyas"
   },
   "Hero": {
     "eyebrow": "Anillos · Collares · Pulseras",
@@ -57,7 +65,19 @@
     "categoryRingsTitle": "Anillos",
     "categoryNecklacesTitle": "Collares",
     "categoryBraceletsTitle": "Pulseras",
-    "categorySubtitle": "Explora nuestra colección de {category}"
+    "categorySubtitle": "Explora nuestra colección de {category}",
+    "filterAllCategories": "Todas las categorías",
+    "filterCategory_anelli": "Anillos",
+    "filterCategory_collane": "Collares",
+    "filterCategory_bracciali": "Pulseras",
+    "filterMinPrice": "Mín €",
+    "filterMaxPrice": "Máx €",
+    "sortNewest": "Más recientes",
+    "sortPriceAsc": "Precio: menor a mayor",
+    "sortPriceDesc": "Precio: mayor a menor",
+    "filterClear": "Borrar filtros",
+    "searchResultsFor": "Resultados para \"{q}\"",
+    "noResults": "No se encontraron productos con estos filtros."
   },
   "Product": {
     "addToCart": "Añadir al carrito",
@@ -87,7 +107,13 @@
     "submit": "Enviar reseña",
     "successToast": "¡Reseña enviada! Gracias 🎉",
     "errorToast": "Error al enviar la reseña",
-    "requiredToast": "Completa todos los campos"
+    "requiredToast": "Completa todos los campos",
+    "emailLabel": "Tu email",
+    "emailPlaceholder": "usado para verificar tu compra",
+    "photosLabel": "Fotos (opcional)",
+    "photosHint": "Hasta 3 fotos, máx. 5MB cada una",
+    "verifiedBadge": "Compra verificada",
+    "uploadError": "Error al subir la foto"
   },
   "Cart": {
     "title": "Tu carrito",
@@ -103,7 +129,9 @@
     "checkoutError": "No se pudo iniciar el pago",
     "trustShipping": "Envío rápido",
     "trustReturns": "Devolución en 14 días",
-    "trustSecure": "Pago seguro"
+    "trustSecure": "Pago seguro",
+    "giftOption": "¿Es un regalo? Añade un mensaje",
+    "giftMessagePlaceholder": "Escribe tu mensaje aquí (opcional)..."
   },
   "Resi": {
     "title": "Devoluciones y reembolsos",
@@ -381,5 +409,143 @@
     "stat3Value": "14 días",
     "stat3Label": "Devolución gratuita",
     "cta": "Descubre nuestra historia"
+  },
+  "SizeGuide": {
+    "metaTitle": "Guía de Tallas",
+    "metaDescription": "Cómo encontrar la talla correcta para anillos, collares y pulseras G&F Hub.",
+    "title": "Guía de Tallas",
+    "intro": "Las medidas correctas para anillos, collares y pulseras que quedan bien desde el primer día.",
+    "ringsTitle": "Anillos",
+    "ringsMethodsTitle": "Cómo medir tu talla",
+    "ringsMethod1": "Con un anillo que ya tengas: mide el diámetro interior en milímetros con una regla y compáralo con la tabla de abajo.",
+    "ringsMethod2": "Con un hilo: enróllalo alrededor del dedo, marca donde se superpone, mide la longitud en milímetros y divídela entre 3,14 para obtener el diámetro.",
+    "ringsTip": "Si estás entre dos tallas, elige siempre la más grande — sobre todo si tus nudillos son más anchos que la base del dedo.",
+    "ringsTableSize": "Talla EU",
+    "ringsTableDiameter": "Diámetro interior",
+    "ringsTable": [
+      {
+        "size": "8",
+        "mm": "14.1"
+      },
+      {
+        "size": "10",
+        "mm": "14.5"
+      },
+      {
+        "size": "12",
+        "mm": "15.3"
+      },
+      {
+        "size": "14",
+        "mm": "16.1"
+      },
+      {
+        "size": "16",
+        "mm": "16.9"
+      },
+      {
+        "size": "18",
+        "mm": "17.7"
+      },
+      {
+        "size": "20",
+        "mm": "18.5"
+      },
+      {
+        "size": "22",
+        "mm": "19.4"
+      }
+    ],
+    "necklacesTitle": "Collares",
+    "necklacesIntro": "Las longitudes más comunes y dónde caen.",
+    "necklaceLengths": [
+      {
+        "cm": "40",
+        "label": "Gargantilla, ajustada a la base del cuello"
+      },
+      {
+        "cm": "45",
+        "label": "Bajo la clavícula — la longitud más versátil"
+      },
+      {
+        "cm": "50",
+        "label": "A la altura del esternón"
+      },
+      {
+        "cm": "60",
+        "label": "Larga, sobre el pecho — ideal para combinar"
+      }
+    ],
+    "braceletsTitle": "Pulseras",
+    "braceletsIntro": "Envuelve una cinta métrica (o un hilo, y luego mídelo con una regla) alrededor de la muñeca, justo debajo del hueso. Añade 1–1,5 cm para un ajuste cómodo, o mantén la medida exacta para uno más ceñido.",
+    "braceletsTableSize": "Talla",
+    "braceletsTableWrist": "Circunferencia de muñeca",
+    "braceletsTable": [
+      {
+        "size": "S",
+        "range": "14–15 cm"
+      },
+      {
+        "size": "M",
+        "range": "15–17 cm"
+      },
+      {
+        "size": "L",
+        "range": "17–19 cm"
+      }
+    ]
+  },
+  "CareGuide": {
+    "metaTitle": "Cuidado de la Plata 925 y el Titanio",
+    "metaDescription": "Cómo limpiar y guardar las joyas de plata 925 y titanio G&F Hub.",
+    "title": "Cuidado de la Plata 925 y el Titanio",
+    "intro": "Dos materiales, dos formas distintas de llevarse cada día sin complicaciones.",
+    "whyTitle": "Por qué elegimos estos dos materiales",
+    "whyText": "La plata 925 es un metal noble, pero como toda plata real puede oxidarse ligeramente en contacto con el aire y la humedad — es una señal de autenticidad, no un defecto, y se elimina en segundos. El titanio, en cambio, no se oxida ni se empaña: es la opción adecuada para quien lo lleva cada día sin querer pensar en ello.",
+    "silverTitle": "Cómo limpiar la plata 925",
+    "silverTips": [
+      "Pasa un paño suave de microfibra después de cada uso, para eliminar restos de sudor y cosméticos.",
+      "Si se ha oscurecido ligeramente, usa un paño abrillantador para plata o agua tibia con jabón neutro, y seca bien.",
+      "Evita la lejía, el cloro y los productos del hogar en contacto directo.",
+      "Guárdala en una bolsa cerrada o una caja, lejos de la humedad, cuando no la lleves puesta."
+    ],
+    "titaniumTitle": "Cómo cuidar el titanio",
+    "titaniumTips": [
+      "Casi no necesita mantenimiento: resiste el agua, el sudor y la mayoría de los productos químicos.",
+      "Puedes llevarlo en la ducha, la piscina o el mar sin problema.",
+      "Un paño suave de vez en cuando basta para mantenerlo brillante."
+    ],
+    "avoidTitle": "Qué evitar en ambos casos",
+    "avoidTips": [
+      "Rociar perfume o aplicar cremas directamente sobre la joya.",
+      "Golpes fuertes contra superficies duras — pueden deformar las zonas más finas.",
+      "Detergentes agresivos para la limpieza del hogar."
+    ],
+    "summaryTitle": "En resumen",
+    "summaryAspect": "",
+    "summarySilver": "Plata 925",
+    "summaryTitanium": "Titanio",
+    "summaryRows": [
+      {
+        "aspect": "Oxidación",
+        "silver": "Leve, fácil de eliminar",
+        "titanium": "No se oxida"
+      },
+      {
+        "aspect": "Mantenimiento",
+        "silver": "Limpieza ocasional recomendada",
+        "titanium": "Prácticamente ninguno"
+      },
+      {
+        "aspect": "Agua y sudor",
+        "silver": "Quitar para exposición prolongada",
+        "titanium": "Resistente"
+      },
+      {
+        "aspect": "Hipoalergénico",
+        "silver": "Sí, para la mayoría de las personas",
+        "titanium": "Sí, al 100%"
+      }
+    ]
   }
 }

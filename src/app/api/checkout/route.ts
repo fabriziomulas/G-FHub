@@ -5,7 +5,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(request: Request) {
   try {
-    const { items, customer } = await request.json();
+    const { items, customer, gift } = await request.json();
 
     if (!items || items.length === 0) {
       return NextResponse.json({ error: "Carrello vuoto" }, { status: 400 });
@@ -36,6 +36,13 @@ export async function POST(request: Request) {
 
     if (customer?.email) {
       sessionConfig.customer_email = customer.email;
+    }
+
+    if (gift?.wrap) {
+      sessionConfig.metadata = {
+        giftWrap: "true",
+        giftMessage: typeof gift.message === "string" ? gift.message.slice(0, 300) : "",
+      };
     }
 
     const session = await stripe.checkout.sessions.create(sessionConfig);

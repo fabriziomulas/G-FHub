@@ -3,13 +3,14 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { Star, MessageSquare } from "lucide-react";
+import { Star, MessageSquare, BadgeCheck } from "lucide-react";
 
 interface Review {
   id: string;
   name: string;
   text: string;
   stars: number;
+  verified: boolean;
   product: { title: string; handle: string };
 }
 
@@ -17,6 +18,7 @@ const MAX_VISIBLE = 6;
 
 export function ReviewCarousel() {
   const t = useTranslations("Home");
+  const tReviews = useTranslations("Reviews");
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -89,7 +91,14 @@ export function ReviewCarousel() {
                 &ldquo;{review.text}&rdquo;
               </p>
               <div className="border-t border-white/10 pt-3">
-                <p className="text-white text-sm font-medium">{review.name}</p>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <p className="text-white text-sm font-medium">{review.name}</p>
+                  {review.verified && (
+                    <span className="flex items-center gap-1 text-accent-electric text-xs">
+                      <BadgeCheck size={12} /> {tReviews("verifiedBadge")}
+                    </span>
+                  )}
+                </div>
                 <p className="text-gray-500 text-xs">{review.product.title}</p>
               </div>
             </motion.div>

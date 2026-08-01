@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/primitives/Button";
 import { Input } from "@/components/ui/primitives/Input";
 import { Badge } from "@/components/ui/primitives/Badge";
 import { toast } from "sonner";
-import { Printer, Package, MapPin, User, Mail, ArrowLeft, Trash2, Star, CheckCircle } from "lucide-react";
+import { Printer, Package, MapPin, User, Mail, ArrowLeft, Trash2, Star, CheckCircle, Gift, Truck } from "lucide-react";
 
 interface Product {
   id: string;
@@ -34,6 +34,8 @@ interface Order {
   customerName: string | null;
   customerEmail: string | null;
   customerAddress: string | null;
+  giftWrap: boolean;
+  giftMessage: string | null;
   createdAt: string;
   items: OrderItem[];
 }
@@ -51,7 +53,7 @@ export default function AdminPage() {
   const [user, setUser] = useState<{ role: string } | null>(null);
   const [checking, setChecking] = useState(true);
   const [tab, setTab] = useState<"products" | "orders" | "reviews">("products");
-  const [orderView, setOrderView] = useState<"pending" | "shipped">("pending");
+  const [orderView, setOrderView] = useState<"pending" | "shipped" | "delivered">("pending");
   const [orders, setOrders] = useState<Order[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -123,6 +125,20 @@ export default function AdminPage() {
     }
   };
 
+  const markDelivered = async (id: string) => {
+    const res = await fetch(`/api/admin/orders/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: "DELIVERED" }),
+    });
+    if (res.ok) {
+      toast.success("Ordine segnato come consegnato, email di richiesta recensione inviata");
+      setOrders(orders.map(o => o.id === id ? { ...o, status: "DELIVERED" } : o));
+    } else {
+      toast.error("Errore");
+    }
+  };
+
   const deleteOrder = async (id: string) => {
     if (!confirm("Eliminare definitivamente questo ordine? L'azione non è reversibile.")) return;
     const res = await fetch(`/api/admin/orders/${id}`, { method: "DELETE" });
@@ -183,7 +199,10 @@ export default function AdminPage() {
   };
 
   const printLabel = (order: Order) => {
-    const label = `<html><head><title>Etichetta ${order.id.slice(0,8)}</title></head><body style="font-family:Arial;padding:20px"><h2>G&F Hub - Etichetta</h2><p>Ordine: ${order.id.slice(0,8)}</p><hr/><h3>Destinatario:</h3><p><strong>${order.customerName||"N/D"}</strong></p><p>${order.customerAddress||""}</p><p>${order.customerEmail||""}</p><hr/><h3>Prodotti:</h3>${order.items.map(i=>`<p>${i.quantity}x ${i.product.title}</p>`).join("")}</body></html>`;
+    const giftBlock = order.giftWrap
+      ? `<hr/><h3>🎁 Confezione regalo</h3>${order.giftMessage ? `<p>"${order.giftMessage}"</p>` : "<p>(nessun messaggio)</p>"}`
+      : "";
+    const label = `<html><head><title>Etichetta ${order.id.slice(0,8)}</title></head><body style="font-family:Arial;padding:20px"><h2>G&F Hub - Etichetta</h2><p>Ordine: ${order.id.slice(0,8)}</p><hr/><h3>Destinatario:</h3><p><strong>${order.customerName||"N/D"}</strong></p><p>${order.customerAddress||""}</p><p>${order.customerEmail||""}</p><hr/><h3>Prodotti:</h3>${order.items.map(i=>`<p>${i.quantity}x ${i.product.title}</p>`).join("")}${giftBlock}</body></html>`;
     const win = window.open("","_blank","width=600,height=800");
     win?.document.write(label); win?.document.close();
   };
@@ -191,9 +210,10 @@ export default function AdminPage() {
   if (checking) return <div className="min-h-screen bg-text-primary flex items-center justify-center"><p className="text-gray-400">Caricamento...</p></div>;
   if (!user || user.role !== "ADMIN") return null;
 
-  const pendingOrders = orders.filter(o => o.status !== "SHIPPED");
+  const pendingOrders = orders.filter(o => o.status !== "SHIPPED" && o.status !== "DELIVERED");
   const shippedOrders = orders.filter(o => o.status === "SHIPPED");
-  const visibleOrders = orderView === "pending" ? pendingOrders : shippedOrders;
+  const deliveredOrders = orders.filter(o => o.status === "DELIVERED");
+  const visibleOrders = orderView === "pending" ? pendingOrders : orderView === "shipped" ? shippedOrders : deliveredOrders;
 
   return (
     <div className="min-h-screen bg-text-primary p-8 pt-24">
@@ -269,11 +289,12 @@ export default function AdminPage() {
               <div className="flex gap-2">
                 <button onClick={() => setOrderView("pending")} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${orderView==="pending"?"bg-accent-electric text-white":"bg-white/5 text-gray-400 border border-white/10"}`}>Da spedire ({pendingOrders.length})</button>
                 <button onClick={() => setOrderView("shipped")} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${orderView==="shipped"?"bg-accent-electric text-white":"bg-white/5 text-gray-400 border border-white/10"}`}>Spediti ({shippedOrders.length})</button>
+                <button onClick={() => setOrderView("delivered")} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${orderView==="delivered"?"bg-accent-electric text-white":"bg-white/5 text-gray-400 border border-white/10"}`}>Consegnati ({deliveredOrders.length})</button>
               </div>
             </div>
 
             {visibleOrders.length === 0 ? (
-              <p className="text-gray-400">{orderView === "pending" ? "Nessun ordine da spedire." : "Nessun ordine spedito ancora."}</p>
+              <p className="text-gray-400">{orderView === "pending" ? "Nessun ordine da spedire." : orderView === "shipped" ? "Nessun ordine spedito ancora." : "Nessun ordine consegnato ancora."}</p>
             ) : (
               <div className="space-y-4">
                 {visibleOrders.map(order => (
@@ -282,9 +303,12 @@ export default function AdminPage() {
                       <div>
                         <div className="flex items-center gap-2 mb-1">
                           <span className="text-xs text-gray-500">#{order.id.slice(0,8)}</span>
-                          <Badge color={order.status==="REFUNDED"?"error":order.status==="PAID"||order.status==="SHIPPED"?"success":"warning"}>
-                            {order.status==="PAID"?"Pagato":order.status==="SHIPPED"?"Spedito":order.status==="REFUNDED"?"Rimborsato":order.status}
+                          <Badge color={order.status==="REFUNDED"?"error":order.status==="PAID"||order.status==="SHIPPED"||order.status==="DELIVERED"?"success":"warning"}>
+                            {order.status==="PAID"?"Pagato":order.status==="SHIPPED"?"Spedito":order.status==="DELIVERED"?"Consegnato":order.status==="REFUNDED"?"Rimborsato":order.status}
                           </Badge>
+                          {order.giftWrap && (
+                            <Badge color="warning"><span className="flex items-center gap-1"><Gift size={11}/> Regalo</span></Badge>
+                          )}
                         </div>
                         <p className="text-xs text-gray-400">{new Date(order.createdAt).toLocaleDateString("it-IT",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"})}</p>
                       </div>
@@ -296,10 +320,19 @@ export default function AdminPage() {
                       <div className="flex items-center gap-1.5 text-gray-300 col-span-2"><MapPin size={14} className="text-gray-500"/><span>{order.customerAddress||"Indirizzo non disponibile"}</span></div>
                     </div>
                     <div className="border-t border-white/10 pt-3"><div className="flex items-center gap-1.5 text-xs text-gray-400 mb-2"><Package size={14}/>Prodotti acquistati:</div><div className="flex flex-wrap gap-2">{order.items.map((item,i)=><span key={i} className="text-xs bg-white/10 text-white px-2 py-1 rounded-lg">{item.quantity}x {item.product.title}</span>)}</div></div>
+                    {order.giftWrap && (
+                      <div className="border-t border-white/10 pt-3">
+                        <div className="flex items-center gap-1.5 text-xs text-amber-400 mb-1"><Gift size={14}/>Confezione regalo richiesta</div>
+                        {order.giftMessage && <p className="text-xs text-gray-300 italic">&quot;{order.giftMessage}&quot;</p>}
+                      </div>
+                    )}
                     <div className="border-t border-white/10 pt-3 flex flex-wrap gap-2">
                       <Button variant="secondary" size="sm" onClick={()=>printLabel(order)} leftIcon={<Printer size={14}/>}>Stampa etichetta</Button>
-                      {order.status !== "SHIPPED" && (
+                      {order.status !== "SHIPPED" && order.status !== "DELIVERED" && (
                         <Button variant="secondary" size="sm" onClick={()=>markShipped(order.id)} leftIcon={<CheckCircle size={14}/>}>Segna come spedito</Button>
+                      )}
+                      {order.status === "SHIPPED" && (
+                        <Button variant="secondary" size="sm" onClick={()=>markDelivered(order.id)} leftIcon={<Truck size={14}/>}>Segna come consegnato</Button>
                       )}
                       <button onClick={() => deleteOrder(order.id)} className="text-gray-400 hover:text-red-400 p-2 ml-auto"><Trash2 size={16} /></button>
                     </div>

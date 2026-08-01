@@ -11,14 +11,22 @@
     "cart": "Carrello",
     "admin": "Admin",
     "logout": "Esci",
-    "login": "Accedi"
+    "login": "Accedi",
+    "searchPlaceholder": "Cerca gioielli...",
+    "searchViewAll": "Vedi tutti i risultati per \"{q}\"",
+    "searchNoResults": "Nessun risultato",
+    "searchLabel": "Cerca"
   },
   "Footer": {
     "tagline": "Gioielli in argento 925 e titanio",
     "privacy": "Privacy",
     "termini": "Termini",
     "spedizioni": "Spedizioni",
-    "resi": "Resi"
+    "resi": "Resi",
+    "instagramLabel": "Seguici su Instagram",
+    "tiktokLabel": "Seguici su TikTok",
+    "guidaTaglie": "Guida Taglie",
+    "curaGioielli": "Cura Gioielli"
   },
   "Hero": {
     "eyebrow": "Anelli · Collane · Bracciali",
@@ -57,7 +65,19 @@
     "categoryRingsTitle": "Anelli",
     "categoryNecklacesTitle": "Collane",
     "categoryBraceletsTitle": "Bracciali",
-    "categorySubtitle": "Esplora la nostra collezione di {category}"
+    "categorySubtitle": "Esplora la nostra collezione di {category}",
+    "filterAllCategories": "Tutte le categorie",
+    "filterCategory_anelli": "Anelli",
+    "filterCategory_collane": "Collane",
+    "filterCategory_bracciali": "Bracciali",
+    "filterMinPrice": "Min €",
+    "filterMaxPrice": "Max €",
+    "sortNewest": "Più recenti",
+    "sortPriceAsc": "Prezzo crescente",
+    "sortPriceDesc": "Prezzo decrescente",
+    "filterClear": "Cancella filtri",
+    "searchResultsFor": "Risultati per \"{q}\"",
+    "noResults": "Nessun prodotto trovato con questi filtri."
   },
   "Product": {
     "addToCart": "Aggiungi al carrello",
@@ -87,7 +107,13 @@
     "submit": "Invia recensione",
     "successToast": "Recensione inviata! Grazie 🎉",
     "errorToast": "Errore durante l'invio della recensione",
-    "requiredToast": "Compila tutti i campi"
+    "requiredToast": "Compila tutti i campi",
+    "emailLabel": "La tua email",
+    "emailPlaceholder": "usata per verificare l'acquisto",
+    "photosLabel": "Foto (facoltative)",
+    "photosHint": "Fino a 3 foto, max 5MB ciascuna",
+    "verifiedBadge": "Acquisto verificato",
+    "uploadError": "Errore durante il caricamento della foto"
   },
   "Cart": {
     "title": "Il tuo carrello",
@@ -103,7 +129,9 @@
     "checkoutError": "Impossibile avviare il pagamento",
     "trustShipping": "Spedizione rapida",
     "trustReturns": "Reso entro 14 giorni",
-    "trustSecure": "Pagamento sicuro"
+    "trustSecure": "Pagamento sicuro",
+    "giftOption": "È un regalo? Aggiungi un messaggio",
+    "giftMessagePlaceholder": "Scrivi qui il tuo messaggio (facoltativo)..."
   },
   "Resi": {
     "title": "Resi e rimborsi",
@@ -381,5 +409,143 @@
     "stat3Value": "14gg",
     "stat3Label": "Reso gratuito",
     "cta": "Scopri la nostra storia"
+  },
+  "SizeGuide": {
+    "metaTitle": "Guida alle Taglie",
+    "metaDescription": "Come misurare la taglia giusta per anelli, collane e bracciali G&F Hub.",
+    "title": "Guida alle Taglie",
+    "intro": "Le misure giuste per anelli, collane e bracciali che si indossano bene fin dal primo giorno.",
+    "ringsTitle": "Anelli",
+    "ringsMethodsTitle": "Come misurare la tua taglia",
+    "ringsMethod1": "Con un anello che hai già: misura il diametro interno in millimetri con un righello e confrontalo con la tabella qui sotto.",
+    "ringsMethod2": "Con un filo: avvolgilo intorno al dito, segna dove si sovrappone, misura la lunghezza in millimetri e dividila per 3,14 per ottenere il diametro.",
+    "ringsTip": "Se sei tra due taglie, scegli sempre quella più grande — soprattutto se le tue nocche sono più larghe della base del dito.",
+    "ringsTableSize": "Taglia IT",
+    "ringsTableDiameter": "Diametro interno",
+    "ringsTable": [
+      {
+        "size": "8",
+        "mm": "14.1"
+      },
+      {
+        "size": "10",
+        "mm": "14.5"
+      },
+      {
+        "size": "12",
+        "mm": "15.3"
+      },
+      {
+        "size": "14",
+        "mm": "16.1"
+      },
+      {
+        "size": "16",
+        "mm": "16.9"
+      },
+      {
+        "size": "18",
+        "mm": "17.7"
+      },
+      {
+        "size": "20",
+        "mm": "18.5"
+      },
+      {
+        "size": "22",
+        "mm": "19.4"
+      }
+    ],
+    "necklacesTitle": "Collane",
+    "necklacesIntro": "Le lunghezze più comuni e dove cadono sul corpo.",
+    "necklaceLengths": [
+      {
+        "cm": "40",
+        "label": "Girocollo, aderente alla base del collo"
+      },
+      {
+        "cm": "45",
+        "label": "Sotto la clavicola — la lunghezza più versatile"
+      },
+      {
+        "cm": "50",
+        "label": "All'altezza dello sterno"
+      },
+      {
+        "cm": "60",
+        "label": "Lunga, sopra il petto — ideale da sovrapporre"
+      }
+    ],
+    "braceletsTitle": "Bracciali",
+    "braceletsIntro": "Avvolgi un metro da sarta (o un filo, poi misuralo con un righello) intorno al polso, appena sotto l'osso. Aggiungi 1–1,5 cm per una vestibilità comoda, o resta sulla misura esatta per uno più aderente.",
+    "braceletsTableSize": "Taglia",
+    "braceletsTableWrist": "Circonferenza polso",
+    "braceletsTable": [
+      {
+        "size": "S",
+        "range": "14–15 cm"
+      },
+      {
+        "size": "M",
+        "range": "15–17 cm"
+      },
+      {
+        "size": "L",
+        "range": "17–19 cm"
+      }
+    ]
+  },
+  "CareGuide": {
+    "metaTitle": "Cura di Argento 925 e Titanio",
+    "metaDescription": "Come pulire e conservare gioielli in argento 925 e titanio G&F Hub.",
+    "title": "Cura di Argento 925 e Titanio",
+    "intro": "Due materiali, due modi diversi di essere indossati ogni giorno senza pensieri.",
+    "whyTitle": "Perché scegliamo questi due materiali",
+    "whyText": "L'argento 925 è un metallo nobile, ma come tutti gli argenti reali può leggermente ossidarsi a contatto con aria e umidità — è un segno di autenticità, non un difetto, e si rimuove in pochi secondi. Il titanio invece non si ossida né si appanna: è la scelta giusta per chi lo indossa tutti i giorni senza volerci pensare.",
+    "silverTitle": "Come pulire l'argento 925",
+    "silverTips": [
+      "Passa un panno morbido in microfibra dopo ogni utilizzo, per rimuovere residui di sudore e cosmetici.",
+      "Se si è leggermente scurito, usa un panno lucidante per argento oppure acqua tiepida e sapone neutro, poi asciuga bene.",
+      "Evita candeggina, cloro e prodotti per la casa a contatto diretto.",
+      "Conservalo in un sacchetto chiuso o in una scatola, lontano dall'umidità, quando non lo indossi."
+    ],
+    "titaniumTitle": "Come curare il titanio",
+    "titaniumTips": [
+      "Non serve quasi nessuna manutenzione: è resistente ad acqua, sudore e alla maggior parte dei prodotti chimici.",
+      "Puoi indossarlo in doccia, in piscina o al mare senza problemi.",
+      "Un panno morbido di tanto in tanto è sufficiente per mantenerlo lucido."
+    ],
+    "avoidTitle": "Da evitare per entrambi",
+    "avoidTips": [
+      "Spruzzare profumo o applicare creme direttamente sul gioiello.",
+      "Urti forti su superfici dure — possono deformare le zone più sottili.",
+      "Detergenti aggressivi per la pulizia della casa."
+    ],
+    "summaryTitle": "In sintesi",
+    "summaryAspect": "",
+    "summarySilver": "Argento 925",
+    "summaryTitanium": "Titanio",
+    "summaryRows": [
+      {
+        "aspect": "Ossidazione",
+        "silver": "Leggera, si rimuove facilmente",
+        "titanium": "Non si ossida"
+      },
+      {
+        "aspect": "Manutenzione",
+        "silver": "Pulizia occasionale consigliata",
+        "titanium": "Praticamente nessuna"
+      },
+      {
+        "aspect": "Acqua e sudore",
+        "silver": "Va tolto per bagni prolungati",
+        "titanium": "Resistente"
+      },
+      {
+        "aspect": "Ipoallergenico",
+        "silver": "Sì, per la maggior parte delle persone",
+        "titanium": "Sì, al 100%"
+      }
+    ]
   }
 }

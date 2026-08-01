@@ -4,8 +4,9 @@ import { getTranslations } from "next-intl/server";
 import { Navbar } from "@/components/ui/layout/Navbar";
 import { Footer } from "@/components/ui/layout/Footer";
 import { ShopGrid } from "@/components/shop/ShopGrid";
+import { ShopFilters } from "@/components/shop/ShopFilters";
 import { Skeleton } from "@/components/ui/primitives/Skeleton";
-import { getAllProducts } from "@/lib/queries/products";
+import { getFilteredProducts, type ProductSort } from "@/lib/queries/products";
 import { buildLanguageAlternates, canonicalFor } from "@/lib/seo";
 
 export async function generateMetadata({
@@ -27,8 +28,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function ShopPage() {
+interface ShopPageProps {
+  searchParams: Promise<{ category?: string; min?: string; max?: string; sort?: string; q?: string }>;
+}
+
+export default async function ShopPage({ searchParams }: ShopPageProps) {
   const t = await getTranslations("Shop");
+  const params = await searchParams;
 
   return (
     <>
@@ -44,8 +50,18 @@ export default async function ShopPage() {
             {t("shopSubtitle")}
           </p>
 
-          <Suspense fallback={<ShopSkeleton />}>
-            <ShopContent />
+          <Suspense fallback={null}>
+            <ShopFilters />
+          </Suspense>
+
+          <Suspense fallback={<ShopSkeleton />} key={JSON.stringify(params)}>
+            <ShopContent
+              category={params.category}
+              minPrice={params.min ? Number(params.min) : undefined}
+              maxPrice={params.max ? Number(params.max) : undefined}
+              sort={params.sort as ProductSort | undefined}
+              q={params.q}
+            />
           </Suspense>
         </div>
       </main>
@@ -74,8 +90,20 @@ function ShopSkeleton() {
   );
 }
 
-async function ShopContent() {
-  const products = await getAllProducts();
+async function ShopContent({
+  category,
+  minPrice,
+  maxPrice,
+  sort,
+  q,
+}: {
+  category?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  sort?: ProductSort;
+  q?: string;
+}) {
+  const products = await getFilteredProducts({ category, minPrice, maxPrice, sort, q });
 
   return <ShopGrid products={products} />;
 }

@@ -11,14 +11,22 @@
     "cart": "Cart",
     "admin": "Admin",
     "logout": "Log out",
-    "login": "Log in"
+    "login": "Log in",
+    "searchPlaceholder": "Search jewelry...",
+    "searchViewAll": "View all results for \"{q}\"",
+    "searchNoResults": "No results",
+    "searchLabel": "Search"
   },
   "Footer": {
     "tagline": "925 silver and titanium jewelry",
     "privacy": "Privacy",
     "termini": "Terms",
     "spedizioni": "Shipping",
-    "resi": "Returns"
+    "resi": "Returns",
+    "instagramLabel": "Follow us on Instagram",
+    "tiktokLabel": "Follow us on TikTok",
+    "guidaTaglie": "Size Guide",
+    "curaGioielli": "Jewelry Care"
   },
   "Hero": {
     "eyebrow": "Rings · Necklaces · Bracelets",
@@ -57,7 +65,19 @@
     "categoryRingsTitle": "Rings",
     "categoryNecklacesTitle": "Necklaces",
     "categoryBraceletsTitle": "Bracelets",
-    "categorySubtitle": "Explore our {category} collection"
+    "categorySubtitle": "Explore our {category} collection",
+    "filterAllCategories": "All categories",
+    "filterCategory_anelli": "Rings",
+    "filterCategory_collane": "Necklaces",
+    "filterCategory_bracciali": "Bracelets",
+    "filterMinPrice": "Min €",
+    "filterMaxPrice": "Max €",
+    "sortNewest": "Newest",
+    "sortPriceAsc": "Price: low to high",
+    "sortPriceDesc": "Price: high to low",
+    "filterClear": "Clear filters",
+    "searchResultsFor": "Results for \"{q}\"",
+    "noResults": "No products found with these filters."
   },
   "Product": {
     "addToCart": "Add to cart",
@@ -87,7 +107,13 @@
     "submit": "Submit review",
     "successToast": "Review submitted! Thank you 🎉",
     "errorToast": "An error occurred while submitting your review",
-    "requiredToast": "Please fill in all fields"
+    "requiredToast": "Please fill in all fields",
+    "emailLabel": "Your email",
+    "emailPlaceholder": "used to verify your purchase",
+    "photosLabel": "Photos (optional)",
+    "photosHint": "Up to 3 photos, max 5MB each",
+    "verifiedBadge": "Verified purchase",
+    "uploadError": "Error uploading photo"
   },
   "Cart": {
     "title": "Your cart",
@@ -103,7 +129,9 @@
     "checkoutError": "Unable to start the payment",
     "trustShipping": "Fast shipping",
     "trustReturns": "Returns within 14 days",
-    "trustSecure": "Secure payment"
+    "trustSecure": "Secure payment",
+    "giftOption": "Is it a gift? Add a message",
+    "giftMessagePlaceholder": "Write your message here (optional)..."
   },
   "Resi": {
     "title": "Returns & Refunds",
@@ -381,5 +409,143 @@
     "stat3Value": "14 days",
     "stat3Label": "Free returns",
     "cta": "Discover our story"
+  },
+  "SizeGuide": {
+    "metaTitle": "Size Guide",
+    "metaDescription": "How to find the right size for G&F Hub rings, necklaces and bracelets.",
+    "title": "Size Guide",
+    "intro": "The right measurements for rings, necklaces and bracelets that fit well from day one.",
+    "ringsTitle": "Rings",
+    "ringsMethodsTitle": "How to measure your size",
+    "ringsMethod1": "With a ring you already own: measure the inner diameter in millimeters with a ruler and check it against the table below.",
+    "ringsMethod2": "With a string: wrap it around your finger, mark where it overlaps, measure the length in millimeters and divide by 3.14 to get the diameter.",
+    "ringsTip": "If you're between two sizes, always choose the larger one — especially if your knuckles are wider than the base of your finger.",
+    "ringsTableSize": "EU size",
+    "ringsTableDiameter": "Inner diameter",
+    "ringsTable": [
+      {
+        "size": "8",
+        "mm": "14.1"
+      },
+      {
+        "size": "10",
+        "mm": "14.5"
+      },
+      {
+        "size": "12",
+        "mm": "15.3"
+      },
+      {
+        "size": "14",
+        "mm": "16.1"
+      },
+      {
+        "size": "16",
+        "mm": "16.9"
+      },
+      {
+        "size": "18",
+        "mm": "17.7"
+      },
+      {
+        "size": "20",
+        "mm": "18.5"
+      },
+      {
+        "size": "22",
+        "mm": "19.4"
+      }
+    ],
+    "necklacesTitle": "Necklaces",
+    "necklacesIntro": "The most common lengths and where they fall.",
+    "necklaceLengths": [
+      {
+        "cm": "40",
+        "label": "Choker, close to the base of the neck"
+      },
+      {
+        "cm": "45",
+        "label": "Below the collarbone — the most versatile length"
+      },
+      {
+        "cm": "50",
+        "label": "At chest height"
+      },
+      {
+        "cm": "60",
+        "label": "Long, over the chest — ideal for layering"
+      }
+    ],
+    "braceletsTitle": "Bracelets",
+    "braceletsIntro": "Wrap a tailor's tape (or a string, then measure it with a ruler) around your wrist, just below the bone. Add 1–1.5 cm for a comfortable fit, or keep the exact measurement for a snugger one.",
+    "braceletsTableSize": "Size",
+    "braceletsTableWrist": "Wrist circumference",
+    "braceletsTable": [
+      {
+        "size": "S",
+        "range": "14–15 cm"
+      },
+      {
+        "size": "M",
+        "range": "15–17 cm"
+      },
+      {
+        "size": "L",
+        "range": "17–19 cm"
+      }
+    ]
+  },
+  "CareGuide": {
+    "metaTitle": "Caring for 925 Silver and Titanium",
+    "metaDescription": "How to clean and store G&F Hub 925 silver and titanium jewelry.",
+    "title": "Caring for 925 Silver and Titanium",
+    "intro": "Two materials, two different ways of being worn every day without a second thought.",
+    "whyTitle": "Why we chose these two materials",
+    "whyText": "925 silver is a noble metal, but like all real silver it can slightly tarnish on contact with air and humidity — that's a sign of authenticity, not a flaw, and it's removed in seconds. Titanium, on the other hand, doesn't tarnish or oxidize: it's the right choice for anyone who wears it every day without wanting to think about it.",
+    "silverTitle": "How to clean 925 silver",
+    "silverTips": [
+      "Wipe with a soft microfiber cloth after each wear, to remove sweat and cosmetic residue.",
+      "If it has slightly darkened, use a silver polishing cloth or warm water with mild soap, then dry thoroughly.",
+      "Avoid bleach, chlorine and household products in direct contact.",
+      "Store it in a closed pouch or box, away from humidity, when not wearing it."
+    ],
+    "titaniumTitle": "How to care for titanium",
+    "titaniumTips": [
+      "Almost no maintenance needed: it resists water, sweat and most chemicals.",
+      "You can wear it in the shower, the pool or the sea without any issue.",
+      "A soft cloth every once in a while is enough to keep it shiny."
+    ],
+    "avoidTitle": "What to avoid for both",
+    "avoidTips": [
+      "Spraying perfume or applying creams directly onto the jewelry.",
+      "Strong impacts on hard surfaces — they can deform the thinner parts.",
+      "Harsh household cleaning products."
+    ],
+    "summaryTitle": "At a glance",
+    "summaryAspect": "",
+    "summarySilver": "925 Silver",
+    "summaryTitanium": "Titanium",
+    "summaryRows": [
+      {
+        "aspect": "Tarnishing",
+        "silver": "Slight, easy to remove",
+        "titanium": "Doesn't tarnish"
+      },
+      {
+        "aspect": "Maintenance",
+        "silver": "Occasional cleaning recommended",
+        "titanium": "Practically none"
+      },
+      {
+        "aspect": "Water and sweat",
+        "silver": "Remove for prolonged exposure",
+        "titanium": "Resistant"
+      },
+      {
+        "aspect": "Hypoallergenic",
+        "silver": "Yes, for most people",
+        "titanium": "Yes, 100%"
+      }
+    ]
   }
 }

@@ -66,8 +66,8 @@ export function Storytelling() {
               className="absolute top-0 right-0 w-72 h-96 rounded-2xl overflow-hidden shadow-glow-blue"
             >
               <Image
-                src="https://images.unsplash.com/photo-1565206077212-4eb48d41f54b?w=600&q=80"
-                alt="Anelli in argento 925 G&F Hub"
+                src="https://images.unsplash.com/photo-1589779957013-1d9d02b139f8?w=600&q=80"
+                alt="Collana e bracciale G&F Hub indossati"
                 fill
                 className="object-cover"
                 sizes="300px"
@@ -78,8 +78,8 @@ export function Storytelling() {
               className="absolute bottom-0 left-0 w-64 h-80 rounded-2xl overflow-hidden shadow-glow-purple"
             >
               <Image
-                src="https://images.unsplash.com/photo-1681091639085-c6d0f85e39a3?w=600&q=80"
-                alt="Bracciale in argento 925 G&F Hub"
+                src="https://images.unsplash.com/photo-1755311901187-b066feb3fdbb?w=600&q=80"
+                alt="Anelli G&F Hub indossati"
                 fill
                 className="object-cover"
                 sizes="260px"
