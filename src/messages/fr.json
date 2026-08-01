@@ -14,17 +14,17 @@
     "login": "Connexion"
   },
   "Footer": {
-    "tagline": "Bijouterie premium",
+    "tagline": "Bijoux en argent 925 et titane",
     "privacy": "Confidentialité",
     "termini": "Conditions",
     "spedizioni": "Livraison",
     "resi": "Retours"
   },
   "Hero": {
-    "eyebrow": "Collection Premium 2026",
-    "titleLine1": "L'élégance",
-    "titleLine2": "du futur",
-    "subtitle": "Design essentiel. Matériaux premium. Une expérience sans compromis.",
+    "eyebrow": "Bagues · Colliers · Bracelets",
+    "titleLine1": "De vrais bijoux",
+    "titleLine2": "un prix honnête",
+    "subtitle": "Argent 925 et titane : résistants à l'eau, hypoallergéniques, pensés pour un usage quotidien — sans la marge du luxe.",
     "cta": "Découvrir la collection"
   },
   "Home": {
@@ -34,11 +34,11 @@
     "categoriesEyebrow": "Collections",
     "categoriesTitle": "Catégories",
     "categoryRingsTitle": "Bagues",
-    "categoryRingsSubtitle": "Élégance intemporelle",
+    "categoryRingsSubtitle": "Argent 925, pour tous les jours",
     "categoryNecklacesTitle": "Colliers",
-    "categoryNecklacesSubtitle": "Lumière et raffinement",
+    "categoryNecklacesSubtitle": "Titane anti-ternissure",
     "categoryBraceletsTitle": "Bracelets",
-    "categoryBraceletsSubtitle": "Détails précieux",
+    "categoryBraceletsSubtitle": "Résistants à l'eau",
     "discover": "Découvrir",
     "reviewsEyebrow": "Ce que l'on dit de nous",
     "reviewsTitle": "Avis",
@@ -72,7 +72,8 @@
     "addedToCart": "{title} ajouté au panier !",
     "notFound": "Produit introuvable",
     "wishlistAdd": "Ajouter aux favoris",
-    "wishlistRemove": "Retirer des favoris"
+    "wishlistRemove": "Retirer des favoris",
+    "trustMaterial": "Argent 925 et titane"
   },
   "Reviews": {
     "title": "Avis ({count})",
@@ -307,14 +308,14 @@
     "errorToast": "Erreur de connexion. Veuillez réessayer sous peu."
   },
   "ChiSiamo": {
-    "sinceBadge": "Depuis 2024",
-    "heroTitle1": "Le luxe se cache dans les détails",
-    "heroTitle2": "que personne ne remarque tout de suite",
-    "heroText": "G&F Hub est né d'une idée simple : celui qui achète une pièce importante n'achète pas seulement un objet, mais la certitude qu'il durera. Chaque produit que nous sélectionnons répond à une exigence qui ne fait jamais de compromis.",
+    "sinceBadge": "Argent 925 · Titane",
+    "heroTitle1": "De vrais bijoux,",
+    "heroTitle2": "un prix honnête",
+    "heroText": "G&F Hub est né d'une idée simple : acheter un bijou ne devrait pas signifier payer le nom sur la boîte, mais le matériau que vous portez. Nous travaillons uniquement avec de l'argent 925 et du titane, vérifiés pièce par pièce, à un prix qui a du sens.",
     "whyTitle": "Pourquoi nous existons",
-    "whyText1": "Le marché regorge de produits qui promettent la qualité et la démentent dès la première utilisation. Nous avons fondé G&F Hub pour inverser ce schéma : sélection rigoureuse des matériaux, contrôles sur chaque lot, et une relation directe et transparente avec nos clients.",
+    "whyText1": "Le marché regorge de bijoux plaqués qui ternissent après quelques semaines, vendus à des prix gonflés par le nom de la marque. Nous avons fondé G&F Hub pour renverser ce schéma : uniquement de l'argent 925 et du titane véritables, des contrôles à chaque lot, et un prix honnête — sans la marge du luxe.",
     "whyText2": "Nous ne courons pas après le volume. Nous recherchons la bonne pièce, pour la bonne personne, celle qui la gardera pendant des années — pas seulement une saison.",
-    "foundedLabel": "Année de fondation",
+    "foundedLabel": "Argent certifié",
     "valuesEyebrow": "Ce qui nous guide",
     "valuesTitle": "Nos principes",
     "value1Title": "Une qualité sans compromis",
@@ -347,10 +348,10 @@
   "Meta": {
     "siteName": "G&F Hub",
     "titleTemplate": "%s | G&F Hub",
-    "defaultTitle": "G&F Hub — Bijouterie Premium en Ligne",
-    "defaultDescription": "Découvrez bagues, colliers et bracelets de bijouterie premium sur G&F Hub. Livraison soignée, paiements sécurisés et assistance dédiée.",
-    "homeTitle": "G&F Hub — Bijouterie Premium en Ligne",
-    "homeDescription": "Bagues, colliers et bracelets de haute joaillerie. Découvrez les nouvelles collections G&F Hub, élégance intemporelle avec livraison rapide et sécurisée.",
+    "defaultTitle": "G&F Hub — Argent 925 et Titane pour Femme",
+    "defaultDescription": "Bagues, colliers et bracelets femme en argent 925 et titane. Résistants à l'eau, hypoallergéniques, une vraie qualité à un prix honnête.",
+    "homeTitle": "G&F Hub — Argent 925 et Titane pour Femme",
+    "homeDescription": "Bagues, colliers et bracelets en argent 925 et titane pour femme. De vrais matériaux, résistants à l'eau et hypoallergéniques, sans le prix du luxe.",
     "shopTitle": "Toute la Bijouterie",
     "shopDescription": "Parcourez toute la collection de bijoux G&F Hub : bagues, colliers et bracelets sélectionnés pour vous.",
     "shopNewTitle": "Nouveautés",
@@ -360,12 +361,25 @@
     "shopOfferteTitle": "Offres Spéciales",
     "shopOfferteDescription": "Profitez d'offres à durée limitée sur une sélection de bijoux G&F Hub.",
     "chiSiamoTitle": "À Propos",
-    "chiSiamoDescription": "Découvrez l'histoire, les valeurs et l'engagement de G&F Hub pour une bijouterie premium accessible.",
+    "chiSiamoDescription": "Découvrez qui se cache derrière G&F Hub et pourquoi nous croyons en des bijoux de vraie qualité à un prix honnête.",
     "resiTitle": "Retours et Remboursements",
     "resiDescription": "Demandez un retour en quelques étapes. Découvrez notre politique de retour et le service client G&F Hub.",
-    "categoryDescription": "Découvrez la collection {category} de G&F Hub : qualité, élégance et style dans chaque pièce.",
+    "categoryDescription": "Découvrez la collection {category} de G&F Hub : argent 925 et titane, une vraie qualité à un prix honnête.",
     "privacyDescription": "Politique de confidentialité de G&F Hub : comment nous collectons, utilisons et protégeons vos données personnelles.",
     "terminiDescription": "Conditions générales de vente de G&F Hub : processus d'achat, droit de rétractation et garanties.",
     "spedizioniDescription": "Délais, coûts et modalités d'expédition des commandes G&F Hub en Italie et à l'étranger."
+  },
+  "Storytelling": {
+    "eyebrow": "Notre philosophie",
+    "headingLine1": "Conçu pour",
+    "headingLine2": "durer dans le temps",
+    "body": "Nous travaillons uniquement avec de l'argent 925 et du titane : de vrais matériaux, résistants à l'eau et hypoallergéniques, pensés pour être portés chaque jour — pas rangés dans un tiroir.",
+    "stat1Value": "925",
+    "stat1Label": "Argent certifié",
+    "stat2Value": "100%",
+    "stat2Label": "Pièces contrôlées à la main",
+    "stat3Value": "14 j",
+    "stat3Label": "Retour gratuit",
+    "cta": "Découvrir notre histoire"
   }
 }

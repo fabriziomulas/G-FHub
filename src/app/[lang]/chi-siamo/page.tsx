@@ -34,7 +34,7 @@ export default async function ChiSiamoPage() {
       <div
         className="fixed inset-0 z-0"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1777286492764-456e3530e34c?w=1920&q=80')",
+          backgroundImage: "url('https://images.unsplash.com/photo-1775652138507-17280f2a59a4?w=1920&q=80')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -76,7 +76,7 @@ export default async function ChiSiamoPage() {
                 </p>
               </div>
               <div className="bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
-                <p className="text-6xl font-bold text-accent-electric mb-2">2024</p>
+                <p className="text-6xl font-bold text-accent-electric mb-2">925</p>
                 <p className="text-gray-400 text-sm tracking-wide uppercase">{t("foundedLabel")}</p>
               </div>
             </div>

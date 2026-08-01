@@ -14,17 +14,17 @@
     "login": "Iniciar sesión"
   },
   "Footer": {
-    "tagline": "Joyería premium",
+    "tagline": "Joyas en plata 925 y titanio",
     "privacy": "Privacidad",
     "termini": "Términos",
     "spedizioni": "Envíos",
     "resi": "Devoluciones"
   },
   "Hero": {
-    "eyebrow": "Colección Premium 2026",
-    "titleLine1": "La elegancia",
-    "titleLine2": "del futuro",
-    "subtitle": "Diseño esencial. Materiales premium. Una experiencia sin compromisos.",
+    "eyebrow": "Anillos · Collares · Pulseras",
+    "titleLine1": "Joyas de verdad",
+    "titleLine2": "precio honesto",
+    "subtitle": "Plata de ley 925 y titanio: resistentes al agua, hipoalergénicos, pensados para el uso diario — sin el sobreprecio del lujo.",
     "cta": "Explorar la colección"
   },
   "Home": {
@@ -34,11 +34,11 @@
     "categoriesEyebrow": "Colecciones",
     "categoriesTitle": "Categorías",
     "categoryRingsTitle": "Anillos",
-    "categoryRingsSubtitle": "Elegancia atemporal",
+    "categoryRingsSubtitle": "Plata 925, para cada día",
     "categoryNecklacesTitle": "Collares",
-    "categoryNecklacesSubtitle": "Luz y refinamiento",
+    "categoryNecklacesSubtitle": "Titanio antiempañamiento",
     "categoryBraceletsTitle": "Pulseras",
-    "categoryBraceletsSubtitle": "Detalles preciosos",
+    "categoryBraceletsSubtitle": "Resistentes al agua",
     "discover": "Descubrir",
     "reviewsEyebrow": "Lo que dicen de nosotros",
     "reviewsTitle": "Reseñas",
@@ -72,7 +72,8 @@
     "addedToCart": "¡{title} añadido al carrito!",
     "notFound": "Producto no encontrado",
     "wishlistAdd": "Añadir a favoritos",
-    "wishlistRemove": "Quitar de favoritos"
+    "wishlistRemove": "Quitar de favoritos",
+    "trustMaterial": "Plata 925 y titanio"
   },
   "Reviews": {
     "title": "Reseñas ({count})",
@@ -307,14 +308,14 @@
     "errorToast": "Error de conexión. Inténtalo de nuevo en breve."
   },
   "ChiSiamo": {
-    "sinceBadge": "Desde 2024",
-    "heroTitle1": "El lujo está en los detalles",
-    "heroTitle2": "que nadie nota a primera vista",
-    "heroText": "G&F Hub nace de una idea sencilla: quien compra una pieza importante no adquiere solo un objeto, sino la certeza de que durará. Cada producto que seleccionamos pasa por un estándar que nunca acepta compromisos.",
+    "sinceBadge": "Plata 925 · Titanio",
+    "heroTitle1": "Joyas de verdad,",
+    "heroTitle2": "precio honesto",
+    "heroText": "G&F Hub nace de una idea simple: comprar una joya no debería significar pagar el nombre en la caja, sino el material que llevas puesto. Trabajamos solo con plata 925 y titanio, verificados pieza por pieza, a un precio que tiene sentido.",
     "whyTitle": "Por qué existimos",
-    "whyText1": "El mercado está lleno de productos que prometen calidad y la desmienten en el primer uso. Fundamos G&F Hub para romper ese esquema: selección rigurosa de materiales, controles en cada lote y una relación directa y transparente con quien compra.",
+    "whyText1": "El mercado está lleno de joyas bañadas que se oscurecen a las pocas semanas, vendidas a precios inflados por el nombre de la marca. Fundamos G&F Hub para romper ese esquema: solo plata 925 y titanio reales, controles en cada lote, y un precio honesto — sin el sobreprecio del lujo.",
     "whyText2": "No perseguimos el volumen. Perseguimos la pieza adecuada, para la persona adecuada, que la conservará durante años, no solo una temporada.",
-    "foundedLabel": "Año de fundación",
+    "foundedLabel": "Plata certificada",
     "valuesEyebrow": "Lo que nos guía",
     "valuesTitle": "Nuestros principios",
     "value1Title": "Calidad sin concesiones",
@@ -347,10 +348,10 @@
   "Meta": {
     "siteName": "G&F Hub",
     "titleTemplate": "%s | G&F Hub",
-    "defaultTitle": "G&F Hub — Joyería Premium Online",
-    "defaultDescription": "Descubre anillos, collares y pulseras de joyería premium en G&F Hub. Envío cuidado, pagos seguros y atención dedicada.",
-    "homeTitle": "G&F Hub — Joyería Premium Online",
-    "homeDescription": "Anillos, collares y pulseras de alta joyería. Descubre las nuevas colecciones de G&F Hub, elegancia atemporal con envío rápido y seguro.",
+    "defaultTitle": "G&F Hub — Plata 925 y Titanio para Mujer",
+    "defaultDescription": "Anillos, collares y pulseras de mujer en plata 925 y titanio. Resistentes al agua, hipoalergénicos, calidad real a un precio honesto.",
+    "homeTitle": "G&F Hub — Plata 925 y Titanio para Mujer",
+    "homeDescription": "Anillos, collares y pulseras en plata 925 y titanio para mujer. Materiales reales, resistentes al agua e hipoalergénicos, sin el precio del lujo.",
     "shopTitle": "Toda la Joyería",
     "shopDescription": "Explora toda la colección de joyas G&F Hub: anillos, collares y pulseras seleccionados para ti.",
     "shopNewTitle": "Novedades",
@@ -360,12 +361,25 @@
     "shopOfferteTitle": "Ofertas Especiales",
     "shopOfferteDescription": "Aprovecha ofertas por tiempo limitado en una selección de joyas G&F Hub.",
     "chiSiamoTitle": "Sobre Nosotros",
-    "chiSiamoDescription": "Descubre la historia, los valores y el compromiso de G&F Hub con la joyería premium accesible.",
+    "chiSiamoDescription": "Descubre quién está detrás de G&F Hub y por qué creemos en joyas de calidad real a un precio honesto.",
     "resiTitle": "Devoluciones y Reembolsos",
     "resiDescription": "Solicita una devolución en pocos pasos. Descubre nuestra política de devoluciones y atención al cliente G&F Hub.",
-    "categoryDescription": "Descubre la colección {category} de G&F Hub: calidad, elegancia y estilo en cada pieza.",
+    "categoryDescription": "Descubre la colección {category} de G&F Hub: plata 925 y titanio, calidad real a un precio honesto.",
     "privacyDescription": "Política de privacidad de G&F Hub: cómo recopilamos, usamos y protegemos tus datos personales.",
     "terminiDescription": "Términos y condiciones de venta de G&F Hub: proceso de compra, derecho de desistimiento y garantías.",
     "spedizioniDescription": "Tiempos, costes y modalidades de envío de los pedidos G&F Hub en Italia y en el extranjero."
+  },
+  "Storytelling": {
+    "eyebrow": "Nuestra filosofía",
+    "headingLine1": "Pensado para",
+    "headingLine2": "durar en el tiempo",
+    "body": "Trabajamos solo con plata 925 y titanio: materiales reales, resistentes al agua e hipoalergénicos, pensados para llevarse cada día — no para quedarse en un cajón.",
+    "stat1Value": "925",
+    "stat1Label": "Plata certificada",
+    "stat2Value": "100%",
+    "stat2Label": "Piezas revisadas a mano",
+    "stat3Value": "14 días",
+    "stat3Label": "Devolución gratuita",
+    "cta": "Descubre nuestra historia"
   }
 }

@@ -14,17 +14,17 @@
     "login": "Log in"
   },
   "Footer": {
-    "tagline": "Premium jewelry",
+    "tagline": "925 silver and titanium jewelry",
     "privacy": "Privacy",
     "termini": "Terms",
     "spedizioni": "Shipping",
     "resi": "Returns"
   },
   "Hero": {
-    "eyebrow": "Premium Collection 2026",
-    "titleLine1": "Elegance",
-    "titleLine2": "of the future",
-    "subtitle": "Essential design. Premium materials. An experience with no compromises.",
+    "eyebrow": "Rings · Necklaces · Bracelets",
+    "titleLine1": "Real jewelry",
+    "titleLine2": "honest prices",
+    "subtitle": "925 silver and titanium: waterproof, hypoallergenic, made for everyday wear — without the luxury markup.",
     "cta": "Explore the collection"
   },
   "Home": {
@@ -34,11 +34,11 @@
     "categoriesEyebrow": "Collections",
     "categoriesTitle": "Categories",
     "categoryRingsTitle": "Rings",
-    "categoryRingsSubtitle": "Timeless elegance",
+    "categoryRingsSubtitle": "925 silver, for every day",
     "categoryNecklacesTitle": "Necklaces",
-    "categoryNecklacesSubtitle": "Light and refinement",
+    "categoryNecklacesSubtitle": "Tarnish-resistant titanium",
     "categoryBraceletsTitle": "Bracelets",
-    "categoryBraceletsSubtitle": "Precious details",
+    "categoryBraceletsSubtitle": "Waterproof",
     "discover": "Discover",
     "reviewsEyebrow": "What people say about us",
     "reviewsTitle": "Reviews",
@@ -72,7 +72,8 @@
     "addedToCart": "{title} added to cart!",
     "notFound": "Product not found",
     "wishlistAdd": "Add to favorites",
-    "wishlistRemove": "Remove from favorites"
+    "wishlistRemove": "Remove from favorites",
+    "trustMaterial": "925 silver and titanium"
   },
   "Reviews": {
     "title": "Reviews ({count})",
@@ -307,14 +308,14 @@
     "errorToast": "Connection error. Please try again shortly."
   },
   "ChiSiamo": {
-    "sinceBadge": "Since 2024",
-    "heroTitle1": "Luxury lies in the details",
-    "heroTitle2": "no one notices right away",
-    "heroText": "G&F Hub was born from a simple idea: buying a meaningful piece isn't just about the object, it's about the certainty it will last. Every product we select goes through a standard that never compromises.",
+    "sinceBadge": "925 Silver · Titanium",
+    "heroTitle1": "Real jewelry,",
+    "heroTitle2": "honest prices",
+    "heroText": "G&F Hub was born from a simple idea: buying jewelry shouldn't mean paying for the name on the box, but for the material you wear. We work only with 925 silver and titanium, checked piece by piece, at a price that makes sense.",
     "whyTitle": "Why we exist",
-    "whyText1": "The market is full of products that promise quality and fail to deliver it at first use. We founded G&F Hub to flip that script: strict material selection, checks on every batch, and a direct, transparent relationship with our customers.",
+    "whyText1": "The market is full of plated jewelry that tarnishes after a few weeks, sold at prices inflated by a brand name. We founded G&F Hub to flip that script: only real 925 silver and titanium, batch checks, and an honest price — without the luxury markup.",
     "whyText2": "We don't chase volume. We chase the right piece, for the right person, one they'll keep for years — not just a season.",
-    "foundedLabel": "Year founded",
+    "foundedLabel": "Certified silver",
     "valuesEyebrow": "What drives us",
     "valuesTitle": "Our principles",
     "value1Title": "Quality without compromise",
@@ -347,10 +348,10 @@
   "Meta": {
     "siteName": "G&F Hub",
     "titleTemplate": "%s | G&F Hub",
-    "defaultTitle": "G&F Hub — Premium Online Jewelry",
-    "defaultDescription": "Discover rings, necklaces and bracelets of premium jewelry at G&F Hub. Curated shipping, secure payments and dedicated support.",
-    "homeTitle": "G&F Hub — Premium Online Jewelry",
-    "homeDescription": "Rings, necklaces and bracelets of fine jewelry. Discover the new G&F Hub collections, timeless elegance with fast and secure shipping.",
+    "defaultTitle": "G&F Hub — 925 Silver & Titanium for Women",
+    "defaultDescription": "Women's rings, necklaces and bracelets in 925 silver and titanium. Waterproof, hypoallergenic, real quality at an honest price.",
+    "homeTitle": "G&F Hub — 925 Silver & Titanium for Women",
+    "homeDescription": "Rings, necklaces and bracelets in 925 silver and titanium for women. Real materials, waterproof and hypoallergenic, without the luxury price tag.",
     "shopTitle": "All Jewelry",
     "shopDescription": "Browse the entire G&F Hub jewelry collection: rings, necklaces and bracelets selected for you.",
     "shopNewTitle": "New Arrivals",
@@ -360,12 +361,25 @@
     "shopOfferteTitle": "Special Offers",
     "shopOfferteDescription": "Take advantage of limited-time offers on a selection of G&F Hub jewelry.",
     "chiSiamoTitle": "About Us",
-    "chiSiamoDescription": "Discover the story, values and commitment of G&F Hub to accessible premium jewelry.",
+    "chiSiamoDescription": "Discover who's behind G&F Hub and why we believe in real quality jewelry at an honest price.",
     "resiTitle": "Returns & Refunds",
     "resiDescription": "Request a return in a few steps. Discover our return policy and G&F Hub customer support.",
-    "categoryDescription": "Discover the {category} collection by G&F Hub: quality, elegance and style in every piece.",
+    "categoryDescription": "Discover the {category} collection by G&F Hub: 925 silver and titanium, real quality at an honest price.",
     "privacyDescription": "G&F Hub privacy policy: how we collect, use and protect your personal data.",
     "terminiDescription": "G&F Hub terms and conditions of sale: purchase process, right of withdrawal and warranties.",
     "spedizioniDescription": "Shipping times, costs and options for G&F Hub orders in Italy and abroad."
+  },
+  "Storytelling": {
+    "eyebrow": "Our philosophy",
+    "headingLine1": "Built to",
+    "headingLine2": "last",
+    "body": "We work only with 925 silver and titanium: real materials, waterproof and hypoallergenic, made to be worn every day — not left in a drawer.",
+    "stat1Value": "925",
+    "stat1Label": "Certified silver",
+    "stat2Value": "100%",
+    "stat2Label": "Hand-checked pieces",
+    "stat3Value": "14 days",
+    "stat3Label": "Free returns",
+    "cta": "Discover our story"
   }
 }

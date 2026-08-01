@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/primitives/Button";
 import { Badge } from "@/components/ui/primitives/Badge";
-import { ShoppingBag, Heart, PenLine, Truck, RotateCcw, ShieldCheck, Flame } from "lucide-react";
+import { ShoppingBag, Heart, PenLine, Truck, RotateCcw, ShieldCheck, Flame, Gem } from "lucide-react";
 import { toast } from "sonner";
 import { useCart } from "@/stores/cart";
 import { useWishlist } from "@/hooks/useWishlist";
@@ -166,19 +167,25 @@ export function ProductInfo({
         </Button>
       </div>
 
-      <div className="grid grid-cols-3 gap-3 text-center">
-        <div className="flex flex-col items-center gap-1.5 py-3 px-2 bg-white/5 border border-white/10 rounded-xl">
-          <Truck size={18} className="text-accent-electric" />
-          <span className="text-gray-300 text-xs leading-tight">{t("trustShipping")}</span>
-        </div>
-        <div className="flex flex-col items-center gap-1.5 py-3 px-2 bg-white/5 border border-white/10 rounded-xl">
-          <RotateCcw size={18} className="text-accent-electric" />
-          <span className="text-gray-300 text-xs leading-tight">{t("trustReturns")}</span>
-        </div>
-        <div className="flex flex-col items-center gap-1.5 py-3 px-2 bg-white/5 border border-white/10 rounded-xl">
-          <ShieldCheck size={18} className="text-accent-electric" />
-          <span className="text-gray-300 text-xs leading-tight">{t("trustSecure")}</span>
-        </div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+        {[
+          { icon: Gem, label: t("trustMaterial") },
+          { icon: Truck, label: t("trustShipping") },
+          { icon: RotateCcw, label: t("trustReturns") },
+          { icon: ShieldCheck, label: t("trustSecure") },
+        ].map(({ icon: Icon, label }, i) => (
+          <motion.div
+            key={label}
+            initial={{ opacity: 0, y: 12, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ delay: i * 0.1, duration: 0.4, ease: "easeOut" }}
+            className="flex flex-col items-center gap-1.5 py-3 px-2 bg-white/5 border border-white/10 rounded-xl"
+          >
+            <Icon size={18} className="text-accent-electric" />
+            <span className="text-gray-300 text-xs leading-tight">{label}</span>
+          </motion.div>
+        ))}
       </div>
 
       <Button size="xl" className="w-full" variant="primary" leftIcon={<PenLine size={20} />} onClick={handleOpenReview}>

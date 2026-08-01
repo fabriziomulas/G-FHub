@@ -14,17 +14,17 @@
     "login": "Accedi"
   },
   "Footer": {
-    "tagline": "Gioielleria premium",
+    "tagline": "Gioielli in argento 925 e titanio",
     "privacy": "Privacy",
     "termini": "Termini",
     "spedizioni": "Spedizioni",
     "resi": "Resi"
   },
   "Hero": {
-    "eyebrow": "Premium Collection 2026",
-    "titleLine1": "L'eleganza",
-    "titleLine2": "del futuro",
-    "subtitle": "Design essenziale. Materiali premium. Esperienza senza compromessi.",
+    "eyebrow": "Anelli · Collane · Bracciali",
+    "titleLine1": "Gioielli veri",
+    "titleLine2": "prezzo onesto",
+    "subtitle": "Argento 925 e titanio: anti-acqua, ipoallergenici, pensati per l'uso quotidiano — senza il sovrapprezzo del lusso.",
     "cta": "Esplora la collezione"
   },
   "Home": {
@@ -34,11 +34,11 @@
     "categoriesEyebrow": "Collezioni",
     "categoriesTitle": "Categorie",
     "categoryRingsTitle": "Anelli",
-    "categoryRingsSubtitle": "Eleganza senza tempo",
+    "categoryRingsSubtitle": "Argento 925, per ogni giorno",
     "categoryNecklacesTitle": "Collane",
-    "categoryNecklacesSubtitle": "Luce e raffinatezza",
+    "categoryNecklacesSubtitle": "Titanio anti-appannamento",
     "categoryBraceletsTitle": "Bracciali",
-    "categoryBraceletsSubtitle": "Dettagli preziosi",
+    "categoryBraceletsSubtitle": "Resistenti all'acqua",
     "discover": "Scopri",
     "reviewsEyebrow": "Cosa dicono di noi",
     "reviewsTitle": "Recensioni",
@@ -72,7 +72,8 @@
     "addedToCart": "{title} aggiunto al carrello!",
     "notFound": "Prodotto non trovato",
     "wishlistAdd": "Aggiungi ai preferiti",
-    "wishlistRemove": "Rimuovi dai preferiti"
+    "wishlistRemove": "Rimuovi dai preferiti",
+    "trustMaterial": "Argento 925 e titanio"
   },
   "Reviews": {
     "title": "Recensioni ({count})",
@@ -307,14 +308,14 @@
     "errorToast": "Errore di connessione. Riprova tra poco."
   },
   "ChiSiamo": {
-    "sinceBadge": "Dal 2024",
-    "heroTitle1": "Il lusso è nei dettagli",
-    "heroTitle2": "che nessuno nota subito",
-    "heroText": "G&F Hub nasce da un'idea semplice: chi acquista un pezzo importante non compra solo un oggetto, ma la certezza che durerà. Ogni prodotto che selezioniamo passa attraverso uno standard che non scende mai a compromessi.",
+    "sinceBadge": "Argento 925 · Titanio",
+    "heroTitle1": "Gioielli veri,",
+    "heroTitle2": "prezzo onesto",
+    "heroText": "G&F Hub nasce da un'idea semplice: chi compra un gioiello non dovrebbe pagare il nome sulla scatola, ma il materiale che indossa. Lavoriamo solo con argento 925 e titanio, verificati pezzo per pezzo, per un prezzo che ha senso.",
     "whyTitle": "Perché esistiamo",
-    "whyText1": "Il mercato è pieno di prodotti che promettono qualità e la smentiscono al primo utilizzo. Abbiamo fondato G&F Hub per ribaltare questo schema: selezione severa dei materiali, controlli su ogni lotto, e un rapporto diretto e trasparente con chi acquista.",
+    "whyText1": "Il mercato è pieno di gioielli placcati che si scuriscono dopo poche settimane, venduti a prezzi gonfiati dal nome sul brand. Abbiamo fondato G&F Hub per ribaltare questo schema: solo argento 925 e titanio veri, controlli su ogni lotto, e un prezzo onesto — senza il sovrapprezzo del lusso.",
     "whyText2": "Non inseguiamo il volume. Inseguiamo il pezzo giusto, per la persona giusta, che lo terrà per anni — non per una stagione.",
-    "foundedLabel": "Anno di fondazione",
+    "foundedLabel": "Argento certificato",
     "valuesEyebrow": "Cosa ci guida",
     "valuesTitle": "I nostri principi",
     "value1Title": "Qualità senza sconti",
@@ -347,10 +348,10 @@
   "Meta": {
     "siteName": "G&F Hub",
     "titleTemplate": "%s | G&F Hub",
-    "defaultTitle": "G&F Hub — Gioielleria Premium Online",
-    "defaultDescription": "Scopri anelli, collane e bracciali di gioielleria premium su G&F Hub. Spedizione curata, pagamenti sicuri e assistenza dedicata.",
-    "homeTitle": "G&F Hub — Gioielleria Premium Online",
-    "homeDescription": "Anelli, collane e bracciali di alta gioielleria. Scopri le nuove collezioni G&F Hub, eleganza senza tempo con spedizione rapida e sicura.",
+    "defaultTitle": "G&F Hub — Argento 925 e Titanio per Donna",
+    "defaultDescription": "Anelli, collane e bracciali da donna in argento 925 e titanio. Anti-acqua, ipoallergenici, qualità vera a un prezzo onesto.",
+    "homeTitle": "G&F Hub — Argento 925 e Titanio per Donna",
+    "homeDescription": "Anelli, collane e bracciali in argento 925 e titanio per donna. Materiali veri, anti-acqua e ipoallergenici, senza il prezzo del lusso.",
     "shopTitle": "Tutti i Gioielli",
     "shopDescription": "Sfoglia l'intera collezione di gioielli G&F Hub: anelli, collane e bracciali selezionati per te.",
     "shopNewTitle": "Nuovi Arrivi",
@@ -360,12 +361,25 @@
     "shopOfferteTitle": "Offerte Speciali",
     "shopOfferteDescription": "Approfitta delle offerte a tempo limitato su una selezione di gioielli G&F Hub.",
     "chiSiamoTitle": "Chi Siamo",
-    "chiSiamoDescription": "Scopri la storia, i valori e l'impegno di G&F Hub per una gioielleria premium accessibile.",
+    "chiSiamoDescription": "Scopri chi c'è dietro G&F Hub e perché crediamo in gioielli di qualità vera a un prezzo onesto.",
     "resiTitle": "Resi e Rimborsi",
     "resiDescription": "Richiedi un reso in pochi passaggi. Scopri la nostra politica di reso e assistenza clienti G&F Hub.",
-    "categoryDescription": "Scopri la collezione {category} di G&F Hub: qualità, eleganza e stile in ogni pezzo.",
+    "categoryDescription": "Scopri la collezione {category} di G&F Hub: argento 925 e titanio, qualità vera a un prezzo onesto.",
     "privacyDescription": "Informativa sulla privacy di G&F Hub: come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali.",
     "terminiDescription": "Termini e condizioni di vendita di G&F Hub: modalità d'acquisto, diritto di recesso e garanzie.",
     "spedizioniDescription": "Tempi, costi e modalità di spedizione degli ordini G&F Hub in Italia e all'estero."
+  },
+  "Storytelling": {
+    "eyebrow": "La nostra filosofia",
+    "headingLine1": "Progettato per",
+    "headingLine2": "durare nel tempo",
+    "body": "Lavoriamo solo con argento 925 e titanio: materiali veri, anti-acqua e ipoallergenici, pensati per essere indossati ogni giorno — non riposti in un cassetto.",
+    "stat1Value": "925",
+    "stat1Label": "Argento certificato",
+    "stat2Value": "100%",
+    "stat2Label": "Pezzi controllati a mano",
+    "stat3Value": "14gg",
+    "stat3Label": "Reso gratuito",
+    "cta": "Scopri la nostra storia"
   }
 }

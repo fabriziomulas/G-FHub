@@ -3,9 +3,12 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/primitives/Button";
 
 export function Storytelling() {
+  const t = useTranslations("Storytelling");
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -14,6 +17,12 @@ export function Storytelling() {
 
   const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const y2 = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+
+  const stats = [
+    { value: t("stat1Value"), label: t("stat1Label") },
+    { value: t("stat2Value"), label: t("stat2Label") },
+    { value: t("stat3Value"), label: t("stat3Label") },
+  ];
 
   return (
     <section ref={ref} className="relative py-32 px-6 overflow-hidden">
@@ -25,36 +34,30 @@ export function Storytelling() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <p className="text-text-muted text-sm tracking-widest uppercase mb-4">
-              La nostra filosofia
+            <p className="text-accent-electric text-sm tracking-widest uppercase mb-4">
+              {t("eyebrow")}
             </p>
-            <h2 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">
-              Progettato per
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              {t("headingLine1")}
               <br />
-              <span className="text-gradient">durare nel tempo</span>
+              <span className="text-gradient">{t("headingLine2")}</span>
             </h2>
-            <p className="text-text-secondary text-lg mb-8 leading-relaxed">
-              Ogni prodotto che trovi su G&amp;F Hub è selezionato con cura maniacale.
-              Materiali premium, design senza tempo, tecnologia all&apos;avanguardia.
-              Non vendiamo prodotti, creiamo esperienze.
+            <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+              {t("body")}
             </p>
             <div className="flex gap-6 mb-8">
-              <div>
-                <span className="text-3xl font-bold text-text-primary">10K+</span>
-                <p className="text-text-muted text-sm mt-1">Clienti soddisfatti</p>
-              </div>
-              <div>
-                <span className="text-3xl font-bold text-text-primary">50+</span>
-                <p className="text-text-muted text-sm mt-1">Brand partner</p>
-              </div>
-              <div>
-                <span className="text-3xl font-bold text-text-primary">4.9</span>
-                <p className="text-text-muted text-sm mt-1">Valutazione media</p>
-              </div>
+              {stats.map((stat) => (
+                <div key={stat.label}>
+                  <span className="text-3xl font-bold text-white">{stat.value}</span>
+                  <p className="text-gray-400 text-sm mt-1">{stat.label}</p>
+                </div>
+              ))}
             </div>
-            <Button variant="primary" size="lg">
-              Scopri la nostra storia
-            </Button>
+            <Link href="/chi-siamo">
+              <Button variant="primary" size="lg">
+                {t("cta")}
+              </Button>
+            </Link>
           </motion.div>
 
           <div className="relative h-125">
@@ -63,8 +66,8 @@ export function Storytelling() {
               className="absolute top-0 right-0 w-72 h-96 rounded-2xl overflow-hidden shadow-glow-blue"
             >
               <Image
-                src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&q=80"
-                alt="Gioiello G&F Hub in primo piano"
+                src="https://images.unsplash.com/photo-1565206077212-4eb48d41f54b?w=600&q=80"
+                alt="Anelli in argento 925 G&F Hub"
                 fill
                 className="object-cover"
                 sizes="300px"
@@ -75,8 +78,8 @@ export function Storytelling() {
               className="absolute bottom-0 left-0 w-64 h-80 rounded-2xl overflow-hidden shadow-glow-purple"
             >
               <Image
-                src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&q=80"
-                alt="Dettaglio artigianale di un gioiello G&F Hub"
+                src="https://images.unsplash.com/photo-1681091639085-c6d0f85e39a3?w=600&q=80"
+                alt="Bracciale in argento 925 G&F Hub"
                 fill
                 className="object-cover"
                 sizes="260px"
