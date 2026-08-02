@@ -133,7 +133,11 @@
     "trustReturns": "Retour sous 14 jours",
     "trustSecure": "Paiement sécurisé",
     "giftOption": "C'est un cadeau ? Ajoutez un message",
-    "giftMessagePlaceholder": "Écrivez votre message ici (facultatif)..."
+    "giftMessagePlaceholder": "Écrivez votre message ici (facultatif)...",
+    "couponPlaceholder": "Code promo",
+    "couponApply": "Appliquer",
+    "couponApplied": "Coupon appliqué : -{percent}%",
+    "couponInvalid": "Code invalide"
   },
   "Resi": {
     "title": "Retours et remboursements",
@@ -221,7 +225,9 @@
     "referralHint": "Partagez votre lien : toute personne qui s'inscrit reçoit une réduction immédiate, et vous recevez un coupon dès sa première commande.",
     "referralCopy": "Copier le lien",
     "referralLinkCopied": "Lien copié !",
-    "referralStats": "Vous avez invité {count} personnes, {rewarded} ont déjà passé une commande."
+    "referralStats": "Vous avez invité {count} personnes, {rewarded} ont déjà passé une commande.",
+    "referralMilestoneProgress": "Encore {remaining} amies qui passent commande et votre réduction passe à 15%.",
+    "referralMilestoneReached": "Objectif atteint : vous avez reçu le coupon bonus pour vos 10 amies qui ont acheté."
   },
   "Wishlist": {
     "title": "Favoris",

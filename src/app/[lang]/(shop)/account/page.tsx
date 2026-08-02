@@ -10,6 +10,7 @@ import { Copy, Gift } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/navigation";
 import { SITE_URL } from "@/lib/seo";
+import { REFERRAL_MILESTONE_COUNT } from "@/lib/referral";
 
 interface Coupon {
   id: string;
@@ -208,6 +209,16 @@ export default function AccountPage() {
                 <p className="text-gray-500 text-xs mt-3">
                   {t("referralStats", { count: referral.referralsCount, rewarded: referral.rewardedCount })}
                 </p>
+              )}
+
+              {referral.rewardedCount < REFERRAL_MILESTONE_COUNT ? (
+                <p className="text-accent-electric text-xs mt-1">
+                  {t("referralMilestoneProgress", {
+                    remaining: REFERRAL_MILESTONE_COUNT - referral.rewardedCount,
+                  })}
+                </p>
+              ) : (
+                <p className="text-accent-electric text-xs mt-1">{t("referralMilestoneReached")}</p>
               )}
             </div>
           )}

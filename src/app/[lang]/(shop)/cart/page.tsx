@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { Minus, Plus, ShoppingBag, Trash2, ArrowLeft, Truck, ShieldCheck, RotateCcw, Gift } from "lucide-react";
+import { Minus, Plus, ShoppingBag, Trash2, ArrowLeft, Truck, ShieldCheck, RotateCcw, Gift, Tag, X } from "lucide-react";
 import { toast } from "sonner";
 import { Navbar } from "@/components/ui/layout/Navbar";
 import { Footer } from "@/components/ui/layout/Footer";
@@ -19,12 +19,42 @@ export default function CartPage() {
   const [loading, setLoading] = useState(false);
   const [giftWrap, setGiftWrap] = useState(false);
   const [giftMessage, setGiftMessage] = useState("");
+  const [couponInput, setCouponInput] = useState("");
+  const [applyingCoupon, setApplyingCoupon] = useState(false);
+  const [coupon, setCoupon] = useState<{ code: string; discount: number } | null>(null);
+
+  const subtotal = totalPrice();
+  const discountAmount = coupon ? (subtotal * coupon.discount) / 100 : 0;
+  const total = subtotal - discountAmount;
+
+  const handleApplyCoupon = async () => {
+    if (!couponInput.trim()) return;
+    setApplyingCoupon(true);
+    try {
+      const res = await fetch("/api/coupons/validate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: couponInput.trim(), subtotal }),
+      });
+      const data = await res.json();
+      if (data.valid) {
+        setCoupon({ code: data.code, discount: data.discount });
+        toast.success(t("couponApplied", { percent: data.discount }));
+      } else {
+        toast.error(data.error || t("couponInvalid"));
+      }
+    } catch {
+      toast.error(t("couponInvalid"));
+    } finally {
+      setApplyingCoupon(false);
+    }
+  };
 
   const handleCheckout = async () => {
     if (items.length === 0) return;
     setLoading(true);
     trackEvent("begin_checkout", {
-      value: totalPrice(),
+      value: total,
       currency: "EUR",
       items: items.map((item) => ({ item_id: item.id, item_name: item.title, quantity: item.quantity })),
     });
@@ -41,6 +71,7 @@ export default function CartPage() {
             image: item.image?.startsWith("http") ? item.image : undefined,
           })),
           gift: giftWrap ? { wrap: true, message: giftMessage.slice(0, 300) } : undefined,
+          couponCode: coupon?.code,
         }),
       });
       const data = await res.json();
@@ -114,9 +145,37 @@ export default function CartPage() {
                 <h2 className="text-lg font-bold text-white mb-4">{t("summary")}</h2>
                 <div className="flex justify-between text-gray-300 text-sm mb-2">
                   <span>{t("subtotal")}</span>
-                  <span>€{totalPrice().toFixed(2)}</span>
+                  <span>€{subtotal.toFixed(2)}</span>
                 </div>
+                {coupon && (
+                  <div className="flex justify-between text-accent-electric text-sm mb-2">
+                    <span className="flex items-center gap-1.5">
+                      <Tag size={13} /> {coupon.code} (-{coupon.discount}%)
+                      <button onClick={() => setCoupon(null)} className="text-gray-500 hover:text-white">
+                        <X size={13} />
+                      </button>
+                    </span>
+                    <span>-€{discountAmount.toFixed(2)}</span>
+                  </div>
+                )}
                 <p className="text-gray-500 text-xs mb-4">{t("shippingNote")}</p>
+
+                <div className="border-t border-white/10 pt-4 pb-4">
+                  {coupon ? null : (
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={couponInput}
+                        onChange={(e) => setCouponInput(e.target.value.toUpperCase())}
+                        placeholder={t("couponPlaceholder")}
+                        className="flex-1 min-w-0 px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-xs placeholder:text-gray-500"
+                      />
+                      <Button variant="secondary" size="sm" loading={applyingCoupon} onClick={handleApplyCoupon}>
+                        {t("couponApply")}
+                      </Button>
+                    </div>
+                  )}
+                </div>
 
                 <div className="border-t border-white/10 pt-4 pb-1">
                   <label className="flex items-center gap-2 text-sm text-gray-300 cursor-pointer">
@@ -142,7 +201,7 @@ export default function CartPage() {
 
                 <div className="border-t border-white/10 pt-4 flex justify-between text-white font-bold mb-6">
                   <span>{t("total")}</span>
-                  <span>€{totalPrice().toFixed(2)}</span>
+                  <span>€{total.toFixed(2)}</span>
                 </div>
                 <Button size="lg" className="w-full" loading={loading} onClick={handleCheckout}>
                   {t("checkout")}

@@ -133,7 +133,11 @@
     "trustReturns": "Reso entro 14 giorni",
     "trustSecure": "Pagamento sicuro",
     "giftOption": "È un regalo? Aggiungi un messaggio",
-    "giftMessagePlaceholder": "Scrivi qui il tuo messaggio (facoltativo)..."
+    "giftMessagePlaceholder": "Scrivi qui il tuo messaggio (facoltativo)...",
+    "couponPlaceholder": "Codice sconto",
+    "couponApply": "Applica",
+    "couponApplied": "Coupon applicato: -{percent}%",
+    "couponInvalid": "Codice non valido"
   },
   "Resi": {
     "title": "Resi e rimborsi",
@@ -221,7 +225,9 @@
     "referralHint": "Condividi il tuo link: chi si iscrive riceve subito uno sconto, e tu ricevi un coupon quando completa il primo ordine.",
     "referralCopy": "Copia link",
     "referralLinkCopied": "Link copiato!",
-    "referralStats": "Hai invitato {count} persone, {rewarded} hanno già completato un ordine."
+    "referralStats": "Hai invitato {count} persone, {rewarded} hanno già completato un ordine.",
+    "referralMilestoneProgress": "Ancora {remaining} amici che completano un ordine e il tuo sconto sale al 15%.",
+    "referralMilestoneReached": "Traguardo raggiunto: hai ricevuto il coupon bonus per i tuoi 10 amici che hanno comprato."
   },
   "Wishlist": {
     "title": "Preferiti",

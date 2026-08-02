@@ -133,7 +133,11 @@
     "trustReturns": "Returns within 14 days",
     "trustSecure": "Secure payment",
     "giftOption": "Is it a gift? Add a message",
-    "giftMessagePlaceholder": "Write your message here (optional)..."
+    "giftMessagePlaceholder": "Write your message here (optional)...",
+    "couponPlaceholder": "Discount code",
+    "couponApply": "Apply",
+    "couponApplied": "Coupon applied: -{percent}%",
+    "couponInvalid": "Invalid code"
   },
   "Resi": {
     "title": "Returns & Refunds",
@@ -221,7 +225,9 @@
     "referralHint": "Share your link: whoever signs up gets an instant discount, and you get a coupon once they complete their first order.",
     "referralCopy": "Copy link",
     "referralLinkCopied": "Link copied!",
-    "referralStats": "You've invited {count} people, {rewarded} have completed an order so far."
+    "referralStats": "You've invited {count} people, {rewarded} have completed an order so far.",
+    "referralMilestoneProgress": "{remaining} more friends who complete an order and your discount goes up to 15%.",
+    "referralMilestoneReached": "Milestone reached: you got the bonus coupon for your 10 friends who bought."
   },
   "Wishlist": {
     "title": "Favorites",

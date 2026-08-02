@@ -3,7 +3,7 @@ import Stripe from "stripe";
 import { Resend } from "resend";
 import { prisma } from "@/lib/prisma";
 import { calculateXp, getLevel, LEVEL_COUPONS } from "@/lib/levels";
-import { REFERRAL_REWARD_DISCOUNT, referralCouponExpiry } from "@/lib/referral";
+import { REFERRAL_REWARD_DISCOUNT, REFERRAL_MILESTONE_COUNT, REFERRAL_MILESTONE_DISCOUNT, referralCouponExpiry } from "@/lib/referral";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -142,6 +142,19 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       }
     });
 
+    // Il coupon eventualmente applicato al checkout diventa "used" solo ora,
+    // a pagamento confermato — non prima (evita che un checkout abbandonato
+    // o fallito bruci comunque il coupon). couponUserId è una verifica in più
+    // contro un metadata manomesso: deve combaciare con chi lo ha creato.
+    const redeemedCouponCode = session.metadata?.couponCode;
+    const redeemedCouponUserId = session.metadata?.couponUserId;
+    if (redeemedCouponCode && redeemedCouponUserId) {
+      await prisma.coupon.updateMany({
+        where: { code: redeemedCouponCode, userId: redeemedCouponUserId, used: false },
+        data: { used: true },
+      });
+    }
+
     let couponCode: string | null = null;
     let newLevelName: string | null = null;
 
@@ -172,45 +185,64 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
         });
       }
 
-      // Ricompensa a chi ha invitato: scatta una sola volta, al primo ordine
-      // pagato dell'amico invitato (referralRewarded evita ordini successivi).
+      // Ricompensa a chi ha invitato: al massimo 2 coupon in tutta la vita del
+      // referrer, non uno per ogni amico. Il primo amico pagante sblocca un
+      // coupon "di benvenuto" al programma; il decimo amico pagante sblocca
+      // un coupon più alto come traguardo. Gli amici dal 2° al 9° (e dall'11°
+      // in poi) fanno comunque salire il conteggio ma non generano coupon.
       if (user.referredById && !user.referralRewarded) {
         const referrer = await prisma.user.findUnique({ where: { id: user.referredById } });
         if (referrer) {
-          await prisma.$transaction([
-            prisma.coupon.create({
-              data: {
-                code: generateCode(),
-                userId: referrer.id,
-                discount: REFERRAL_REWARD_DISCOUNT,
-                expiresAt: referralCouponExpiry(),
-              },
-            }),
-            prisma.user.update({ where: { id: user.id }, data: { referralRewarded: true } }),
-          ]);
+          const priorRewardedReferrals = await prisma.user.count({
+            where: { referredById: referrer.id, referralRewarded: true },
+          });
+          const referralOrdinal = priorRewardedReferrals + 1;
+          const isFirstReferral = referralOrdinal === 1;
+          const isMilestoneReferral = referralOrdinal === REFERRAL_MILESTONE_COUNT;
 
-          if (referrer.email) {
-            try {
-              await resend.emails.send({
-                from: "G&F Hub <noreply@gfhubs.com>",
-                to: referrer.email,
-                subject: "Il tuo invito ha portato un nuovo ordine 🎉",
-                html: `
-                  <div style="max-width: 480px; margin: 0 auto; padding: 40px 20px; font-family: 'Inter', Arial, sans-serif; background-color: #0C0A09; color: #F4F5F6; border-radius: 16px; text-align: center;">
-                    <img src="${process.env.NEXTAUTH_URL}/brand/logo-full.png" alt="G&F Hub" width="150" style="display: block; margin: 0 auto 16px; height: auto;" />
-                    <p style="font-size: 15px; margin-bottom: 24px; color: #A0A0A0;">
-                      Una persona che hai invitato ha appena completato il suo primo ordine. Come ringraziamento, trovi un nuovo coupon
-                      del ${REFERRAL_REWARD_DISCOUNT}% nella tua area account, valido 30 giorni.
-                    </p>
-                    <a href="${process.env.NEXTAUTH_URL}/account" style="display: inline-block; background-color: #B2B395; color: #0C0A09; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 15px;">Vai al tuo account</a>
-                    <hr style="border: 0; border-top: 1px solid #222; margin: 24px 0;" />
-                    <p style="font-size: 11px; color: #444;">© ${new Date().getFullYear()} G&F Hub. Tutti i diritti riservati.</p>
-                  </div>
-                `,
-              });
-            } catch (err) {
-              console.error("REFERRAL REWARD EMAIL ERROR:", err);
+          if (isFirstReferral || isMilestoneReferral) {
+            const rewardDiscount = isMilestoneReferral ? REFERRAL_MILESTONE_DISCOUNT : REFERRAL_REWARD_DISCOUNT;
+
+            await prisma.$transaction([
+              prisma.coupon.create({
+                data: {
+                  code: generateCode(),
+                  userId: referrer.id,
+                  discount: rewardDiscount,
+                  expiresAt: referralCouponExpiry(),
+                },
+              }),
+              prisma.user.update({ where: { id: user.id }, data: { referralRewarded: true } }),
+            ]);
+
+            if (referrer.email) {
+              try {
+                const introText = isMilestoneReferral
+                  ? `Hai raggiunto 10 amici che hanno completato un ordine grazie al tuo invito! Come ringraziamento, trovi un coupon del ${rewardDiscount}%`
+                  : `Una persona che hai invitato ha appena completato il suo primo ordine. Come ringraziamento, trovi un coupon del ${rewardDiscount}%`;
+                await resend.emails.send({
+                  from: "G&F Hub <noreply@gfhubs.com>",
+                  to: referrer.email,
+                  subject: isMilestoneReferral ? "Hai raggiunto 10 amici invitati 🎉" : "Il tuo invito ha portato un nuovo ordine 🎉",
+                  html: `
+                    <div style="max-width: 480px; margin: 0 auto; padding: 40px 20px; font-family: 'Inter', Arial, sans-serif; background-color: #0C0A09; color: #F4F5F6; border-radius: 16px; text-align: center;">
+                      <img src="${process.env.NEXTAUTH_URL}/brand/logo-full.png" alt="G&F Hub" width="150" style="display: block; margin: 0 auto 16px; height: auto;" />
+                      <p style="font-size: 15px; margin-bottom: 24px; color: #A0A0A0;">
+                        ${introText} nella tua area account, valido 30 giorni.
+                      </p>
+                      <a href="${process.env.NEXTAUTH_URL}/account" style="display: inline-block; background-color: #B2B395; color: #0C0A09; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 15px;">Vai al tuo account</a>
+                      <hr style="border: 0; border-top: 1px solid #222; margin: 24px 0;" />
+                      <p style="font-size: 11px; color: #444;">© ${new Date().getFullYear()} G&F Hub. Tutti i diritti riservati.</p>
+                    </div>
+                  `,
+                });
+              } catch (err) {
+                console.error("REFERRAL REWARD EMAIL ERROR:", err);
+              }
             }
+          } else {
+            // Amico pagante che non è né il primo né il decimo: si conta ma non genera coupon.
+            await prisma.user.update({ where: { id: user.id }, data: { referralRewarded: true } });
           }
         }
       }
