@@ -6,8 +6,10 @@ import { Navbar } from "@/components/ui/layout/Navbar";
 import { Footer } from "@/components/ui/layout/Footer";
 import { Badge } from "@/components/ui/primitives/Badge";
 import { LevelBadge } from "@/components/ui/LevelBadge";
+import { Copy, Gift } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/navigation";
+import { SITE_URL } from "@/lib/seo";
 
 interface Coupon {
   id: string;
@@ -40,6 +42,7 @@ export default function AccountPage() {
   } | null>(null);
 
   const [coupons, setCoupons] = useState<Coupon[]>([]);
+  const [referral, setReferral] = useState<{ referralCode: string; referralsCount: number; rewardedCount: number } | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -56,7 +59,20 @@ export default function AccountPage() {
     fetch("/api/user/coupons")
       .then((r) => r.json())
       .then(setCoupons);
+
+    fetch("/api/user/referral")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.referralCode) setReferral(data);
+      });
   }, [router]);
+
+  const referralLink = referral ? `${SITE_URL}?ref=${referral.referralCode}` : "";
+
+  const copyReferralLink = () => {
+    navigator.clipboard.writeText(referralLink);
+    toast.success(t("referralLinkCopied"));
+  };
 
   if (!user) return null;
 
@@ -162,6 +178,39 @@ export default function AccountPage() {
               </span>
             </div>
           </div>
+
+          {referral && (
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl mb-6">
+              <div className="flex items-center gap-2 mb-2">
+                <Gift size={18} className="text-accent-electric" />
+                <h2 className="text-lg font-semibold text-white">{t("referralTitle")}</h2>
+              </div>
+
+              <p className="text-gray-400 text-sm mb-4">{t("referralHint")}</p>
+
+              <div className="flex items-center gap-2">
+                <input
+                  readOnly
+                  value={referralLink}
+                  onFocus={(e) => e.target.select()}
+                  className="flex-1 min-w-0 px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-xs truncate"
+                />
+                <button
+                  onClick={copyReferralLink}
+                  className="p-2.5 rounded-lg bg-accent-electric text-white hover:bg-accent-purple transition-colors shrink-0"
+                  aria-label={t("referralCopy")}
+                >
+                  <Copy size={16} />
+                </button>
+              </div>
+
+              {referral.referralsCount > 0 && (
+                <p className="text-gray-500 text-xs mt-3">
+                  {t("referralStats", { count: referral.referralsCount, rewarded: referral.rewardedCount })}
+                </p>
+              )}
+            </div>
+          )}
 
           {activeCoupons.length > 0 && (
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl mb-6">

@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Navbar } from "@/components/ui/layout/Navbar";
 import { Footer } from "@/components/ui/layout/Footer";
 import { Hero } from "@/components/home/Hero";
+import { RecentlyViewed } from "@/components/home/RecentlyViewed";
 import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 import { Categories } from "@/components/home/Categories";
 import { Storytelling } from "@/components/home/Storytelling";
@@ -48,6 +49,7 @@ export default async function Home() {
         <Navbar />
         <main>
           <Hero />
+          <RecentlyViewed />
           <FeaturedProducts products={products} />
           <Categories />
           <Storytelling />

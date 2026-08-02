@@ -51,7 +51,9 @@
     "reviewsEyebrow": "Cosa dicono di noi",
     "reviewsTitle": "Recensioni",
     "reviewsEmptyTitle": "Nessuna recensione ancora.",
-    "reviewsEmptyText": "Sii il primo a lasciare una recensione!"
+    "reviewsEmptyText": "Sii il primo a lasciare una recensione!",
+    "recentlyViewedEyebrow": "Continua da dove hai lasciato",
+    "recentlyViewedTitle": "Visti di recente"
   },
   "Shop": {
     "shopTitle": "Shop",
@@ -191,7 +193,8 @@
     "goToLogin": "Vai al Login",
     "errorTitle": "Errore",
     "registerAgain": "Registrati di nuovo",
-    "backToLogin": "Torna al Login"
+    "backToLogin": "Torna al Login",
+    "referralWelcome": "Sei stata invitata! Registrati e ricevi subito un coupon del {percent}%."
   },
   "Account": {
     "title": "Il mio account",
@@ -213,14 +216,25 @@
     "minSpend": "Minimo €{amount}",
     "discount": "{percent}% sconto",
     "orders": "I miei ordini",
-    "ordersComingSoon": "Storico ordini in arrivo..."
+    "ordersComingSoon": "Storico ordini in arrivo...",
+    "referralTitle": "Invita un'amica",
+    "referralHint": "Condividi il tuo link: chi si iscrive riceve subito uno sconto, e tu ricevi un coupon quando completa il primo ordine.",
+    "referralCopy": "Copia link",
+    "referralLinkCopied": "Link copiato!",
+    "referralStats": "Hai invitato {count} persone, {rewarded} hanno già completato un ordine."
   },
   "Wishlist": {
     "title": "Preferiti",
     "loading": "Caricamento...",
     "count": "{count} prodotti salvati",
     "empty": "Nessun prodotto nei preferiti",
-    "emptyHint": "Salva i prodotti che ami per ritrovarli facilmente."
+    "emptyHint": "Salva i prodotti che ami per ritrovarli facilmente.",
+    "shareButton": "Condividi",
+    "shareLinkCopied": "Link copiato! Ora puoi condividerlo.",
+    "shareError": "Errore durante la condivisione",
+    "sharedTitle": "Lista dei preferiti",
+    "sharedTitleName": "Lista dei preferiti di {name}",
+    "sharedNotFound": "Questa lista non esiste o non è più disponibile."
   },
   "Legal": {
     "updatedAtLabel": "Ultimo aggiornamento:",

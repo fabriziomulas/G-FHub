@@ -69,32 +69,43 @@ async function main() {
   console.log("wrote src/app/icon.png");
 
   // 4. src/app/apple-icon.png — icon-only composited onto solid brand-dark bg, opaque, 180x180
-  const appleCanvas = 180;
-  const applePadding = Math.round(appleCanvas * 0.18);
-  const appleInner = appleCanvas - applePadding * 2;
-  const appleIconResized = await sharp(iconBuf)
-    .resize({ width: appleInner, height: appleInner, fit: "inside" })
+  await makeOpaqueIcon(iconBuf, 180, path.join(ROOT, "src", "app", "apple-icon.png"));
+  console.log("wrote src/app/apple-icon.png");
+
+  // 5. public/icons/icon-192.png + icon-512.png — PWA manifest icons, same opaque style
+  await makeOpaqueIcon(iconBuf, 192, path.join(ROOT, "public", "icons", "icon-192.png"));
+  console.log("wrote public/icons/icon-192.png");
+  await makeOpaqueIcon(iconBuf, 512, path.join(ROOT, "public", "icons", "icon-512.png"));
+  console.log("wrote public/icons/icon-512.png");
+}
+
+// Icon-only logo composited centered onto a solid brand-dark square — used for
+// contexts (Apple touch icon, PWA manifest) where transparency isn't wanted.
+async function makeOpaqueIcon(iconBuf, canvasSize, outputPath) {
+  const padding = Math.round(canvasSize * 0.18);
+  const innerSize = canvasSize - padding * 2;
+  const resized = await sharp(iconBuf)
+    .resize({ width: innerSize, height: innerSize, fit: "inside" })
     .toBuffer();
-  const appleIconResizedMeta = await sharp(appleIconResized).metadata();
+  const resizedMeta = await sharp(resized).metadata();
 
   await sharp({
     create: {
-      width: appleCanvas,
-      height: appleCanvas,
+      width: canvasSize,
+      height: canvasSize,
       channels: 4,
       background: { r: 12, g: 10, b: 9, alpha: 1 }, // #0C0A09 brand dark
     },
   })
     .composite([
       {
-        input: appleIconResized,
-        left: Math.round((appleCanvas - (appleIconResizedMeta.width || appleInner)) / 2),
-        top: Math.round((appleCanvas - (appleIconResizedMeta.height || appleInner)) / 2),
+        input: resized,
+        left: Math.round((canvasSize - (resizedMeta.width || innerSize)) / 2),
+        top: Math.round((canvasSize - (resizedMeta.height || innerSize)) / 2),
       },
     ])
     .png({ compressionLevel: 9 })
-    .toFile(path.join(ROOT, "src", "app", "apple-icon.png"));
-  console.log("wrote src/app/apple-icon.png");
+    .toFile(outputPath);
 }
 
 main().catch((err) => {

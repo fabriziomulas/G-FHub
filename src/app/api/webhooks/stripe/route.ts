@@ -3,6 +3,7 @@ import Stripe from "stripe";
 import { Resend } from "resend";
 import { prisma } from "@/lib/prisma";
 import { calculateXp, getLevel, LEVEL_COUPONS } from "@/lib/levels";
+import { REFERRAL_REWARD_DISCOUNT, referralCouponExpiry } from "@/lib/referral";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -169,6 +170,49 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
             expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
           },
         });
+      }
+
+      // Ricompensa a chi ha invitato: scatta una sola volta, al primo ordine
+      // pagato dell'amico invitato (referralRewarded evita ordini successivi).
+      if (user.referredById && !user.referralRewarded) {
+        const referrer = await prisma.user.findUnique({ where: { id: user.referredById } });
+        if (referrer) {
+          await prisma.$transaction([
+            prisma.coupon.create({
+              data: {
+                code: generateCode(),
+                userId: referrer.id,
+                discount: REFERRAL_REWARD_DISCOUNT,
+                expiresAt: referralCouponExpiry(),
+              },
+            }),
+            prisma.user.update({ where: { id: user.id }, data: { referralRewarded: true } }),
+          ]);
+
+          if (referrer.email) {
+            try {
+              await resend.emails.send({
+                from: "G&F Hub <noreply@gfhubs.com>",
+                to: referrer.email,
+                subject: "Il tuo invito ha portato un nuovo ordine 🎉",
+                html: `
+                  <div style="max-width: 480px; margin: 0 auto; padding: 40px 20px; font-family: 'Inter', Arial, sans-serif; background-color: #0C0A09; color: #F4F5F6; border-radius: 16px; text-align: center;">
+                    <img src="${process.env.NEXTAUTH_URL}/brand/logo-full.png" alt="G&F Hub" width="150" style="display: block; margin: 0 auto 16px; height: auto;" />
+                    <p style="font-size: 15px; margin-bottom: 24px; color: #A0A0A0;">
+                      Una persona che hai invitato ha appena completato il suo primo ordine. Come ringraziamento, trovi un nuovo coupon
+                      del ${REFERRAL_REWARD_DISCOUNT}% nella tua area account, valido 30 giorni.
+                    </p>
+                    <a href="${process.env.NEXTAUTH_URL}/account" style="display: inline-block; background-color: #B2B395; color: #0C0A09; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 15px;">Vai al tuo account</a>
+                    <hr style="border: 0; border-top: 1px solid #222; margin: 24px 0;" />
+                    <p style="font-size: 11px; color: #444;">© ${new Date().getFullYear()} G&F Hub. Tutti i diritti riservati.</p>
+                  </div>
+                `,
+              });
+            } catch (err) {
+              console.error("REFERRAL REWARD EMAIL ERROR:", err);
+            }
+          }
+        }
       }
     }
 

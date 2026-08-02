@@ -51,7 +51,9 @@
     "reviewsEyebrow": "Lo que dicen de nosotros",
     "reviewsTitle": "Reseñas",
     "reviewsEmptyTitle": "Todavía no hay reseñas.",
-    "reviewsEmptyText": "¡Sé el primero en dejar una reseña!"
+    "reviewsEmptyText": "¡Sé el primero en dejar una reseña!",
+    "recentlyViewedEyebrow": "Sigue donde lo dejaste",
+    "recentlyViewedTitle": "Vistos recientemente"
   },
   "Shop": {
     "shopTitle": "Tienda",
@@ -191,7 +193,8 @@
     "goToLogin": "Ir a iniciar sesión",
     "errorTitle": "Error",
     "registerAgain": "Registrarse de nuevo",
-    "backToLogin": "Volver al inicio de sesión"
+    "backToLogin": "Volver al inicio de sesión",
+    "referralWelcome": "¡Te han invitado! Regístrate y recibe al instante un cupón del {percent}%."
   },
   "Account": {
     "title": "Mi cuenta",
@@ -213,14 +216,25 @@
     "minSpend": "Mínimo €{amount}",
     "discount": "{percent}% de descuento",
     "orders": "Mis pedidos",
-    "ordersComingSoon": "Historial de pedidos próximamente..."
+    "ordersComingSoon": "Historial de pedidos próximamente...",
+    "referralTitle": "Invita a una amiga",
+    "referralHint": "Comparte tu enlace: quien se registre recibe un descuento al instante, y tú recibes un cupón cuando complete su primer pedido.",
+    "referralCopy": "Copiar enlace",
+    "referralLinkCopied": "¡Enlace copiado!",
+    "referralStats": "Has invitado a {count} personas, {rewarded} ya han completado un pedido."
   },
   "Wishlist": {
     "title": "Favoritos",
     "loading": "Cargando...",
     "count": "{count} productos guardados",
     "empty": "No hay productos en favoritos",
-    "emptyHint": "Guarda los productos que te gustan para encontrarlos fácilmente."
+    "emptyHint": "Guarda los productos que te gustan para encontrarlos fácilmente.",
+    "shareButton": "Compartir",
+    "shareLinkCopied": "¡Enlace copiado! Ya puedes compartirlo.",
+    "shareError": "Error al compartir",
+    "sharedTitle": "Lista de deseos",
+    "sharedTitleName": "Lista de deseos de {name}",
+    "sharedNotFound": "Esta lista no existe o ya no está disponible."
   },
   "Legal": {
     "updatedAtLabel": "Última actualización:",

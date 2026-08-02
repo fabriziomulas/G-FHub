@@ -3,14 +3,19 @@ import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { Resend } from "resend";
 import { SignJWT } from "jose";
+import { generateReferralCode, REFERRAL_WELCOME_DISCOUNT, referralCouponExpiry } from "@/lib/referral";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const JWT_SECRET = new TextEncoder().encode(process.env.NEXTAUTH_SECRET!);
 
+function generateCouponCode(): string {
+  return "SL-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { email, password, name } = body;
+    const { email, password, name, ref } = body;
 
     if (!email || !password) {
       return NextResponse.json({ error: "Email e password obbligatorie" }, { status: 400 });
@@ -23,14 +28,35 @@ export async function POST(request: Request) {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    const referrer = ref ? await prisma.user.findUnique({ where: { referralCode: ref } }) : null;
+
+    let referralCode = generateReferralCode();
+    // Collisione estremamente improbabile (spazio di ~2 miliardi di codici), ma la evitiamo comunque.
+    while (await prisma.user.findUnique({ where: { referralCode } })) {
+      referralCode = generateReferralCode();
+    }
+
     const user = await prisma.user.create({
       data: {
         email,
         password: hashedPassword,
         name: name || null,
         emailVerified: false,
+        referralCode,
+        referredById: referrer?.id,
       },
     });
+
+    if (referrer) {
+      await prisma.coupon.create({
+        data: {
+          code: generateCouponCode(),
+          userId: user.id,
+          discount: REFERRAL_WELCOME_DISCOUNT,
+          expiresAt: referralCouponExpiry(),
+        },
+      });
+    }
 
     const verifyToken = await new SignJWT({ id: user.id, email: user.email })
       .setProtectedHeader({ alg: "HS256" })

@@ -51,7 +51,9 @@
     "reviewsEyebrow": "Ce que l'on dit de nous",
     "reviewsTitle": "Avis",
     "reviewsEmptyTitle": "Aucun avis pour le moment.",
-    "reviewsEmptyText": "Soyez le premier à laisser un avis !"
+    "reviewsEmptyText": "Soyez le premier à laisser un avis !",
+    "recentlyViewedEyebrow": "Reprenez où vous en étiez",
+    "recentlyViewedTitle": "Vus récemment"
   },
   "Shop": {
     "shopTitle": "Boutique",
@@ -191,7 +193,8 @@
     "goToLogin": "Aller à la connexion",
     "errorTitle": "Erreur",
     "registerAgain": "S'inscrire à nouveau",
-    "backToLogin": "Retour à la connexion"
+    "backToLogin": "Retour à la connexion",
+    "referralWelcome": "Vous avez été invitée ! Inscrivez-vous et recevez aussitôt un coupon de {percent}%."
   },
   "Account": {
     "title": "Mon compte",
@@ -213,14 +216,25 @@
     "minSpend": "Minimum {amount} €",
     "discount": "{percent} % de réduction",
     "orders": "Mes commandes",
-    "ordersComingSoon": "Historique des commandes bientôt disponible..."
+    "ordersComingSoon": "Historique des commandes bientôt disponible...",
+    "referralTitle": "Invitez une amie",
+    "referralHint": "Partagez votre lien : toute personne qui s'inscrit reçoit une réduction immédiate, et vous recevez un coupon dès sa première commande.",
+    "referralCopy": "Copier le lien",
+    "referralLinkCopied": "Lien copié !",
+    "referralStats": "Vous avez invité {count} personnes, {rewarded} ont déjà passé une commande."
   },
   "Wishlist": {
     "title": "Favoris",
     "loading": "Chargement...",
     "count": "{count} produits enregistrés",
     "empty": "Aucun produit dans vos favoris",
-    "emptyHint": "Enregistrez les produits que vous aimez pour les retrouver facilement."
+    "emptyHint": "Enregistrez les produits que vous aimez pour les retrouver facilement.",
+    "shareButton": "Partager",
+    "shareLinkCopied": "Lien copié ! Vous pouvez le partager.",
+    "shareError": "Erreur lors du partage",
+    "sharedTitle": "Liste de souhaits",
+    "sharedTitleName": "Liste de souhaits de {name}",
+    "sharedNotFound": "Cette liste n'existe pas ou n'est plus disponible."
   },
   "Legal": {
     "updatedAtLabel": "Dernière mise à jour :",

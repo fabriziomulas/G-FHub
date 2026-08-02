@@ -11,6 +11,7 @@ import { useCart } from "@/stores/cart";
 import { useWishlist } from "@/hooks/useWishlist";
 import { cn } from "@/lib/cn";
 import { trackEvent } from "@/lib/analytics";
+import { addRecentlyViewed } from "@/lib/recentlyViewed";
 
 interface Variant {
   id: string;
@@ -66,6 +67,7 @@ export function ProductInfo({
       value: parseFloat(price),
       currency: "EUR",
     });
+    addRecentlyViewed(productId);
   }, [productId, title, price]);
 
   const handleAddToCart = () => {

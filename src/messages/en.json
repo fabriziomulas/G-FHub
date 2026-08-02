@@ -51,7 +51,9 @@
     "reviewsEyebrow": "What people say about us",
     "reviewsTitle": "Reviews",
     "reviewsEmptyTitle": "No reviews yet.",
-    "reviewsEmptyText": "Be the first to leave a review!"
+    "reviewsEmptyText": "Be the first to leave a review!",
+    "recentlyViewedEyebrow": "Pick up where you left off",
+    "recentlyViewedTitle": "Recently viewed"
   },
   "Shop": {
     "shopTitle": "Shop",
@@ -191,7 +193,8 @@
     "goToLogin": "Go to login",
     "errorTitle": "Error",
     "registerAgain": "Sign up again",
-    "backToLogin": "Back to login"
+    "backToLogin": "Back to login",
+    "referralWelcome": "You were invited! Sign up and get a {percent}% coupon right away."
   },
   "Account": {
     "title": "My account",
@@ -213,14 +216,25 @@
     "minSpend": "Minimum €{amount}",
     "discount": "{percent}% off",
     "orders": "My orders",
-    "ordersComingSoon": "Order history coming soon..."
+    "ordersComingSoon": "Order history coming soon...",
+    "referralTitle": "Invite a friend",
+    "referralHint": "Share your link: whoever signs up gets an instant discount, and you get a coupon once they complete their first order.",
+    "referralCopy": "Copy link",
+    "referralLinkCopied": "Link copied!",
+    "referralStats": "You've invited {count} people, {rewarded} have completed an order so far."
   },
   "Wishlist": {
     "title": "Favorites",
     "loading": "Loading...",
     "count": "{count} saved products",
     "empty": "No products in your favorites",
-    "emptyHint": "Save the products you love to find them easily later."
+    "emptyHint": "Save the products you love to find them easily later.",
+    "shareButton": "Share",
+    "shareLinkCopied": "Link copied! You can now share it.",
+    "shareError": "Error while sharing",
+    "sharedTitle": "Wishlist",
+    "sharedTitleName": "{name}'s wishlist",
+    "sharedNotFound": "This list doesn't exist or is no longer available."
   },
   "Legal": {
     "updatedAtLabel": "Last updated:",

@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/primitives/Button";
 import { Input } from "@/components/ui/primitives/Input";
 import { toast } from "sonner";
 import { Link, useRouter } from "@/i18n/navigation";
+import { REFERRAL_WELCOME_DISCOUNT } from "@/lib/referral";
 
 export default function RegisterPage() {
   const t = useTranslations("Auth");
@@ -15,6 +17,8 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const ref = searchParams.get("ref");
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +39,7 @@ export default function RegisterPage() {
         email,
         password,
         name,
+        ref,
       }),
     });
 
@@ -56,6 +61,12 @@ export default function RegisterPage() {
         <h1 className="text-xl font-bold text-white text-center">
           {t("registerTitle")}
         </h1>
+
+        {ref && (
+          <p className="text-center text-accent-electric text-xs bg-accent-electric/10 border border-accent-electric/20 rounded-lg py-2 px-3">
+            {t("referralWelcome", { percent: REFERRAL_WELCOME_DISCOUNT })}
+          </p>
+        )}
 
         <form onSubmit={handleRegister} className="space-y-4">
           <Input
